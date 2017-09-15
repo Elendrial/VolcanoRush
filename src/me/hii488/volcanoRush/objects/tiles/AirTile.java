@@ -6,7 +6,7 @@ public class AirTile extends BlankTile{
 
 	@Override
 	public void initVars() {
-		this.states = 2; // Underground, and above ground
+		this.states = 1; // Underground, and above ground
 		this.textureName = "air.png";
 		this.identifier = "airTile";
 	}

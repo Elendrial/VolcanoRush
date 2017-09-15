@@ -8,9 +8,9 @@ public enum OreType {
 	GOLD(1400),
 	DIAMOND(2500);
 	
-	public int value;
+	public int score;
 	
 	OreType(int value){
-		this.value = value;
+		this.score = value;
 	}
 }

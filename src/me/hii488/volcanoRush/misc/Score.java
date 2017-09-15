@@ -24,6 +24,10 @@ public class Score implements Comparator<Score>{
 		return a.score - b.score;
 	}
 	
+	public void addToScore(int i){
+		score += multiplier * i;
+	}
+	
 	
 	
 }
