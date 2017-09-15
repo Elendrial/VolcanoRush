@@ -1,6 +1,7 @@
 package me.hii488.volcanoRush.objects.tiles;
 
-import me.hii488.objects.tiles.BaseTile;
+import me.hii488.handlers.ContainerHandler;
+import me.hii488.volcanoRush.containers.volcanoes.Volcano;
 
 public class DirtTile extends MineralTile{
 	
@@ -9,12 +10,15 @@ public class DirtTile extends MineralTile{
 	
 	@Override
 	public void initVars() {
+		this.oreType = ((Volcano) ContainerHandler.getLoadedContainer()).mineralSpawner.getOreType(gridPosition);
 		
+		this.identifier = "dirtTile" + this.oreType;
+		this.textureName = "dirtTile_" + this.oreType.toString().toLowerCase();
 	}
 
 	@Override
-	public BaseTile clone() {
-		return null;
+	public DirtTile clone() {
+		return new DirtTile(this);
 	}
 
 }

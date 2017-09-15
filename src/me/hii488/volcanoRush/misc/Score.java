@@ -4,7 +4,8 @@ import java.util.Comparator;
 
 public class Score implements Comparator<Score>{
 	
-	public int score = 0;
+	protected int score = 0;
+	public int multiplier = 1;
 	public String name = "";
 	
 	public Score(){}
@@ -22,5 +23,7 @@ public class Score implements Comparator<Score>{
 	public int compare(Score a, Score b){
 		return a.score - b.score;
 	}
+	
+	
 	
 }
