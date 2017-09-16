@@ -28,15 +28,20 @@ public abstract class MineralTile extends BaseTile {
 	public float randTickChance() {return 0;}
 
 	@Override
-	public void updateOnTick() {}
+	public void updateOnTick() {
+		if(damageValue >= 5){
+			this.onDestroy();
+			ContainerHandler.getLoadedContainer().grid.setTile("airTile", gridPosition);
+		}
+	}
 
 	@Override
 	public void updateOnSec() {
 		if(damageValue >= 1){
-			if(ContainerHandler.getLoadedContainer().grid.getTile(gridPosition.getX(), gridPosition.getY()) instanceof AirTile)	damageValue++;
+			if(ContainerHandler.getLoadedContainer().grid.getTile(gridPosition.getX(), gridPosition.getY() + 1) instanceof AirTile)	damageValue++;
 			else if(damageValue >= 2) damageValue--;
 		}
-		if(damageValue >= 3){
+		if(damageValue == 4){
 			// MineralTile should be replaced with AirTile, a FallingTileEntity should be created at it's position.
 		}
 	}
@@ -52,9 +57,13 @@ public abstract class MineralTile extends BaseTile {
 
 	@Override
 	public void onDestroy() {
+		//super.onDestroy();
 		MineralItem i = new MineralItem();
 		i.previousMovement.setLocation(GameController.rand.nextFloat() * 3, GameController.rand.nextFloat() * 5);
 		i.setOreType(oreType);
+		ContainerHandler.getLoadedContainer().addEntity(i);
 	}
 
+	public abstract void onDig();
+	
 }

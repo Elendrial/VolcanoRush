@@ -18,6 +18,11 @@ public class DirtTile extends MineralTile{
 		this.isCollidable = true;
 	}
 
+	public void onDig(){
+		if(damageValue == 0) damageValue = 2;
+		else damageValue = 5;
+	}
+	
 	@Override
 	public DirtTile clone() {
 		return new DirtTile(this);
