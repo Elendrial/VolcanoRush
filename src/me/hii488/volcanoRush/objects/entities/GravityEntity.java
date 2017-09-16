@@ -28,26 +28,26 @@ public abstract class GravityEntity extends BaseEntity{
 		
 		if(v.getAbsY() < 0){
 			a = p.clone().addToLocation(0, v.getAbsY()); // Test -ve y movement
-			if(g.getTileAtScrnVector(a).isCollidable || g.getTileAtScrnVector(a.clone().addToLocation(collisionBox.width-1, 0)).isCollidable){
+			if(g.getTileAtVector(a).isCollidable || g.getTileAtVector(a.clone().addToLocation(collisionBox.width-1, 0)).isCollidable){
 				v.setY((position.getY() + Camera.cameraPosition.getY())%Settings.Texture.tileSize); // Get dist between top of player and above tile.
 			}
 		}
 		else if(v.getAbsY() > 0){
 			a = p.clone().addToLocation(0, v.getAbsY()); // Test +ve y movement
-			if(g.getTileAtScrnVector(a.clone().addToLocation(0, collisionBox.height-1)).isCollidable || g.getTileAtScrnVector(a.clone().addToLocation(collisionBox.width-1, collisionBox.height-1)).isCollidable){
+			if(g.getTileAtVector(a.clone().addToLocation(0, collisionBox.height-1)).isCollidable || g.getTileAtVector(a.clone().addToLocation(collisionBox.width-1, collisionBox.height-1)).isCollidable){
 				v.setY(Settings.Texture.tileSize - collisionBox.height - (position.getY() + Camera.cameraPosition.getY()) % Settings.Texture.tileSize); // Get dist between bottom of player and tile below.
 			}
 		}
 		
 		if(v.getAbsX() < 0){
 			a = p.clone().addToLocation(v.getAbsX(), 0); // Test -ve x movement
-			if(g.getTileAtScrnVector(a).isCollidable || g.getTileAtScrnVector(a.clone().addToLocation(0, collisionBox.height-1)).isCollidable){
+			if(g.getTileAtVector(a).isCollidable || g.getTileAtVector(a.clone().addToLocation(0, collisionBox.height-1)).isCollidable){
 				v.setX((position.getX() + Camera.cameraPosition.getX()) % Settings.Texture.tileSize); // Get dist between left of player and left tile.
 			}
 		}
 		else if(v.getAbsX() > 0){
 			a = p.clone().addToLocation(v.getAbsX(), 0); // Test +ve x movement
-			if(g.getTileAtScrnVector(a.clone().addToLocation(collisionBox.width-1, 0)).isCollidable || g.getTileAtScrnVector(a.clone().addToLocation(collisionBox.width-1, collisionBox.height-1)).isCollidable){
+			if(g.getTileAtVector(a.clone().addToLocation(collisionBox.width-1, 0)).isCollidable || g.getTileAtVector(a.clone().addToLocation(collisionBox.width-1, collisionBox.height-1)).isCollidable){
 				v.setX(Settings.Texture.tileSize - collisionBox.width - (position.getX() + Camera.cameraPosition.getX()) % Settings.Texture.tileSize); // Get dist between right of player and right tile.
 			}
 		}
