@@ -73,7 +73,7 @@ public class VRPlayer extends Player{
 			}
 		}
 		
-		t =  g.getTile(g.getGridPosAtVector(position.clone().addToLocation(direction)));
+		t =  g.getTile(g.getGridPosAtVector(position.clone().addToLocation(currentTexture.getWidth()/2, currentTexture.getHeight()/2)).addToLocation(direction));
 		if(t instanceof MineralTile) ((MineralTile) t).onDig();
 	}
 	
