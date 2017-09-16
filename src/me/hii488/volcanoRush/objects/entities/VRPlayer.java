@@ -12,6 +12,7 @@ import me.hii488.misc.Settings;
 import me.hii488.misc.Vector;
 import me.hii488.objects.entities.Player;
 import me.hii488.objects.tiles.BaseTile;
+import me.hii488.volcanoRush.containers.menus.MainMenu;
 import me.hii488.volcanoRush.objects.tiles.MineralTile;
 
 public class VRPlayer extends Player{
@@ -40,7 +41,7 @@ public class VRPlayer extends Player{
 	
 	protected float previousMovement = 0;
 	protected int maxFallSpeed = 15;
-	protected int jumpSpeed = -6;
+	protected int jumpSpeed = -8;
 	public void addGravity(Vector v){
 		if(v.getY() < 0 && previousMovement == 0) v.setY(jumpSpeed);
 		else{
@@ -78,7 +79,7 @@ public class VRPlayer extends Player{
 	}
 	
 	public void render(Graphics g){
-		super.render(g);
+		if(!(ContainerHandler.getLoadedContainer() instanceof MainMenu)) super.render(g);
 		
 		Color c = g.getColor();
 		g.setColor(Color.white);

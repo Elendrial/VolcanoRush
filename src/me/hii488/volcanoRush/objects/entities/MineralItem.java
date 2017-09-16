@@ -12,20 +12,24 @@ public class MineralItem extends GravityEntity {
 	
 	@Override
 	public void initVars() {
+		this.states = 0;
 		this.identifier = "mineralItem";
-		this.textureName = "mineral_" + oreType;
+		this.textureName = "mineral_" + oreType + ".png";
 	}
 	
 	public void updateOnTick(){
 		super.updateOnTick();
-		if(EntityHandler.getCollidingEntities(this).contains(EntityRegistry.player)) VolcRush.score.addToScore(oreType.score);
+		if(EntityHandler.getCollidingEntities(this).contains(EntityRegistry.player)){
+			VolcRush.score.addToScore(oreType.score);
+			this.destroy();
+		}
 	}
 	
 	public void setOreType(OreType o){
 		if(o == OreType.NONE) this.destroy();
 		oreType = o;
 		this.identifier = "mineralItem" + this.oreType;
-		this.textureName = "mineral_" + oreType;
+		this.textureName = "mineral_" + oreType + ".png";
 		this.setupTextures();
 	}
 	

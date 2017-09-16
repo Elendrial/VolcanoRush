@@ -21,7 +21,7 @@ public abstract class MineralTile extends BaseTile {
 	
 	@Override
 	public void initVars() {
-		this.states = 3; // 0: Undamaged, 1: barely damaged, 2: moderately damaged
+		this.states = 0;
 		this.isCollidable = true;
 	}
 	
@@ -60,12 +60,12 @@ public abstract class MineralTile extends BaseTile {
 	public void onDestroy() {
 		//super.onDestroy();
 		MineralItem i = new MineralItem();
-		i.position.setLocation(gridPosition.getX() * Settings.Texture.tileSize + currentTexture.getWidth()/2, gridPosition.getY() * Settings.Texture.tileSize + currentTexture.getHeight()/2);
-		i.previousMovement.setLocation(GameController.rand.nextFloat() * 3, GameController.rand.nextFloat() * 5);
+		i.position.setLocation(gridPosition.getX() * Settings.Texture.tileSize + currentTexture.getWidth()/2 - 5, gridPosition.getY() * Settings.Texture.tileSize + currentTexture.getHeight()/2 - 5);
+		i.previousMovement.setLocation(GameController.rand.nextFloat()*5-2.5f, GameController.rand.nextFloat()*-10);
 		ContainerHandler.getLoadedContainer().addEntity(i);
 		i.setOreType(oreType);
 	}
 
 	public abstract void onDig();
-	
+	public abstract void setOreType(OreType o);
 }
