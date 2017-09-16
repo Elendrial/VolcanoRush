@@ -8,6 +8,7 @@ public class MainMenu extends BaseContainer {
 	
 	public MainMenu(){
 		grid.setupGrid(10, 10);
+		this.identifier = "mainmenu";
 	}
 	
 	@Override

@@ -22,6 +22,7 @@ public class MineralItem extends GravityEntity {
 	}
 	
 	public void setOreType(OreType o){
+		if(o == OreType.NONE) this.destroy();
 		oreType = o;
 		this.identifier = "mineralItem" + this.oreType;
 		this.textureName = "mineral_" + oreType;

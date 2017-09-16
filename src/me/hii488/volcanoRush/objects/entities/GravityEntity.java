@@ -15,8 +15,7 @@ public abstract class GravityEntity extends BaseEntity{
 	}
 	
 	public Vector previousMovement = new Vector(0, 0);
-	protected int maxFallSpeed = -5;
-	protected int jumpSpeed = 4;
+	protected int maxFallSpeed = 13;
 	public Vector addGravity(){ // Mostly code is copied from VRPlayer and PLayer
 		Vector v = new Vector(0,0);
 		
