@@ -8,6 +8,8 @@ public class AllDirtAlg extends MineralAlg{
 	@Override
 	public void populate(Grid g){
 		g.fillRectWithTile("dirtTile", 0, 0, g.dimensions.getX(), g.dimensions.getY());
+		g.fillRectWithTile("airTile", 1, 1, g.dimensions.getX() - 1, 3);
+		g.wallRectWithTile("unbreakableTile", 0, 0, g.dimensions.getX(), g.dimensions.getY());
 	}
 	
 	@Override

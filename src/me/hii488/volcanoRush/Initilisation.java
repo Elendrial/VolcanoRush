@@ -15,6 +15,7 @@ import me.hii488.volcanoRush.containers.volcanoes.StandardVolcano;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
 import me.hii488.volcanoRush.objects.tiles.DirtTile;
+import me.hii488.volcanoRush.objects.tiles.UnbreakableTile;
 
 public class Initilisation implements IInitiliser{
 	
@@ -34,6 +35,7 @@ public class Initilisation implements IInitiliser{
 		
 		new DirtTile();
 		new AirTile();
+		new UnbreakableTile();
 		
 		EntityRegistry.player = new VRPlayer();
 	}

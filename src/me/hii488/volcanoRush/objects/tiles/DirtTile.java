@@ -15,6 +15,7 @@ public class DirtTile extends MineralTile{
 		else oreType = OreType.NONE;
 		this.identifier = "dirtTile";
 		this.textureName = "dirtTile_" + this.oreType + ".png";
+		this.isCollidable = true;
 	}
 
 	@Override
