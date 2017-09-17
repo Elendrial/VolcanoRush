@@ -8,7 +8,11 @@ import me.hii488.objects.entities.BaseEntity;
 
 public abstract class GravityEntity extends BaseEntity{
 	
-	public GravityEntity(){}
+	public GravityEntity(){
+		super();
+		maxFallSpeed = 13;
+		acceleration = 1;
+	}
 	public GravityEntity(GravityEntity e){super(e);}
 	
 	public void updateOnTick(){
@@ -17,11 +21,12 @@ public abstract class GravityEntity extends BaseEntity{
 	}
 	
 	public Vector previousMovement = new Vector(0, 0);
-	protected int maxFallSpeed = 13;
+	protected int maxFallSpeed;
+	protected float acceleration;
 	public Vector addGravity(){ // Mostly code is copied from VRPlayer and PLayer
 		Vector v = new Vector(0,0);
 		
-		v.setY(previousMovement.getY() >= maxFallSpeed ? maxFallSpeed : previousMovement.getY() + 1f);
+		v.setY(previousMovement.getY() >= maxFallSpeed ? maxFallSpeed : previousMovement.getY() + acceleration);
 		v.setX((previousMovement.getAbsX() * 0.7f));
 		
 		Grid g = ContainerHandler.getLoadedContainer().grid;

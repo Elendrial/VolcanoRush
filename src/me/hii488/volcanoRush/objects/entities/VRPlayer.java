@@ -39,6 +39,10 @@ public class VRPlayer extends Player{
 		}
 	}
 	
+	public void kill(){
+		
+	}
+	
 	protected float previousMovement = 0;
 	protected int maxFallSpeed = 15;
 	protected int jumpSpeed = -8;
