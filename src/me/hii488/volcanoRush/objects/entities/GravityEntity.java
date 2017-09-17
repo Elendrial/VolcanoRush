@@ -8,6 +8,9 @@ import me.hii488.objects.entities.BaseEntity;
 
 public abstract class GravityEntity extends BaseEntity{
 	
+	public GravityEntity(){}
+	public GravityEntity(GravityEntity e){super(e);}
+	
 	public void updateOnTick(){
 		super.updateOnTick();
 		position.addToLocation(addGravity());

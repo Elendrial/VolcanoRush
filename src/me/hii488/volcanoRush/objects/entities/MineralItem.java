@@ -1,7 +1,6 @@
 package me.hii488.volcanoRush.objects.entities;
 
 import me.hii488.handlers.EntityHandler;
-import me.hii488.objects.TexturedObject;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.volcanoRush.VolcRush;
 import me.hii488.volcanoRush.objects.OreType;
@@ -9,6 +8,12 @@ import me.hii488.volcanoRush.objects.OreType;
 public class MineralItem extends GravityEntity {
 
 	public OreType oreType;
+	
+	public MineralItem(){super();}
+	public MineralItem(MineralItem i){
+		if(i.oreType != OreType.NONE) this.setOreType(i.oreType);
+		else this.oreType = OreType.NONE;
+	}
 	
 	@Override
 	public void initVars() {
@@ -50,6 +55,6 @@ public class MineralItem extends GravityEntity {
 	public void onDestroy() {}
 
 	@Override
-	public TexturedObject clone() {return null;}
+	public MineralItem clone() {return new MineralItem(this);}
 
 }
