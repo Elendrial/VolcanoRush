@@ -3,21 +3,26 @@ package me.hii488.volcanoRush.objects.entities;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 import me.hii488.controllers.GameController;
 import me.hii488.graphics.Camera;
 import me.hii488.handlers.ContainerHandler;
+import me.hii488.handlers.TextureHandler;
 import me.hii488.misc.Grid;
 import me.hii488.misc.Settings;
 import me.hii488.misc.Vector;
 import me.hii488.objects.entities.Player;
 import me.hii488.objects.tiles.BaseTile;
 import me.hii488.volcanoRush.containers.menus.MainMenu;
+import me.hii488.volcanoRush.objects.tiles.AirTile;
 import me.hii488.volcanoRush.objects.tiles.MineralTile;
 
 public class VRPlayer extends Player{
 	
+	public BufferedImage[] breathOverlay;
 	public boolean movementAllowed = false;
+	public int breath = 120;
 	
 	@Override
 	public void initVars() {
@@ -25,6 +30,10 @@ public class VRPlayer extends Player{
 		this.textureName = "player.png";
 		this.usesEngineMovement = false;
 		this.speed = 3;
+		
+		breathOverlay = new BufferedImage[4];
+		for(int i = 0; i < breathOverlay.length; i++)
+			breathOverlay[i] = TextureHandler.loadTexture("textures/overlays/", "breathOverlay_" + i + ".png", this);
 	}
 	
 	@Override
@@ -36,6 +45,7 @@ public class VRPlayer extends Player{
 			previousMovement = v.getY();
 			position.addToLocation(v);
 			Camera.cameraPosition = new Vector(position.getX() - GameController.windows[0].width/2, position.getY() - GameController.windows[0].height/2);
+			checkBreath();
 		}
 	}
 	
@@ -82,14 +92,37 @@ public class VRPlayer extends Player{
 		if(t instanceof MineralTile) ((MineralTile) t).onDig();
 	}
 	
-	public void render(Graphics g){
-		if(!(ContainerHandler.getLoadedContainer() instanceof MainMenu)) super.render(g);
+	public void checkBreath(){
+		BaseTile t = ContainerHandler.getLoadedContainer().grid.getTileAtVector(position);
+		boolean drowning = false;
+		if(t instanceof AirTile){
+			for(int i = 0; i < ((AirTile) t).fluidContent.length; i++){
+				if(((AirTile) t).fluidContent[i] > 50) drowning = true;
+			}
+		}
 		
-		Color c = g.getColor();
-		g.setColor(Color.white);
-		g.fillRect(0, 0, 1000, 15);
-		g.setColor(c);
-		g.drawString("player: " + position + ";;   camera: " + Camera.cameraPosition + ";;  tile: " + ContainerHandler.getLoadedContainer().grid.getTileAtVector(position).identifier + ";;   container: " + ContainerHandler.getLoadedContainer().identifier, 2, 12);
+		if(drowning) breath--;
+		else breath = 120;
+		
+		if(breath <= 0) this.kill();
+	}
+	
+	public void render(Graphics g){
+		if(!(ContainerHandler.getLoadedContainer() instanceof MainMenu)){
+			super.render(g);
+			
+			if(breath != 120){
+				if(breath > 90) g.drawImage(breathOverlay[0], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
+				else if(breath > 60) g.drawImage(breathOverlay[1], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
+				else if(breath > 30) g.drawImage(breathOverlay[2], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
+				else if(breath > 0) g.drawImage(breathOverlay[3], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
+			}
+			
+			g.setColor(Color.white);
+			g.fillRect(0, 0, 1000, 15);
+			g.setColor(Color.black);
+			g.drawString("player: " + position + ";;   camera: " + Camera.cameraPosition + ";;  tile: " + ContainerHandler.getLoadedContainer().grid.getTileAtVector(position).identifier + ";;   breath: " + breath, 2, 12);
+		}
 	}
 	
 	public void keyDown(KeyEvent arg0){
