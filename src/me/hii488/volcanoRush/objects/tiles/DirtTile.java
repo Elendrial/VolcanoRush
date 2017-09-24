@@ -34,8 +34,7 @@ public class DirtTile extends MineralTile{
 		
 		overlay = new BufferedImage[3];
 		for(int i = 0; i < overlay.length; i++)
-			overlay[i] = TextureHandler.loadTexture("textures/tiles/", "dirtOverlay_" + i + ".png", this);
-
+			overlay[i] = TextureHandler.loadTexture("textures/overlays/", "dirtOverlay_" + i + ".png", this);
 	}
 	
 	@Override
