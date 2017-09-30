@@ -64,12 +64,25 @@ public class AirTile extends BlankTile{
 					t = ContainerHandler.getLoadedContainer().grid.getTile(gridPosition.clone().addToLocation(1, 0));
 					if(t instanceof AirTile){
 						if(((AirTile) t).fluidContent[i] < fluidContent[i]){
-							int j = (fluidContent[i] - ((AirTile) t).fluidContent[i])/2;
+							int j = (int) Math.ceil((fluidContent[i] - ((AirTile) t).fluidContent[i])/2);
 							j = j > 10 ? 10 : j;
 							
 							if(fluidContent[i] - j >= 0){
 								((AirTile) t).fluidContent[i] += j;
 								fluidContent[i] -= j;
+							}
+						}
+						
+						t = ContainerHandler.getLoadedContainer().grid.getTile(gridPosition.clone().addToLocation(2, 0));
+						if(t instanceof AirTile){
+							if(((AirTile) t).fluidContent[i] < fluidContent[i]){
+								int j = (int) Math.ceil((fluidContent[i] - ((AirTile) t).fluidContent[i])/2);
+								j = j > 10 ? 10 : j;
+								
+								if(fluidContent[i] - j >= 0){
+									((AirTile) t).fluidContent[i] += j;
+									fluidContent[i] -= j;
+								}
 							}
 						}
 					}
@@ -77,7 +90,7 @@ public class AirTile extends BlankTile{
 					t = ContainerHandler.getLoadedContainer().grid.getTile(gridPosition.clone().addToLocation(-1, 0));
 					if(t instanceof AirTile){
 						if(((AirTile) t).fluidContent[i] < fluidContent[i]){
-							int j = (fluidContent[i] - ((AirTile) t).fluidContent[i])/2;
+							int j = (int) Math.ceil((fluidContent[i] - ((AirTile) t).fluidContent[i])/2);
 							j = j > 10 ? 10 : j;
 							
 							if(fluidContent[i] - j >= 0){
@@ -85,6 +98,20 @@ public class AirTile extends BlankTile{
 								fluidContent[i] -= j;
 							}
 						}
+						
+						t = ContainerHandler.getLoadedContainer().grid.getTile(gridPosition.clone().addToLocation(-2, 0));
+						if(t instanceof AirTile){
+							if(((AirTile) t).fluidContent[i] < fluidContent[i]){
+								int j = (int) Math.ceil((fluidContent[i] - ((AirTile) t).fluidContent[i])/2);
+								j = j > 10 ? 10 : j;
+								
+								if(fluidContent[i] - j >= 0){
+									((AirTile) t).fluidContent[i] += j;
+									fluidContent[i] -= j;
+								}
+							}
+						}
+						
 					}
 				}
 			}
