@@ -5,11 +5,13 @@ import java.awt.event.MouseEvent;
 
 import me.hii488.controllers.GameController;
 import me.hii488.controllers.InitilisationController;
+import me.hii488.controllers.TickController;
 import me.hii488.graphics.GUI.GUI;
 import me.hii488.graphics.GUI.GUILabel;
 import me.hii488.handlers.ContainerHandler;
 import me.hii488.interfaces.IInitiliser;
 import me.hii488.registries.EntityRegistry;
+import me.hii488.volcanoRush.additionalTickers.LiquidFix;
 import me.hii488.volcanoRush.containers.menus.MainMenu;
 import me.hii488.volcanoRush.containers.volcanoes.StandardVolcano;
 import me.hii488.volcanoRush.objects.entities.FallingDirt;
@@ -25,6 +27,7 @@ public class Initilisation implements IInitiliser{
 	
 	public static void setup(){
 		InitilisationController.initList.add(instance);
+		TickController.additionalLateTicking.add(new LiquidFix());
 	}
 
 	public static MainMenu menuContainer = new MainMenu();
