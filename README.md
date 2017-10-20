@@ -8,3 +8,5 @@ Most of the core game has been made, but here's what's left:
 - Improve movement
 - Monsters
 - Actually dying when you die
+- Improve the main menu to include instructions etc
+- Pause Menu

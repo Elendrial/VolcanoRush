@@ -12,6 +12,7 @@ import me.hii488.handlers.ContainerHandler;
 import me.hii488.interfaces.IInitiliser;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.volcanoRush.additionalTickers.LiquidFix;
+import me.hii488.volcanoRush.containers.menus.DeathMenu;
 import me.hii488.volcanoRush.containers.menus.MainMenu;
 import me.hii488.volcanoRush.containers.volcanoes.StandardVolcano;
 import me.hii488.volcanoRush.objects.entities.FallingDirt;
@@ -31,13 +32,16 @@ public class Initilisation implements IInitiliser{
 	}
 
 	public static MainMenu menuContainer = new MainMenu();
+	public static DeathMenu deathContainer = new DeathMenu();
 	public static StandardVolcano standardVolc = new StandardVolcano();
 	
 	@Override
 	public void preInit() {
 		ContainerHandler.addContainer(menuContainer);
+		ContainerHandler.addContainer(deathContainer);
 		ContainerHandler.addContainer(standardVolc);
 		
+		// These need to be instantiated to add them to the entity/tile register.
 		new DirtTile();
 		new AirTile();
 		new UnbreakableTile();

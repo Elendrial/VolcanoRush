@@ -50,7 +50,7 @@ public class VRPlayer extends Player{
 	}
 	
 	public void kill(){
-		
+		ContainerHandler.loadNewContainer("deathMenu");
 	}
 	
 	protected float previousMovement = 0;

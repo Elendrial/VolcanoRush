@@ -1,8 +1,11 @@
 package me.hii488.volcanoRush.misc;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
-public class Score implements Comparator<Score>{
+public class Score implements Comparator<Score>, Serializable{
+	
+	private static final long serialVersionUID = -7156916902531681012L;
 	
 	protected int score = 0;
 	public int multiplier = 1;
@@ -28,6 +31,9 @@ public class Score implements Comparator<Score>{
 		score += multiplier * i;
 	}
 	
+	public int getScore(){
+		return score;
+	}
 	
 	
 }
