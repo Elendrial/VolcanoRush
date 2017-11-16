@@ -15,6 +15,7 @@ import me.hii488.misc.Vector;
 import me.hii488.objects.entities.Player;
 import me.hii488.objects.tiles.BaseTile;
 import me.hii488.volcanoRush.containers.menus.MainMenu;
+import me.hii488.volcanoRush.containers.volcanoes.Volcano;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
 import me.hii488.volcanoRush.objects.tiles.MineralTile;
 
@@ -107,6 +108,13 @@ public class VRPlayer extends Player{
 		if(breath <= 0) this.kill();
 	}
 	
+	public void pause(){
+		if(ContainerHandler.getLoadedContainer() instanceof Volcano){
+			GameController.isPaused = true;
+			ContainerHandler.getLoadedContainer().getGui("pauseMenu").showAll();
+		}
+	}
+	
 	public void render(Graphics g){
 		if(!(ContainerHandler.getLoadedContainer() instanceof MainMenu)){
 			super.render(g);
@@ -180,6 +188,9 @@ public class VRPlayer extends Player{
 			break;
 		case KeyEvent.VK_Z:
 			dig(new Vector(-1,1));
+			break;
+		case KeyEvent.VK_P:
+			pause();
 			break;
 		}
 	}

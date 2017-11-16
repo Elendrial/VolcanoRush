@@ -2,6 +2,7 @@ package me.hii488.volcanoRush.additionalTickers;
 
 import java.util.ArrayList;
 
+import me.hii488.controllers.GameController;
 import me.hii488.handlers.ContainerHandler;
 import me.hii488.interfaces.ITickable;
 import me.hii488.misc.Grid;
@@ -13,7 +14,7 @@ public class LiquidFix implements ITickable{
 	
 	@Override
 	public void updateOnSec() {
-		if(ContainerHandler.getLoadedContainer() instanceof Volcano){
+		if(ContainerHandler.getLoadedContainer() instanceof Volcano && !GameController.isPaused){
 			
 			Volcano container = (Volcano) ContainerHandler.getLoadedContainer();
 			ArrayList<AirTile> toUpdate = new ArrayList<AirTile>();			
