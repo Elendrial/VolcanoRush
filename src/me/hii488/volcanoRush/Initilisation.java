@@ -15,6 +15,7 @@ import me.hii488.volcanoRush.additionalTickers.LiquidFix;
 import me.hii488.volcanoRush.containers.menus.DeathMenu;
 import me.hii488.volcanoRush.containers.menus.MainMenu;
 import me.hii488.volcanoRush.containers.volcanoes.StandardVolcano;
+import me.hii488.volcanoRush.items.ItemList;
 import me.hii488.volcanoRush.objects.entities.FallingDirt;
 import me.hii488.volcanoRush.objects.entities.MineralItem;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
@@ -48,6 +49,8 @@ public class Initilisation implements IInitiliser{
 		
 		new MineralItem();
 		new FallingDirt();
+		
+		ItemList.registerItems();
 		
 		EntityRegistry.player = new VRPlayer();
 	}

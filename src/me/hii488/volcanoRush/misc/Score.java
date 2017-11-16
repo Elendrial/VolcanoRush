@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import me.hii488.saveSystem.FileIO;
+import me.hii488.volcanoRush.items.ItemList;
 
 public class Score implements Comparator<Score>, Serializable{
 	
@@ -35,7 +36,7 @@ public class Score implements Comparator<Score>, Serializable{
 	}
 	
 	public int getScore(){
-		return score * multiplier;
+		return (int) (score * multiplier * ItemList.getItemMultiplier());
 	}
 	
 	public String toString(){

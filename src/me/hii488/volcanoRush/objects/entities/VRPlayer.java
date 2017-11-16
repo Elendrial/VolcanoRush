@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 import me.hii488.controllers.GameController;
 import me.hii488.graphics.Camera;
@@ -16,6 +17,8 @@ import me.hii488.objects.entities.Player;
 import me.hii488.objects.tiles.BaseTile;
 import me.hii488.volcanoRush.containers.menus.MainMenu;
 import me.hii488.volcanoRush.containers.volcanoes.Volcano;
+import me.hii488.volcanoRush.items.ItemList;
+import me.hii488.volcanoRush.objects.FluidType;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
 import me.hii488.volcanoRush.objects.tiles.MineralTile;
 
@@ -23,6 +26,7 @@ public class VRPlayer extends Player{
 	
 	public BufferedImage[] breathOverlay;
 	public boolean movementAllowed = false;
+	public int maxBreath = 120;
 	public int breath = 120;
 	
 	@Override
@@ -93,16 +97,24 @@ public class VRPlayer extends Player{
 		if(t instanceof MineralTile) ((MineralTile) t).onDig();
 	}
 	
+	public boolean drowning[] = new boolean[FluidType.values().length];
 	public void checkBreath(){
 		BaseTile t = ContainerHandler.getLoadedContainer().grid.getTileAtVector(position);
-		boolean drowning = false;
+		Arrays.fill(drowning, false);
+		
 		if(t instanceof AirTile){
 			for(int i = 0; i < ((AirTile) t).fluidContent.length; i++){
-				if(((AirTile) t).fluidContent[i] > 50) drowning = true;
+				if(((AirTile) t).fluidContent[i] > 50){
+					drowning[i] = true;
+					ItemList.inFluid(FluidType.values()[i]);
+				}
 			}
 		}
 		
-		if(drowning) breath--;
+		boolean drowns = false;
+		for(int i = 0; i < drowning.length && !drowns; i++) if(drowning[i]) drowns = true;
+		
+		if(drowns) breath--;
 		else breath = 120;
 		
 		if(breath <= 0) this.kill();
