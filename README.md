@@ -10,4 +10,4 @@ Most of the core game has been made, but here's what's left:
 - Improve the main menu to include instructions etc
 
 Other:
-- I tried to make the code organised, but it seems it's made it more of a mess. Sorry about that
+- I tried to make the code organised, but it seems it's made it more of a mess. Sorry to those who look through it.

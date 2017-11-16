@@ -130,6 +130,8 @@ public class AirTile extends BlankTile{
 			if(renderPosA.getY() < GameController.windows[0].height && renderPosB.getY() > 0){
 				g.drawImage(currentTexture, renderPosA.getX(), renderPosA.getY(), null);
 				
+				if(Settings.Logging.debug) g.drawString(fluidContent[1] + "", renderPosA.getX(), renderPosA.getY());
+				
 				for(int i = 0; i < fluidContent.length; i++){
 					if(fluidContent[i] != 0){
 						if(fluidContent[i] < 25) g.drawImage(overlays[i][0], renderPosA.getX(), renderPosA.getY(), null);

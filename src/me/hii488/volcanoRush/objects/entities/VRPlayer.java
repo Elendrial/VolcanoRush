@@ -125,11 +125,13 @@ public class VRPlayer extends Player{
 				else if(breath > 30) g.drawImage(breathOverlay[2], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
 				else if(breath > 0) g.drawImage(breathOverlay[3], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
 			}
-			
-			g.setColor(Color.white);
-			g.fillRect(0, 0, 1000, 15);
-			g.setColor(Color.black);
-			g.drawString("player: " + position + ";;   camera: " + Camera.cameraPosition + ";;  tile: " + ContainerHandler.getLoadedContainer().grid.getTileAtVector(position).identifier + ";;   breath: " + breath, 2, 12);
+	
+			if(Settings.Logging.debug){
+				g.setColor(Color.white);
+				g.fillRect(0, 0, 1000, 15);
+				g.setColor(Color.black);
+				g.drawString("player: " + position + ";;   camera: " + Camera.cameraPosition + ";;  tile: " + ContainerHandler.getLoadedContainer().grid.getTileAtVector(position).identifier, 2, 12);
+			}
 		}
 	}
 	

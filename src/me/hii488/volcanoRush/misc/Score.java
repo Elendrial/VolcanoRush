@@ -1,7 +1,10 @@
 package me.hii488.volcanoRush.misc;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Comparator;
+
+import me.hii488.saveSystem.FileIO;
 
 public class Score implements Comparator<Score>, Serializable{
 	
@@ -28,12 +31,38 @@ public class Score implements Comparator<Score>, Serializable{
 	}
 	
 	public void addToScore(int i){
-		score += multiplier * i;
+		score += i;
 	}
 	
 	public int getScore(){
-		return score;
+		return score * multiplier;
 	}
 	
+	public String toString(){
+		return "" + getScore();
+	}
+	
+	public void saveScore(String fileName){
+		ArrayList<Score> scores = loadScores(fileName);
+		scores.add(this);
+		scores.sort(new Score());
+		try {
+			FileIO.serialize(fileName, scores);
+		} catch (Exception e) {
+			System.err.println("Error saving scores");
+			e.printStackTrace();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Score> loadScores(String fileName){
+		try {
+			return (ArrayList<Score>) FileIO.deserialize(fileName);
+		} catch (Exception e) {
+			System.err.println("Error loading scores");
+			e.printStackTrace();
+			return new ArrayList<Score>();
+		}
+	}
 	
 }
