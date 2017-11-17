@@ -34,6 +34,8 @@ public class Initilisation implements IInitiliser{
 	
 	@Override
 	public void preInit() {
+		ItemList.registerItems();
+		
 		ContainerHandler.addContainer(menuContainer);
 		ContainerHandler.addContainer(shopContainer);
 		ContainerHandler.addContainer(deathContainer);
@@ -46,8 +48,6 @@ public class Initilisation implements IInitiliser{
 		
 		new MineralItem();
 		new FallingDirt();
-		
-		ItemList.registerItems();
 		
 		EntityRegistry.player = new VRPlayer();
 	}

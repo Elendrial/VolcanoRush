@@ -1,6 +1,7 @@
 package me.hii488.volcanoRush.containers.menus;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.HashMap;
 
 import me.hii488.controllers.GameController;
 import me.hii488.graphics.GUI.GUI;
+import me.hii488.graphics.GUI.GUIElement;
 import me.hii488.graphics.GUI.GUILabel;
 import me.hii488.graphics.GUI.GUIPicture;
 import me.hii488.handlers.ContainerHandler;
@@ -23,16 +25,32 @@ public class ShopMenu extends BaseContainer {
 	final int maxSpend = 500;
 	int currentFunds = 500;
 	
+	public GUI shop = new GUI();
+	
 	public ShopMenu(){
 		grid.setupGrid(10, 10);
 		this.identifier = "shop";
 		
-		GUI shop = new GUI();
+		guis.add(shop);
+		
+		
+		System.out.println(shop.getElements().size());
+		for(GUIElement e : shop.getElements()) System.out.println(e.identifier);
+		
+	}
+	
+	@Override
+	public void onLoad(){
+		super.onLoad();
+		currentFunds = maxSpend;
+		
+		shop.empty();
 		
 		HashMap<Item, Boolean> itemList = ItemList.getItemList();
 		
 		int row = 0, col = 0;
 		for(Item i : itemList.keySet()) {
+			System.out.println("inloop");
 			GUIPicture item = (GUIPicture) new GUIPicture() {
 				@Override
 				public void onClick(MouseEvent e) {
@@ -51,7 +69,7 @@ public class ShopMenu extends BaseContainer {
 						this.setupTextures();
 					}
 				}
-			}.setStates(0).setTextureName(i.identifier + ".png").setDimensions(64, 64).setIdentifier(i.identifier + "Picture").setPosition(col * 70 + 20, row * 70 + 120);
+			}.setStates(0).setPath("textures/items/").setTextureName(i.identifier + ".png").setDimensions(64, 64).setIdentifier(i.identifier + "Picture").setPosition(col * 70 + 20, row * 70 + 120);
 			
 			item.setupTextures();
 			itemPictures.add(item);
@@ -60,7 +78,7 @@ public class ShopMenu extends BaseContainer {
 			
 			//TODO Check this is vaguely correct once enough items have been added.
 			col++;
-			if(col > 6) {
+			if(col > 12) {
 				col = 0;
 				row++;
 			}
@@ -73,18 +91,13 @@ public class ShopMenu extends BaseContainer {
 				ContainerHandler.loadNewContainer("standardVolcano"); // TODO: Change this to allow for multiple volcanoes
 			}
 		}.setFill(false).setTextColor(Color.white).setOutlineColor(Color.white).setText("Start Game")
-				.setDimensions(70, 30).setPosition(GameController.windows[0].width/2+15, 700);
+				.setDimensions(70, 30).setPosition(GameController.windows[0].width/2+15, 700).setIdentifier("playButton");
+		
+		shop.addElement(new GUILabel().setTextColor(Color.WHITE).setFont(Font.decode(Font.MONOSPACED + "-24")).setIdentifier("title")
+				.setText("Shop:").setDimensions(100, 40).setPosition(GameController.windows[0].width/2-50, 50));
 		
 		shop.addElement(playButton);
 		
-		guis.add(shop);
-		
-	}
-	
-	@Override
-	public void onLoad(){
-		super.onLoad();
-		currentFunds = maxSpend;
 		((VRPlayer) EntityRegistry.player).resetPlayer();
 	}
 	
