@@ -8,6 +8,15 @@ import me.hii488.volcanoRush.objects.entities.VRPlayer;
 
 public class ItemGasMask extends Item{
 
+	public ItemGasMask(){
+		this.name = "Gas mask";
+		this.identifier = "gasmask";
+		this.droppable = true;
+		this.priority = 1;
+		this.cost = 200;
+		this.scoreMultiplier = 1;
+	}
+	
 	@Override
 	public void inFluid(FluidType fluid) {
 		if(fluid.name() == "GAS"){

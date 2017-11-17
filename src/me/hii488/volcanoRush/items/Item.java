@@ -1,17 +1,21 @@
 package me.hii488.volcanoRush.items;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import me.hii488.interfaces.IInputUser;
 import me.hii488.volcanoRush.objects.FluidType;
 
 public abstract class Item implements IInputUser{
 	
-	public String name;
-	public int scoreMultiplier;
-	public int priority;
-	public boolean droppable;
-	public int cost;
+	public String name = "";
+	public String identifier = "";
+	public int scoreMultiplier = 1;
+	public int priority = 10; // lower = higher priority.
+	public boolean droppable = false;
+	public int cost = -1;
+	
+	public BufferedImage texture;
 	
 	public abstract void onEquip();
 	

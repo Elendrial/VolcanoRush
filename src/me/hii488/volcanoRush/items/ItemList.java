@@ -19,6 +19,10 @@ public class ItemList {
 		registerItem(new ItemGasMask());
 	}
 	
+	public static void unequipAll(){
+		for(Item i : itemList.keySet()) itemList.put(i, false);
+	}
+	
 	public static float getItemMultiplier(){
 		float mult = 1;
 		for(Item i : itemList.keySet()){

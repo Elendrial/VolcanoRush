@@ -24,8 +24,9 @@ import me.hii488.volcanoRush.objects.tiles.MineralTile;
 
 public class VRPlayer extends Player{
 	
-	public BufferedImage[] breathOverlay;
 	public boolean movementAllowed = false;
+	public BufferedImage[] breathOverlay;
+	public boolean drowning[] = new boolean[FluidType.values().length];
 	public int maxBreath = 120;
 	public int breath = 120;
 	
@@ -39,6 +40,14 @@ public class VRPlayer extends Player{
 		breathOverlay = new BufferedImage[4];
 		for(int i = 0; i < breathOverlay.length; i++)
 			breathOverlay[i] = TextureHandler.loadTexture("textures/overlays/", "breathOverlay_" + i + ".png", this);
+	}
+	
+	public void resetPlayer(){
+		ItemList.unequipAll();
+		maxBreath = 120;
+		breath = 120;
+		speed = 3;
+		movementAllowed = false;
 	}
 	
 	@Override
@@ -97,7 +106,6 @@ public class VRPlayer extends Player{
 		if(t instanceof MineralTile) ((MineralTile) t).onDig();
 	}
 	
-	public boolean drowning[] = new boolean[FluidType.values().length];
 	public void checkBreath(){
 		BaseTile t = ContainerHandler.getLoadedContainer().grid.getTileAtVector(position);
 		Arrays.fill(drowning, false);
