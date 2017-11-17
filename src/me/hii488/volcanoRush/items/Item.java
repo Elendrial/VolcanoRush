@@ -1,6 +1,5 @@
 package me.hii488.volcanoRush.items;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import me.hii488.interfaces.IInputUser;
@@ -25,7 +24,5 @@ public abstract class Item implements IInputUser{
 	public abstract boolean onMovement();
 	
 	public abstract void onGeneration();
-	
-	public abstract void render(Graphics g);
 	
 }

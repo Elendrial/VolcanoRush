@@ -22,7 +22,7 @@ public class MainMenu extends BaseContainer {
 			@Override
 			public void onClick(MouseEvent e){
 				if(e.getButton() != MouseEvent.BUTTON1) return;
-				ContainerHandler.loadNewContainer("standardVolcano");			
+				ContainerHandler.loadNewContainer("shop");			
 			}
 		}.setFill(false).setTextColor(Color.white).setOutlineColor(Color.white).setText("Start Game").setDimensions(100, 40).setPosition(GameController.windows[0].width/2-50, GameController.windows[0].height/2-20);
 		

@@ -45,7 +45,7 @@ public class DeathMenu extends BaseContainer{
 			public void onClick(MouseEvent e){
 				if(e.getButton() != MouseEvent.BUTTON1) return;
 				saveScore();
-				ContainerHandler.loadNewContainer("standardVolcano"); // TODO: Change this to allow for more types of volcano.
+				ContainerHandler.loadNewContainer("shop");
 			}
 		}.setFill(false).setTextColor(Color.white).setOutlineColor(Color.white).setText("Start Game")
 				.setDimensions(70, 30).setPosition(GameController.windows[0].width/2+15, 700);

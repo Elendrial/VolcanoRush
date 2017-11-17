@@ -1,7 +1,5 @@
 package me.hii488.volcanoRush.items;
 
-import java.awt.Graphics;
-
 import me.hii488.registries.EntityRegistry;
 import me.hii488.volcanoRush.objects.FluidType;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
@@ -29,9 +27,6 @@ public class ItemGasMask extends Item{
 
 	@Override
 	public void onGeneration() {}
-
-	@Override
-	public void render(Graphics g) {}
 
 	@Override
 	public void onEquip() {}

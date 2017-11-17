@@ -24,9 +24,6 @@ public class ItemScoreTriple extends Item {
 	public void onGeneration() {}
 
 	@Override
-	public void render(Graphics g) {}
-
-	@Override
 	public void onEquip() {}
 
 }
