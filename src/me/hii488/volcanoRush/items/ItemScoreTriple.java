@@ -1,7 +1,5 @@
 package me.hii488.volcanoRush.items;
 
-import java.awt.Graphics;
-
 import me.hii488.volcanoRush.objects.FluidType;
 
 public class ItemScoreTriple extends Item {

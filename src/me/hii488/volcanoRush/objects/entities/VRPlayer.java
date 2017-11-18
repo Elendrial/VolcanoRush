@@ -13,7 +13,6 @@ import me.hii488.handlers.TextureHandler;
 import me.hii488.misc.Grid;
 import me.hii488.misc.Settings;
 import me.hii488.misc.Vector;
-import me.hii488.objects.containers.BaseContainer;
 import me.hii488.objects.entities.Player;
 import me.hii488.objects.tiles.BaseTile;
 import me.hii488.volcanoRush.containers.menus.MainMenu;

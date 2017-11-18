@@ -1,5 +1,6 @@
 package me.hii488.volcanoRush.containers.algorithms;
 
+import me.hii488.controllers.GameController;
 import me.hii488.misc.Grid;
 import me.hii488.volcanoRush.objects.FluidType;
 import me.hii488.volcanoRush.objects.OreType;
@@ -25,7 +26,13 @@ public class StandardAlg extends MineralAlg{
 	}
 
 	@Override
-	public OreType getOreType(int x, int y) {return null;}
+	public OreType getOreType(int x, int y) {
+		double rand = GameController.rand.nextDouble();
+		// TODO: Come up with a better algorithm than this
+		
+		
+		return OreType.NONE;
+	}
 
 	@Override
 	public int getFluidAmount(FluidType t, int x, int y) {return 0;}
