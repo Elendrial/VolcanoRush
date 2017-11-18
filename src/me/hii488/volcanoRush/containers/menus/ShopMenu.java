@@ -33,8 +33,6 @@ public class ShopMenu extends BaseContainer {
 		
 		guis.add(shop);
 		
-		
-		System.out.println(shop.getElements().size());
 		for(GUIElement e : shop.getElements()) System.out.println(e.identifier);
 		
 	}
@@ -50,7 +48,6 @@ public class ShopMenu extends BaseContainer {
 		
 		int row = 0, col = 0;
 		for(Item i : itemList.keySet()) {
-			System.out.println("inloop");
 			GUIPicture item = (GUIPicture) new GUIPicture() {
 				@Override
 				public void onClick(MouseEvent e) {

@@ -13,6 +13,7 @@ import me.hii488.handlers.TextureHandler;
 import me.hii488.misc.Grid;
 import me.hii488.misc.Settings;
 import me.hii488.misc.Vector;
+import me.hii488.objects.containers.BaseContainer;
 import me.hii488.objects.entities.Player;
 import me.hii488.objects.tiles.BaseTile;
 import me.hii488.volcanoRush.containers.menus.MainMenu;
@@ -58,9 +59,28 @@ public class VRPlayer extends Player{
 			Vector v = allowedMovement(queuedMovement);
 			previousMovement = v.getY();
 			position.addToLocation(v);
-			Camera.cameraPosition = new Vector(position.getX() - GameController.windows[0].width/2, position.getY() - GameController.windows[0].height/2);
+			updateCamera();
 			checkBreath();
 		}
+	}
+	
+	public void updateCamera(){
+		Vector possiblePosition = new Vector(position.getX() - GameController.windows[0].width/2, position.getY() - GameController.windows[0].height/2);
+		Grid g = ContainerHandler.getLoadedContainer().grid;
+		
+		if(g.dimensions.getX() * Settings.Texture.tileSize > GameController.windows[0].width){
+			if(possiblePosition.getX() < 0) possiblePosition.setX(0);
+			if(possiblePosition.getX() + GameController.windows[0].width > g.dimensions.getX() * Settings.Texture.tileSize) 
+				possiblePosition.setX(g.dimensions.getX() * Settings.Texture.tileSize - GameController.windows[0].width);
+		}
+
+		if(g.dimensions.getY() * Settings.Texture.tileSize > GameController.windows[0].height){
+			if(possiblePosition.getY() < 0) possiblePosition.setY(0);
+			if(possiblePosition.getY() + GameController.windows[0].height > g.dimensions.getY() * Settings.Texture.tileSize) 
+				possiblePosition.setY(g.dimensions.getY() * Settings.Texture.tileSize - GameController.windows[0].height);
+		}
+		
+		Camera.cameraPosition = possiblePosition;
 	}
 	
 	public void kill(){
