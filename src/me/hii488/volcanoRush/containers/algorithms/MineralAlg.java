@@ -2,8 +2,8 @@ package me.hii488.volcanoRush.containers.algorithms;
 
 import me.hii488.misc.Grid;
 import me.hii488.misc.Vector;
-import me.hii488.volcanoRush.objects.FluidType;
-import me.hii488.volcanoRush.objects.OreType;
+import me.hii488.volcanoRush.tileExtras.FluidType;
+import me.hii488.volcanoRush.tileExtras.OreType;
 
 public abstract class MineralAlg {
 	

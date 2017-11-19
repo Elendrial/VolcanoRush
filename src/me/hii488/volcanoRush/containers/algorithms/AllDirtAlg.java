@@ -2,10 +2,10 @@ package me.hii488.volcanoRush.containers.algorithms;
 
 import me.hii488.misc.Grid;
 import me.hii488.objects.tiles.BaseTile;
-import me.hii488.volcanoRush.objects.FluidType;
-import me.hii488.volcanoRush.objects.OreType;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
 import me.hii488.volcanoRush.objects.tiles.MineralTile;
+import me.hii488.volcanoRush.tileExtras.FluidType;
+import me.hii488.volcanoRush.tileExtras.OreType;
 
 // Note this is just an alg for testing, it wont be the final one etc etc
 public class AllDirtAlg extends MineralAlg{

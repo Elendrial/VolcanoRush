@@ -1,8 +1,8 @@
 package me.hii488.volcanoRush.items;
 
 import me.hii488.registries.EntityRegistry;
-import me.hii488.volcanoRush.objects.FluidType;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
+import me.hii488.volcanoRush.tileExtras.FluidType;
 
 public class ItemGasMask extends Item{
 

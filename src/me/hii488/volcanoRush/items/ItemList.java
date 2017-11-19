@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 import me.hii488.handlers.TextureHandler;
-import me.hii488.volcanoRush.objects.FluidType;
+import me.hii488.volcanoRush.tileExtras.FluidType;
 
 public class ItemList {
 	

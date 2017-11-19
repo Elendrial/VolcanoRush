@@ -18,9 +18,9 @@ import me.hii488.objects.tiles.BaseTile;
 import me.hii488.volcanoRush.containers.menus.MainMenu;
 import me.hii488.volcanoRush.containers.volcanoes.Volcano;
 import me.hii488.volcanoRush.items.ItemList;
-import me.hii488.volcanoRush.objects.FluidType;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
 import me.hii488.volcanoRush.objects.tiles.MineralTile;
+import me.hii488.volcanoRush.tileExtras.FluidType;
 
 public class VRPlayer extends Player{
 	

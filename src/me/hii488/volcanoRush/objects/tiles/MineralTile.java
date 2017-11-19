@@ -5,8 +5,8 @@ import me.hii488.handlers.ContainerHandler;
 import me.hii488.misc.Settings;
 import me.hii488.objects.tiles.BaseTile;
 import me.hii488.registries.EntityRegistry;
-import me.hii488.volcanoRush.objects.OreType;
 import me.hii488.volcanoRush.objects.entities.MineralItem;
+import me.hii488.volcanoRush.tileExtras.OreType;
 
 public abstract class MineralTile extends BaseTile {
 

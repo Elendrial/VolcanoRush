@@ -3,7 +3,7 @@ package me.hii488.volcanoRush.items;
 import java.awt.image.BufferedImage;
 
 import me.hii488.interfaces.IInputUser;
-import me.hii488.volcanoRush.objects.FluidType;
+import me.hii488.volcanoRush.tileExtras.FluidType;
 
 public abstract class Item implements IInputUser{
 	

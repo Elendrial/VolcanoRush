@@ -7,8 +7,8 @@ import me.hii488.handlers.ContainerHandler;
 import me.hii488.interfaces.ITickable;
 import me.hii488.misc.Grid;
 import me.hii488.volcanoRush.containers.volcanoes.Volcano;
-import me.hii488.volcanoRush.objects.FluidType;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
+import me.hii488.volcanoRush.tileExtras.FluidType;
 
 public class LiquidFix implements ITickable{
 	

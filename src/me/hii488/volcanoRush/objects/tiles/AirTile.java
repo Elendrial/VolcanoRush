@@ -11,7 +11,7 @@ import me.hii488.handlers.TextureHandler;
 import me.hii488.misc.Settings;
 import me.hii488.objects.tiles.BaseTile;
 import me.hii488.objects.tiles.BlankTile;
-import me.hii488.volcanoRush.objects.FluidType;
+import me.hii488.volcanoRush.tileExtras.FluidType;
 
 public class AirTile extends BlankTile{
 	

@@ -1,4 +1,4 @@
-package me.hii488.volcanoRush.objects;
+package me.hii488.volcanoRush.tileExtras;
 
 public enum FluidType {
 	GAS(-1),

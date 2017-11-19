@@ -7,8 +7,8 @@ import me.hii488.misc.Settings;
 import me.hii488.objects.entities.BaseEntity;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.registries.TileRegistry;
-import me.hii488.volcanoRush.objects.OreType;
 import me.hii488.volcanoRush.objects.tiles.DirtTile;
+import me.hii488.volcanoRush.tileExtras.OreType;
 
 public class FallingDirt extends BaseEntity{
 
