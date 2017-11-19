@@ -84,7 +84,7 @@ public class DeathMenu extends BaseContainer{
 			e.printStackTrace();
 		}
 		
-		VolcRush.score.multiplier = ItemList.getItemMultiplier();
+		VolcRush.score.multiplier *= ItemList.getItemMultiplier();
 		currentScore.text = "Score achieved: " + VolcRush.score.getScore();
 	}
 	

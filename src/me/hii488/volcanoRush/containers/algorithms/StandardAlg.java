@@ -23,8 +23,18 @@ public class StandardAlg extends MineralAlg{
 			g.fillRectWithTile("unbreakableTile", g.dimensions.getX()/2 + (2*i), i, g.dimensions.getX()/2 + (2*i+2), i+1);
 		}
 		
-		// TODO: Make rope tile that you can use to escape volcano and place instead of this air.
-		g.setTile("airTile", 0, g.dimensions.getX()/2-1, 0);
+		g.setTile("ropeTile", g.dimensions.getX()/2-1, 0);
+		g.setTile("ropeTile", g.dimensions.getX()/2-1, 1);
+		
+		double rand;
+		double rockChance; 
+		for(int j = 0; j < g.dimensions.getY(); j++) { // x and y 'wrong' way around to go down by rows so rockchance can be updated easily.
+			rockChance = Math.tanh(j * 0.01) * 0.01;
+			for(int i = 0; i < g.dimensions.getX(); i++) {
+				rand = GameController.rand.nextDouble();
+				if(rand < rockChance) g.setTile("rockTile", i, j);
+			}
+		}
 		
 		for(BaseTile[] b : g.grid) for(BaseTile t : b){
 			if(t instanceof MineralTile) ((MineralTile) t).setOreType(getOreType(t.gridPosition));

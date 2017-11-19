@@ -16,6 +16,8 @@ import me.hii488.volcanoRush.objects.entities.MineralItem;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
 import me.hii488.volcanoRush.objects.tiles.DirtTile;
+import me.hii488.volcanoRush.objects.tiles.RockTile;
+import me.hii488.volcanoRush.objects.tiles.RopeTile;
 import me.hii488.volcanoRush.objects.tiles.UnbreakableTile;
 
 public class Initilisation implements IInitiliser{
@@ -43,8 +45,10 @@ public class Initilisation implements IInitiliser{
 		
 		// These need to be instantiated to add them to the entity/tile register.
 		new DirtTile();
+		new RockTile();
 		new AirTile();
 		new UnbreakableTile();
+		new RopeTile();
 		
 		new MineralItem();
 		new FallingDirt();
