@@ -7,12 +7,14 @@ import me.hii488.volcanoRush.misc.Score;
 public class VolcRush {
 	
 	public static Score score = new Score();
+	public static boolean debugCommands;
 	
 	public static void main(String[] args){
 		GameController.setupEngine();
 		GameController.loadWindow("Volcano Rush", 1000, 800);
 		
 		Settings.Texture.tileSize = 32;
+		debugCommands = true;
 		
 		Initilisation.setup();
 		

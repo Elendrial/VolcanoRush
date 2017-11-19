@@ -4,11 +4,9 @@ A 2D game heavily based on Minor Disturbance (web vers) by Jagex - WIP
 Most of the core game has been made, but here's what's left:
 - Improve movement
 - Improve the main menu to include instructions etc
-- Volcano generation
 - Monsters
 - The rest of the items
 - Reduce visibility
-- Ores in rocks
 - Forced end to game (volcano erupting)
 - Redo all art
 

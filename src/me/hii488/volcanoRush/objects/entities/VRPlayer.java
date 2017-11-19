@@ -26,8 +26,9 @@ import me.hii488.volcanoRush.tileExtras.FluidType;
 public class VRPlayer extends Player{
 	
 	public boolean movementAllowed = false;
-	public BufferedImage[] breathOverlay;
 	public boolean drowning[] = new boolean[FluidType.values().length];
+	private boolean invincible = false;
+	public BufferedImage[] breathOverlay;
 	public int maxBreath = 120;
 	public int breath = 120;
 	
@@ -49,6 +50,7 @@ public class VRPlayer extends Player{
 		breath = 120;
 		speed = 3;
 		movementAllowed = false;
+		invincible = false;
 	}
 	
 	@Override
@@ -84,7 +86,7 @@ public class VRPlayer extends Player{
 	}
 	
 	public void kill(){
-		ContainerHandler.loadNewContainer("deathMenu");
+		if(!invincible) ContainerHandler.loadNewContainer("deathMenu");
 	}
 	
 	protected float previousMovement = 0;
@@ -170,7 +172,7 @@ public class VRPlayer extends Player{
 				g.setColor(Color.white);
 				g.fillRect(0, 0, 1000, 15);
 				g.setColor(Color.black);
-				g.drawString("player: " + position + ";;   camera: " + Camera.cameraPosition + ";;  tile: " + ContainerHandler.getLoadedContainer().grid.getTileAtVector(position).identifier + ";; score: " + VolcRush.score.getScore(), 2, 12);
+				g.drawString("player: " + position + ";;  tilePos: " + Grid.getGridPosAtVector(position).toString() + ";;   camera: " + Camera.cameraPosition + ";;  tile: " + ContainerHandler.getLoadedContainer().grid.getTileAtVector(position).identifier + ";; score: " + VolcRush.score.getScore(), 2, 12);
 			}
 		}
 	}
@@ -237,10 +239,13 @@ public class VRPlayer extends Player{
 		}
 		
 		// Debug commands
-		if(Settings.Logging.debug) {
+		if(Settings.Logging.debug || VolcRush.debugCommands) {
 			switch(arg0.getKeyCode()) {
 			case KeyEvent.VK_K:
 				this.kill();
+				break;
+			case KeyEvent.VK_I:
+				this.invincible = !this.invincible;
 				break;
 			}
 		}

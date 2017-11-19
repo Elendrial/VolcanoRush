@@ -54,8 +54,8 @@ public abstract class Volcano extends BaseContainer{
 	
 	public void onLoad(){
 		super.onLoad();
-		mineralSpawner.populate(grid);
 		((VRPlayer) EntityRegistry.player).movementAllowed = true;
 		EntityRegistry.player.position.setLocation(grid.dimensions.getX()/2 * Settings.Texture.tileSize, 50);
+		mineralSpawner.populate(grid);
 	}
 }

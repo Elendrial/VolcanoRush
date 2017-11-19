@@ -27,7 +27,7 @@ public class Score implements Comparator<Score>, Serializable{
 	}
 	
 	public int compare(Score a, Score b){
-		return a.score - b.score;
+		return a.getScore() - b.getScore();
 	}
 	
 	public void addToScore(int i){
