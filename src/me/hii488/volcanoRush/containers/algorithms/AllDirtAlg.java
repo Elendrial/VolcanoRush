@@ -1,6 +1,7 @@
 package me.hii488.volcanoRush.containers.algorithms;
 
 import me.hii488.misc.Grid;
+import me.hii488.misc.Vector;
 import me.hii488.objects.tiles.BaseTile;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
 import me.hii488.volcanoRush.objects.tiles.MineralTile;
@@ -35,8 +36,9 @@ public class AllDirtAlg extends MineralAlg{
 		if(y == 30) return OreType.DIAMOND;
 		return OreType.NONE;
 	}
-
-	@Override
+	
+	public int getFluidAmount(FluidType t, Vector v) { return getFluidAmount(t, v.getX(), v.getY());}
+	
 	public int getFluidAmount(FluidType t, int x, int y) {
 		if(t == FluidType.WATER && y == 34) return 100;
 		return 0;
