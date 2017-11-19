@@ -103,26 +103,26 @@ public class VRPlayer extends Player{
 		BaseTile t;
 		
 		if(Math.abs(direction.getX() + direction.getY()) == 1){ // If direction is vertical/horizontal 
-			t = g.getTile(g.getGridPosAtVector(position.clone().addToLocation(currentTexture.getWidth()/2, currentTexture.getHeight()/2)).addToLocation(direction));
+			t = g.getTile(Grid.getGridPosAtVector(position.clone().addToLocation(currentTexture.getWidth()/2, currentTexture.getHeight()/2)).addToLocation(direction));
 			if(t instanceof MineralTile) ((MineralTile) t).onDig();
 			else if(direction.getY() == 0){ // If you're over half a tile in x direction, you can reach the next tile over.
-				t = g.getTile(g.getGridPosAtVector(position.clone().addToLocation(currentTexture.getWidth()/2, currentTexture.getHeight()/2).addToLocation(Settings.Texture.tileSize/2, 0)).addToLocation(direction));
+				t = g.getTile(Grid.getGridPosAtVector(position.clone().addToLocation(currentTexture.getWidth()/2, currentTexture.getHeight()/2).addToLocation(Settings.Texture.tileSize/2, 0)).addToLocation(direction));
 				if(t instanceof MineralTile) ((MineralTile) t).onDig();
 			}
 			return;
 		}
 		
 		// If direction is diagonal, must have mined one of the blocks around it first
-		t = g.getTile(g.getGridPosAtVector(position.clone().addToLocation(currentTexture.getWidth()/2, currentTexture.getHeight()/2)).addToLocation(0, direction.getY()));
+		t = g.getTile(Grid.getGridPosAtVector(position.clone().addToLocation(currentTexture.getWidth()/2, currentTexture.getHeight()/2)).addToLocation(0, direction.getY()));
 		if(t instanceof MineralTile){
-			t = g.getTile(g.getGridPosAtVector(position.clone().addToLocation(currentTexture.getWidth()/2, currentTexture.getHeight()/2)).addToLocation(direction.getX(), 0));
+			t = g.getTile(Grid.getGridPosAtVector(position.clone().addToLocation(currentTexture.getWidth()/2, currentTexture.getHeight()/2)).addToLocation(direction.getX(), 0));
 			if(t instanceof MineralTile){ // If neither side of diagonal tile is free, mine the one above/below it
 				((MineralTile) t).onDig();
 				return;
 			}
 		}
 		
-		t =  g.getTile(g.getGridPosAtVector(position.clone().addToLocation(currentTexture.getWidth()/2, currentTexture.getHeight()/2)).addToLocation(direction));
+		t =  g.getTile(Grid.getGridPosAtVector(position.clone().addToLocation(currentTexture.getWidth()/2, currentTexture.getHeight()/2)).addToLocation(direction));
 		if(t instanceof MineralTile) ((MineralTile) t).onDig();
 	}
 	
@@ -159,10 +159,10 @@ public class VRPlayer extends Player{
 		if(!(ContainerHandler.getLoadedContainer() instanceof MainMenu)){
 			super.render(g);
 			
-			if(breath != 120){
-				if(breath > 90) g.drawImage(breathOverlay[0], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
-				else if(breath > 60) g.drawImage(breathOverlay[1], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
-				else if(breath > 30) g.drawImage(breathOverlay[2], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
+			if(breath != maxBreath){
+				if(breath > maxBreath * 0.75) g.drawImage(breathOverlay[0], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
+				else if(breath > maxBreath * 0.50) g.drawImage(breathOverlay[1], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
+				else if(breath > maxBreath * 0.25) g.drawImage(breathOverlay[2], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
 				else if(breath > 0) g.drawImage(breathOverlay[3], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
 			}
 	
