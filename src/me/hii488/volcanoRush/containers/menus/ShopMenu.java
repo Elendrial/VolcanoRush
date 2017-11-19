@@ -15,8 +15,10 @@ import me.hii488.graphics.GUI.GUIPicture;
 import me.hii488.handlers.ContainerHandler;
 import me.hii488.objects.containers.BaseContainer;
 import me.hii488.registries.EntityRegistry;
+import me.hii488.volcanoRush.VolcRush;
 import me.hii488.volcanoRush.items.Item;
 import me.hii488.volcanoRush.items.ItemList;
+import me.hii488.volcanoRush.misc.Score;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
 
 public class ShopMenu extends BaseContainer {
@@ -96,6 +98,7 @@ public class ShopMenu extends BaseContainer {
 		shop.addElement(playButton);
 		
 		((VRPlayer) EntityRegistry.player).resetPlayer();
+		VolcRush.score = new Score();
 	}
 	
 	public void render(Graphics g) {

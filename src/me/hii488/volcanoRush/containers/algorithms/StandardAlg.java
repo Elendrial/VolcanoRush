@@ -34,13 +34,13 @@ public class StandardAlg extends MineralAlg{
 	@Override
 	public OreType getOreType(int x, int y) {
 		double rand = GameController.rand.nextDouble();
-		if(rand > 0.15) return OreType.NONE;
+		if(rand > 0.10) return OreType.NONE;
 		
 		double[] chances = new double[OreType.values().length];
 		double total = 0;
 		
 		for(OreType o : OreType.values()) {
-			chances[o.ordinal()] = o.info.getSpawnChance(x, y);
+			chances[o.ordinal()] = o.util.getSpawnChance(x, y);
 			total += chances[o.ordinal()];
 		}
 		

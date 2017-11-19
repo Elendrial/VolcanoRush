@@ -39,6 +39,7 @@ public class DirtTile extends MineralTile{
 	
 	@Override
 	public void updateOnTick() {
+		super.updateOnTick();
 		if(damageValue >= 5){
 			this.onDestroy();
 			ContainerHandler.getLoadedContainer().grid.setTile("airTile", gridPosition);

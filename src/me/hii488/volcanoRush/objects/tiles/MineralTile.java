@@ -25,6 +25,16 @@ public abstract class MineralTile extends BaseTile {
 	}
 	
 	@Override
+	public void updateOnTick() {
+		oreType.util.updateOnTick(this.gridPosition.getX(), this.gridPosition.getY());
+	}
+	
+	@Override
+	public void updateOnSec() {
+		oreType.util.updateOnSec(this.gridPosition.getX(), this.gridPosition.getY());
+	}
+	
+	@Override
 	public float randTickChance() {return 0;}
 
 	@Override

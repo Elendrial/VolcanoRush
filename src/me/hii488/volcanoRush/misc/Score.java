@@ -5,14 +5,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import me.hii488.saveSystem.FileIO;
-import me.hii488.volcanoRush.items.ItemList;
 
 public class Score implements Comparator<Score>, Serializable{
 	
 	private static final long serialVersionUID = -7156916902531681012L;
 	
 	protected int score = 0;
-	public int multiplier = 1;
+	public float multiplier = 1;
 	public String name = "";
 	
 	public Score(){}
@@ -36,7 +35,7 @@ public class Score implements Comparator<Score>, Serializable{
 	}
 	
 	public int getScore(){
-		return (int) (score * multiplier * ItemList.getItemMultiplier());
+		return (int) (score * multiplier);
 	}
 	
 	public String toString(){

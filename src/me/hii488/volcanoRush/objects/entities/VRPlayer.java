@@ -15,6 +15,7 @@ import me.hii488.misc.Settings;
 import me.hii488.misc.Vector;
 import me.hii488.objects.entities.Player;
 import me.hii488.objects.tiles.BaseTile;
+import me.hii488.volcanoRush.VolcRush;
 import me.hii488.volcanoRush.containers.menus.MainMenu;
 import me.hii488.volcanoRush.containers.volcanoes.Volcano;
 import me.hii488.volcanoRush.items.ItemList;
@@ -169,7 +170,7 @@ public class VRPlayer extends Player{
 				g.setColor(Color.white);
 				g.fillRect(0, 0, 1000, 15);
 				g.setColor(Color.black);
-				g.drawString("player: " + position + ";;   camera: " + Camera.cameraPosition + ";;  tile: " + ContainerHandler.getLoadedContainer().grid.getTileAtVector(position).identifier, 2, 12);
+				g.drawString("player: " + position + ";;   camera: " + Camera.cameraPosition + ";;  tile: " + ContainerHandler.getLoadedContainer().grid.getTileAtVector(position).identifier + ";; score: " + VolcRush.score.getScore(), 2, 12);
 			}
 		}
 	}
@@ -233,6 +234,15 @@ public class VRPlayer extends Player{
 		case KeyEvent.VK_P:
 			pause();
 			break;
+		}
+		
+		// Debug commands
+		if(Settings.Logging.debug) {
+			switch(arg0.getKeyCode()) {
+			case KeyEvent.VK_K:
+				this.kill();
+				break;
+			}
 		}
 	}
 	

@@ -1,6 +1,6 @@
 package me.hii488.volcanoRush.tileExtras;
 
-public class OreInfo{
+public class OreUtil{
 	
 	public double getSpawnChance(int x, int y) {return 0;}
 	
