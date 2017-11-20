@@ -4,7 +4,8 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 import me.hii488.handlers.TextureHandler;
-import me.hii488.volcanoRush.tileExtras.FluidType;
+import me.hii488.volcanoRush.dataTypes.DeathCause;
+import me.hii488.volcanoRush.dataTypes.FluidType;
 
 public class ItemList {
 	
@@ -54,5 +55,15 @@ public class ItemList {
 		}
 	}
 	
+	public static boolean onDeath(DeathCause cause){
+		boolean b = true;
+		for(Item i : itemList.keySet()){
+			if(itemList.get(i)){
+				b = i.onDeath(cause);
+				if(!b) return !b;
+			}
+		}
+		return true;
+	}
 	
 }

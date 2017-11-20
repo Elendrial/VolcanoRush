@@ -3,7 +3,7 @@ package me.hii488.volcanoRush.objects.entities;
 import me.hii488.handlers.EntityHandler;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.volcanoRush.VolcRush;
-import me.hii488.volcanoRush.tileExtras.OreType;
+import me.hii488.volcanoRush.dataTypes.OreType;
 
 public class MineralItem extends GravityEntity {
 

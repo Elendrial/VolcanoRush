@@ -1,7 +1,5 @@
 package me.hii488.volcanoRush.items;
 
-import me.hii488.volcanoRush.tileExtras.FluidType;
-
 public class ItemScoreDouble extends Item {
 
 	public ItemScoreDouble(){
@@ -12,16 +10,4 @@ public class ItemScoreDouble extends Item {
 		this.cost = 200;
 	}
 	
-	@Override
-	public void inFluid(FluidType fluid) {}
-
-	@Override
-	public boolean onMovement() {return true;}
-
-	@Override
-	public void onGeneration() {}
-
-	@Override
-	public void onEquip() {}
-
 }

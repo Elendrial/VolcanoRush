@@ -1,4 +1,4 @@
-package me.hii488.volcanoRush.tileExtras;
+package me.hii488.volcanoRush.dataTypes;
 
 public class OreUtil{
 	

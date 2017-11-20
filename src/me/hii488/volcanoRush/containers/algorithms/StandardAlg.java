@@ -3,8 +3,8 @@ package me.hii488.volcanoRush.containers.algorithms;
 import me.hii488.controllers.GameController;
 import me.hii488.misc.Grid;
 import me.hii488.objects.tiles.BaseTile;
+import me.hii488.volcanoRush.dataTypes.OreType;
 import me.hii488.volcanoRush.objects.tiles.MineralTile;
-import me.hii488.volcanoRush.tileExtras.OreType;
 
 public class StandardAlg extends MineralAlg{
 

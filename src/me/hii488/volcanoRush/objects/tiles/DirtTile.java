@@ -10,8 +10,8 @@ import me.hii488.handlers.ContainerHandler;
 import me.hii488.handlers.TextureHandler;
 import me.hii488.misc.Settings;
 import me.hii488.registries.EntityRegistry;
+import me.hii488.volcanoRush.dataTypes.OreType;
 import me.hii488.volcanoRush.objects.entities.FallingDirt;
-import me.hii488.volcanoRush.tileExtras.OreType;
 
 public class DirtTile extends MineralTile{
 	

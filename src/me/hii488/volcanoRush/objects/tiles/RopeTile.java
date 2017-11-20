@@ -4,6 +4,7 @@ import me.hii488.misc.Grid;
 import me.hii488.objects.tiles.BaseTile;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.volcanoRush.VolcRush;
+import me.hii488.volcanoRush.dataTypes.DeathCause;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
 
 public class RopeTile extends BaseTile{
@@ -27,7 +28,7 @@ public class RopeTile extends BaseTile{
 	public void updateOnTick() {
 		if(Grid.getGridPosAtVector(EntityRegistry.player.position).equals(this.gridPosition)) {
 			VolcRush.score.multiplier *= 2;
-			((VRPlayer) EntityRegistry.player).kill();
+			((VRPlayer) EntityRegistry.player).kill(DeathCause.ESCAPE);
 		}
 	}
 

@@ -1,8 +1,8 @@
 package me.hii488.volcanoRush.items;
 
 import me.hii488.registries.EntityRegistry;
+import me.hii488.volcanoRush.dataTypes.FluidType;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
-import me.hii488.volcanoRush.tileExtras.FluidType;
 
 public class ItemGasMask extends Item{
 
@@ -21,14 +21,5 @@ public class ItemGasMask extends Item{
 			((VRPlayer) EntityRegistry.player).drowning[FluidType.GAS.ordinal()] = false;
 		}
 	}
-
-	@Override
-	public boolean onMovement() {return true;}
-
-	@Override
-	public void onGeneration() {}
-
-	@Override
-	public void onEquip() {}
-
+	
 }

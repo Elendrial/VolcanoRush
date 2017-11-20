@@ -18,10 +18,11 @@ import me.hii488.objects.tiles.BaseTile;
 import me.hii488.volcanoRush.VolcRush;
 import me.hii488.volcanoRush.containers.menus.MainMenu;
 import me.hii488.volcanoRush.containers.volcanoes.Volcano;
+import me.hii488.volcanoRush.dataTypes.DeathCause;
+import me.hii488.volcanoRush.dataTypes.FluidType;
 import me.hii488.volcanoRush.items.ItemList;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
 import me.hii488.volcanoRush.objects.tiles.MineralTile;
-import me.hii488.volcanoRush.tileExtras.FluidType;
 
 public class VRPlayer extends Player{
 	
@@ -85,7 +86,8 @@ public class VRPlayer extends Player{
 		Camera.cameraPosition = possiblePosition;
 	}
 	
-	public void kill(){
+	public void kill(DeathCause cause){
+		
 		if(!invincible) ContainerHandler.loadNewContainer("deathMenu");
 	}
 	
@@ -147,7 +149,7 @@ public class VRPlayer extends Player{
 		if(drowns) breath--;
 		else breath = 120;
 		
-		if(breath <= 0) this.kill();
+		if(breath <= 0) this.kill(DeathCause.DROWN);
 	}
 	
 	public void pause(){
@@ -242,7 +244,7 @@ public class VRPlayer extends Player{
 		if(Settings.Logging.debug || VolcRush.debugCommands) {
 			switch(arg0.getKeyCode()) {
 			case KeyEvent.VK_K:
-				this.kill();
+				this.kill(DeathCause.OTHER);
 				break;
 			case KeyEvent.VK_I:
 				this.invincible = !this.invincible;

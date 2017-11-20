@@ -1,6 +1,6 @@
 package me.hii488.volcanoRush.objects.tiles;
 
-import me.hii488.volcanoRush.tileExtras.OreType;
+import me.hii488.volcanoRush.dataTypes.OreType;
 
 public class RockTile extends MineralTile{
 	
