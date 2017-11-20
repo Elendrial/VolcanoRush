@@ -31,15 +31,17 @@ public class FallingDirt extends BaseEntity{
 	public void updateOnTick(){
 		super.updateOnTick();
 		Grid g = ContainerHandler.getLoadedContainer().grid;
-		do{
-			this.position.addToLocation(0, Settings.Texture.tileSize);
+		if(g.getTileAtVector(position.clone().addToLocation(0, Settings.Texture.tileSize)).isCollidable){
+			this.destroy();
+			DirtTile d = (DirtTile) TileRegistry.getTile("dirtTile");
+			d.setOreType(oreType);
+			d.damageValue = 3;
+			ContainerHandler.getLoadedContainer().grid.setTile(d, Grid.getGridPosAtVector(position));
+		}
+		else{
+			this.position.addToLocation(0, Settings.Texture.tileSize/2);
 			if(EntityHandler.getCollidingEntities(this).contains(EntityRegistry.player)) ((VRPlayer) EntityRegistry.player).kill();
-		}while(!g.getTileAtVector(position.clone().addToLocation(0, Settings.Texture.tileSize)).isCollidable);
-		this.destroy();
-		DirtTile d = (DirtTile) TileRegistry.getTile("dirtTile");
-		d.setOreType(oreType);
-		d.damageValue = 3;
-		ContainerHandler.getLoadedContainer().grid.setTile(d, ContainerHandler.getLoadedContainer().grid.getGridPosAtVector(position));
+		}
 	}
 	
 	public void setOreType(OreType o) {
