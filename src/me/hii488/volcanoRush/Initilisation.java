@@ -3,6 +3,7 @@ package me.hii488.volcanoRush;
 import me.hii488.controllers.InitilisationController;
 import me.hii488.controllers.TickController;
 import me.hii488.handlers.ContainerHandler;
+import me.hii488.handlers.InputHandler;
 import me.hii488.interfaces.IInitiliser;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.volcanoRush.additionalTickers.LiquidFix;
@@ -11,6 +12,7 @@ import me.hii488.volcanoRush.containers.menus.MainMenu;
 import me.hii488.volcanoRush.containers.menus.ShopMenu;
 import me.hii488.volcanoRush.containers.volcanoes.StandardVolcano;
 import me.hii488.volcanoRush.items.ItemList;
+import me.hii488.volcanoRush.objects.entities.DynamiteEntity;
 import me.hii488.volcanoRush.objects.entities.FallingDirt;
 import me.hii488.volcanoRush.objects.entities.MineralItem;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
@@ -26,6 +28,8 @@ public class Initilisation implements IInitiliser{
 	
 	public static void setup(){
 		InitilisationController.initList.add(instance);
+		InputHandler.inputUsers.add(new ItemList());
+		TickController.additionalEarlyTicking.add(new ItemList());
 		TickController.additionalLateTicking.add(new LiquidFix());
 	}
 
@@ -52,6 +56,7 @@ public class Initilisation implements IInitiliser{
 		
 		new MineralItem();
 		new FallingDirt();
+		new DynamiteEntity();
 		
 		EntityRegistry.player = new VRPlayer();
 	}

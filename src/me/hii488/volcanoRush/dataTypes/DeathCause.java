@@ -5,5 +5,6 @@ public enum DeathCause {
 	ATTACK,
 	DROWN,
 	ESCAPE,
+	EXPLOSION,
 	OTHER;
 }

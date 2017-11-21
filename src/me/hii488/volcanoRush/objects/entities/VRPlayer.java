@@ -88,7 +88,7 @@ public class VRPlayer extends Player{
 	
 	public void kill(DeathCause cause){
 		
-		if(!invincible) ContainerHandler.loadNewContainer("deathMenu");
+		if(ItemList.onDeath(cause) && !invincible) ContainerHandler.loadNewContainer("deathMenu");
 	}
 	
 	protected float previousMovement = 0;

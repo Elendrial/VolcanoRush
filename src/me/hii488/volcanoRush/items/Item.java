@@ -3,10 +3,11 @@ package me.hii488.volcanoRush.items;
 import java.awt.image.BufferedImage;
 
 import me.hii488.interfaces.IInputUser;
+import me.hii488.interfaces.ITickable;
 import me.hii488.volcanoRush.dataTypes.DeathCause;
 import me.hii488.volcanoRush.dataTypes.FluidType;
 
-public class Item implements IInputUser{
+public class Item implements IInputUser, ITickable{
 	
 	public String name = "";
 	public String identifier = "";
@@ -23,6 +24,8 @@ public class Item implements IInputUser{
 	public boolean onDeath(DeathCause cause){return true;} // Return whether player still dies
 	public boolean onMovement(){return true;} // Return whether to also use existing movement code
 	public void onGeneration(){}
+	public void updateOnTick() {}
+	public void updateOnSec() {}
 	
 	public String getName() {
 		return name;
@@ -73,4 +76,8 @@ public class Item implements IInputUser{
 		this.texture = texture;
 		return this;
 	}
+	@Override
+	public float randTickChance() {return 0;}
+	@Override
+	public void updateOnRandTick() {}
 }

@@ -85,8 +85,6 @@ public class StandardAlg extends MineralAlg{
 					int x1 = i - 21 > 1 ? i - 21 : 1, x2 = i + 21 < g.dimensions.getX()-1 ? i + 21 : g.dimensions.getX()-2;
 					int y = j + 17 < g.dimensions.getY() ? j + 17 : g.dimensions.getY() - 1;
 					
-					System.out.println(i + "::" + j);
-					
 					g.fillRectWithTile("airTile", 0, x1, j, x2, y);
 					
 					for(int k = x1; k < x2; k++) {

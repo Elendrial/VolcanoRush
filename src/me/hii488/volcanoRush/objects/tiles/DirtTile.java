@@ -52,8 +52,8 @@ public class DirtTile extends MineralTile{
 			if(ContainerHandler.getLoadedContainer().grid.getTile(gridPosition.getX(), gridPosition.getY() + 1) instanceof AirTile)	damageValue++;
 			else if(damageValue >= 2) damageValue--;
 		}
-		if(damageValue == 4){
-			FallingDirt d = (FallingDirt) EntityRegistry.getEntity("fallingDirt");
+		if(damageValue == 4 && ContainerHandler.getLoadedContainer().grid.getTile(gridPosition.getX(), gridPosition.getY() + 1) instanceof AirTile){
+			FallingDirt d = ((FallingDirt) EntityRegistry.getEntity("fallingDirt")).clone();
 			d.setOreType(this.oreType);
 			d.position.setLocation(gridPosition.getX() * Settings.Texture.tileSize, gridPosition.getY() * Settings.Texture.tileSize);
 			ContainerHandler.getLoadedContainer().grid.setTile("airTile", gridPosition);
