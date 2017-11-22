@@ -11,6 +11,7 @@ import me.hii488.misc.Settings;
 import me.hii488.objects.containers.BaseContainer;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.volcanoRush.containers.algorithms.MineralAlg;
+import me.hii488.volcanoRush.items.ItemList;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
 
 public abstract class Volcano extends BaseContainer{
@@ -56,6 +57,7 @@ public abstract class Volcano extends BaseContainer{
 		super.onLoad();
 		((VRPlayer) EntityRegistry.player).movementAllowed = true;
 		EntityRegistry.player.position.setLocation(grid.dimensions.getX()/2 * Settings.Texture.tileSize, 50);
+		ItemList.doEquips();
 		mineralSpawner.populate(grid);
 	}
 }

@@ -1,5 +1,5 @@
 # VolcanoRush
-A 2D game heavily based on Minor Disturbance (web vers) by Jagex - WIP
+A 2D game heavily based on Miner Disturbance (web vers) by Jagex - WIP
 
 Most of the core game has been made, but here's what's left:
 - Improve movement
@@ -8,6 +8,7 @@ Most of the core game has been made, but here's what's left:
 - The rest of the items
 - Reduce visibility
 - Forced end to game (volcano erupting)
+- Proper explosions
 - Redo all art
 - Rewrite a lot of code to use events & listeners (low priority)
 

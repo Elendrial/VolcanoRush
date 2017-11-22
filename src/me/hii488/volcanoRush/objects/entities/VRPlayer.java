@@ -147,7 +147,7 @@ public class VRPlayer extends Player{
 		for(int i = 0; i < drowning.length && !drowns; i++) if(drowning[i]) drowns = true;
 		
 		if(drowns) breath--;
-		else breath = 120;
+		else breath = maxBreath;
 		
 		if(breath <= 0) this.kill(DeathCause.DROWN);
 	}

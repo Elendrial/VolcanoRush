@@ -15,6 +15,7 @@ public class ItemList implements IInputUser, ITickable{
 	
 	// The bool is whether the player already has it or not.
 	protected static HashMap<Item, Boolean> itemList = new HashMap<Item, Boolean>();
+	protected static HashMap<String, Item> identifierList = new HashMap<String, Item>();
 	protected static HashMap<String, BufferedImage> textureList = new HashMap<String, BufferedImage>();
 	
 	// Don't use this to edit the list, only iterate through it.
@@ -24,6 +25,7 @@ public class ItemList implements IInputUser, ITickable{
 	
 	public static void registerItem(Item i){
 		itemList.put(i, false);
+		identifierList.put(i.identifier, i);
 		textureList.put(i.identifier, TextureHandler.loadTexture("textures/items/", i.identifier + ".png", i));
 	}
 	
@@ -33,6 +35,7 @@ public class ItemList implements IInputUser, ITickable{
 		registerItem(new ItemGasMask());
 		registerItem(new ItemHardHat());
 		registerItem(new ItemDynamite());
+		registerItem(new ItemAirTank());
 	}
 
 	public static BufferedImage getTexture(Item i) {
@@ -45,6 +48,23 @@ public class ItemList implements IInputUser, ITickable{
 	
 	public static void unequipAll(){
 		for(Item i : itemList.keySet()) itemList.put(i, false);
+	}
+	
+	public static void equipItem(String identifier) {
+		itemList.put(identifierList.get(identifier), true);
+		identifierList.get(identifier).onEquip();
+	}
+	
+	public static void equipItem(Item i) {
+		itemList.put(identifierList.get(i.identifier), true); //ensures it is the item already in the list that is equipped.
+		identifierList.get(i.identifier).onEquip();
+	}
+	
+	// This should only be invoked once, by the Volcano as it loads, to equip items bought in the shop.
+	public static void doEquips() {
+		for(Item i : itemList.keySet()){
+			if(itemList.get(i)) i.onEquip();
+		}
 	}
 	
 	public static float getItemMultiplier(){

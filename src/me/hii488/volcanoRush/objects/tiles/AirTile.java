@@ -37,6 +37,18 @@ public class AirTile extends BlankTile{
 				overlays[i][j] = TextureHandler.loadTexture("textures/overlays/", FluidType.values()[i].toString().toLowerCase() + "Overlay_" + j + ".png", this);
 	}
 	
+	public void fillWithFluid(FluidType fluid, int amount) {
+		if(amount > 100) amount = 100;
+		fluidContent[fluid.ordinal()] = amount;
+	}
+	
+	public void fillWithFluid(int fluid, int amount) {
+		if(amount > 100) amount = 100;
+		if(fluid < 0 || fluid > FluidType.values().length) return;
+		fluidContent[fluid] = amount;
+	}
+	
+	
 	protected boolean belowFull;
 	@Override
 	public void updateOnTick(){
@@ -114,6 +126,15 @@ public class AirTile extends BlankTile{
 						
 					}
 				}
+			}
+		}
+	}
+	
+	public void updateOnSec() {
+		// Fluids within the top 3 y coords have fluids drain "out" to simulate them leaving the volcano.
+		if(this.gridPosition.getY() < 3) {
+			for(int i = 0; i < fluidContent.length; i++) {
+				fluidContent[i] = fluidContent[i] > 50 ? fluidContent[i] - 50 : 0;
 			}
 		}
 	}
