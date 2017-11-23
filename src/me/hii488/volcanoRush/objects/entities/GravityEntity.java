@@ -13,7 +13,11 @@ public abstract class GravityEntity extends BaseEntity{
 		maxFallSpeed = 13;
 		acceleration = 1;
 	}
-	public GravityEntity(GravityEntity e){super(e);}
+	public GravityEntity(GravityEntity e){
+		super(e);
+		this.acceleration = e.acceleration;
+		this.maxFallSpeed = e.maxFallSpeed;
+	}
 	
 	public void updateOnTick(){
 		super.updateOnTick();

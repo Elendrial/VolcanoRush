@@ -36,6 +36,7 @@ public class ItemList implements IInputUser, ITickable{
 		registerItem(new ItemHardHat());
 		registerItem(new ItemDynamite());
 		registerItem(new ItemAirTank());
+		registerItem(new ItemCharge());
 	}
 
 	public static BufferedImage getTexture(Item i) {
@@ -58,6 +59,14 @@ public class ItemList implements IInputUser, ITickable{
 	public static void equipItem(Item i) {
 		itemList.put(identifierList.get(i.identifier), true); //ensures it is the item already in the list that is equipped.
 		identifierList.get(i.identifier).onEquip();
+	}
+	
+	public static void unequipItem(Item i) {
+		itemList.put(identifierList.get(i.identifier), false);
+	}
+	
+	public static void unequipItem(String s) {
+		itemList.put(identifierList.get(s), false);
 	}
 	
 	// This should only be invoked once, by the Volcano as it loads, to equip items bought in the shop.

@@ -26,14 +26,16 @@ public class ItemDynamite extends Item {
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_CONTROL) {
 			if(delay <= 0) {
-				
-				DynamiteEntity d = (DynamiteEntity) EntityRegistry.getEntity("dynamite").clone();
-				d.position.setLocation(EntityRegistry.player.position.clone());
-				ContainerHandler.getLoadedContainer().addEntity(d);
-				
+				spawnDynamite();		
 				delay = delayAmount;
 			}
 		}
+	}
+	
+	public void spawnDynamite() {
+		DynamiteEntity d = (DynamiteEntity) EntityRegistry.getEntity("dynamite").clone();
+		d.position.setLocation(EntityRegistry.player.position.clone());
+		ContainerHandler.getLoadedContainer().addEntity(d);
 	}
 	
 }

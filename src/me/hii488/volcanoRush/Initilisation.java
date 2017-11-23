@@ -12,6 +12,7 @@ import me.hii488.volcanoRush.containers.menus.MainMenu;
 import me.hii488.volcanoRush.containers.menus.ShopMenu;
 import me.hii488.volcanoRush.containers.volcanoes.StandardVolcano;
 import me.hii488.volcanoRush.items.ItemList;
+import me.hii488.volcanoRush.objects.entities.ChargeEntity;
 import me.hii488.volcanoRush.objects.entities.DynamiteEntity;
 import me.hii488.volcanoRush.objects.entities.FallingDirt;
 import me.hii488.volcanoRush.objects.entities.MineralItem;
@@ -57,6 +58,7 @@ public class Initilisation implements IInitiliser{
 		new MineralItem();
 		new FallingDirt();
 		new DynamiteEntity();
+		new ChargeEntity();
 		
 		EntityRegistry.player = new VRPlayer();
 	}
