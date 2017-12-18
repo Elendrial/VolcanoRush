@@ -21,10 +21,12 @@ import me.hii488.volcanoRush.containers.volcanoes.Volcano;
 import me.hii488.volcanoRush.dataTypes.DeathCause;
 import me.hii488.volcanoRush.dataTypes.FluidType;
 import me.hii488.volcanoRush.items.ItemList;
+import me.hii488.volcanoRush.misc.LightSource;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
+import me.hii488.volcanoRush.objects.tiles.LightTile;
 import me.hii488.volcanoRush.objects.tiles.MineralTile;
 
-public class VRPlayer extends Player{
+public class VRPlayer extends Player implements LightSource{
 	
 	public boolean movementAllowed = false;
 	public boolean drowning[] = new boolean[FluidType.values().length];
@@ -170,11 +172,12 @@ public class VRPlayer extends Player{
 				else if(breath > 0) g.drawImage(breathOverlay[3], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
 			}
 	
-			if(Settings.Logging.debug){
+			if((Settings.Logging.debug || VolcRush.debugCommands) && ContainerHandler.getLoadedContainer() instanceof Volcano){
 				g.setColor(Color.white);
 				g.fillRect(0, 0, 1000, 15);
 				g.setColor(Color.black);
-				g.drawString("player: " + position + ";;  tilePos: " + Grid.getGridPosAtVector(position).toString() + ";;   camera: " + Camera.cameraPosition + ";;  tile: " + ContainerHandler.getLoadedContainer().grid.getTileAtVector(position).identifier + ";; score: " + VolcRush.score.getScore(), 2, 12);
+				g.drawString("player: " + position + ";;  tilePos: " + Grid.getGridPosAtVector(position).toString() + ";;   camera: " + Camera.cameraPosition + ";;  tile: " + ContainerHandler.getLoadedContainer().grid.getTileAtVector(position).identifier 
+						+ ";; light: " + ((LightTile) ContainerHandler.getLoadedContainer().grid.getTileAtVector(position)).lightPercent+ ";; score: " + VolcRush.score.getScore(), 2, 12);
 			}
 		}
 	}
@@ -251,6 +254,21 @@ public class VRPlayer extends Player{
 				break;
 			}
 		}
+	}
+
+	@Override
+	public int getLightIntensity(int depth) {
+		return 90;
+	}
+
+	@Override
+	public int getRadius(int depth) {
+		return 5;
+	}
+
+	@Override
+	public float getDropOff(int depth) {
+		return 5;
 	}
 	
 }

@@ -6,6 +6,7 @@ import me.hii488.handlers.ContainerHandler;
 import me.hii488.handlers.InputHandler;
 import me.hii488.interfaces.IInitiliser;
 import me.hii488.registries.EntityRegistry;
+import me.hii488.volcanoRush.additionalTickers.LightHandler;
 import me.hii488.volcanoRush.additionalTickers.LiquidFix;
 import me.hii488.volcanoRush.containers.menus.DeathMenu;
 import me.hii488.volcanoRush.containers.menus.MainMenu;
@@ -26,12 +27,14 @@ import me.hii488.volcanoRush.objects.tiles.UnbreakableTile;
 public class Initilisation implements IInitiliser{
 	
 	public static Initilisation instance = new Initilisation();
+	public static LightHandler lightHandler = new LightHandler();
 	
 	public static void setup(){
 		InitilisationController.initList.add(instance);
 		InputHandler.inputUsers.add(new ItemList());
 		TickController.additionalEarlyTicking.add(new ItemList());
 		TickController.additionalLateTicking.add(new LiquidFix());
+		TickController.additionalLateTicking.add(lightHandler);
 	}
 
 	public static MainMenu menuContainer = new MainMenu();

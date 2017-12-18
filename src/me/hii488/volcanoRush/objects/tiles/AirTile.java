@@ -10,10 +10,9 @@ import me.hii488.handlers.ContainerHandler;
 import me.hii488.handlers.TextureHandler;
 import me.hii488.misc.Settings;
 import me.hii488.objects.tiles.BaseTile;
-import me.hii488.objects.tiles.BlankTile;
 import me.hii488.volcanoRush.dataTypes.FluidType;
 
-public class AirTile extends BlankTile{
+public class AirTile extends LightTile{
 	
 	public AirTile(){super();}
 	public AirTile(AirTile t){
@@ -161,6 +160,8 @@ public class AirTile extends BlankTile{
 						else g.drawImage(overlays[i][3], renderPosA.getX(), renderPosA.getY(), null);
 					}
 				}
+				
+				renderLight(g);
 				
 				if(Settings.Logging.debug && isCollidable){
 					g.setColor(Color.red);

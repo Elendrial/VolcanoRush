@@ -3,12 +3,11 @@ package me.hii488.volcanoRush.objects.tiles;
 import me.hii488.controllers.GameController;
 import me.hii488.handlers.ContainerHandler;
 import me.hii488.misc.Settings;
-import me.hii488.objects.tiles.BaseTile;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.volcanoRush.dataTypes.OreType;
 import me.hii488.volcanoRush.objects.entities.MineralItem;
 
-public abstract class MineralTile extends BaseTile {
+public abstract class MineralTile extends LightTile {
 
 	public OreType oreType;
 	

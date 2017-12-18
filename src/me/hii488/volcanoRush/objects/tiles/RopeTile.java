@@ -7,7 +7,7 @@ import me.hii488.volcanoRush.VolcRush;
 import me.hii488.volcanoRush.dataTypes.DeathCause;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
 
-public class RopeTile extends BaseTile{
+public class RopeTile extends LightTile{
 
 	public RopeTile() {super();}
 	public RopeTile(RopeTile t) {super(t);}

@@ -2,7 +2,7 @@ package me.hii488.volcanoRush.objects.tiles;
 
 import me.hii488.objects.tiles.BaseTile;
 
-public class UnbreakableTile extends BaseTile{
+public class UnbreakableTile extends LightTile{
 
 	public UnbreakableTile(){}
 	public UnbreakableTile(UnbreakableTile t){super(t);}

@@ -43,6 +43,7 @@ public class DirtTile extends MineralTile{
 		if(damageValue >= 5){
 			this.onDestroy();
 			ContainerHandler.getLoadedContainer().grid.setTile("airTile", gridPosition);
+			((LightTile) ContainerHandler.getLoadedContainer().grid.getTile(gridPosition)).raiseLightTo(lightPercent);
 		}
 	}
 	
@@ -85,6 +86,7 @@ public class DirtTile extends MineralTile{
 		if(renderPosA.getX() < GameController.windows[0].width && renderPosB.getX() > 0){
 			if(renderPosA.getY() < GameController.windows[0].height && renderPosB.getY() > 0){
 				g.drawImage(currentTexture, renderPosA.getX(), renderPosA.getY(), null);
+				renderLight(g);
 				if(damageValue > 0 && damageValue < 4) g.drawImage(overlay[damageValue-1], renderPosA.getX(), renderPosA.getY(), null);
 				if(Settings.Logging.debug && isCollidable){
 					g.setColor(Color.red);
