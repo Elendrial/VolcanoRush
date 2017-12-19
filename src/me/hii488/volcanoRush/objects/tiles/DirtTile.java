@@ -2,9 +2,7 @@ package me.hii488.volcanoRush.objects.tiles;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
-import me.hii488.controllers.GameController;
 import me.hii488.graphics.Camera;
 import me.hii488.handlers.ContainerHandler;
 import me.hii488.handlers.TextureHandler;
@@ -16,13 +14,11 @@ import me.hii488.volcanoRush.objects.entities.FallingDirt;
 public class DirtTile extends MineralTile{
 	
 	public int damageValue = 0;
-	public BufferedImage[] overlay;
 	
 	public DirtTile(){super();}
 	public DirtTile(DirtTile t){
 		super(t);
 		this.damageValue = t.damageValue;
-		this.overlay = t.overlay;
 	}
 	
 	@Override
@@ -32,9 +28,8 @@ public class DirtTile extends MineralTile{
 		this.textureName = "dirtTile_" + this.oreType + ".png";
 		this.isCollidable = true;
 		
-		overlay = new BufferedImage[3];
-		for(int i = 0; i < overlay.length; i++)
-			overlay[i] = TextureHandler.loadTexture("textures/overlays/", "dirtOverlay_" + i + ".png", this);
+		for(int i = 0; i < 3; i++)
+			TextureHandler.loadTexture("textures/overlays/", "dirtOverlay_" + i + ".png", this, "dirtOverlay_" + i);
 	}
 	
 	@Override
@@ -77,22 +72,14 @@ public class DirtTile extends MineralTile{
 	}
 	
 	public void render(Graphics g){
+		super.render(g);
 		
-		renderPosA.setX(gridPosition.getAbsX() * Camera.scale * Settings.Texture.tileSize - Camera.cameraPosition.getAbsX());
-		renderPosA.setY(gridPosition.getAbsY() * Camera.scale * Settings.Texture.tileSize - Camera.cameraPosition.getAbsY());
-		renderPosB.setX(renderPosA.getAbsX() + (Settings.Texture.tileSize * Camera.scale));
-		renderPosB.setY(renderPosA.getAbsY() + (Settings.Texture.tileSize * Camera.scale));
+		// Adding overlay like this as it is unlikely that this will need to be done for many tiles at once.
+		if(damageValue > 0 && damageValue < 4) g.drawImage(TextureHandler.getTexture("dirtOverlay_" + (damageValue-1)), renderPosA.getX(), renderPosA.getY(), null);
 		
-		if(renderPosA.getX() < GameController.windows[0].width && renderPosB.getX() > 0){
-			if(renderPosA.getY() < GameController.windows[0].height && renderPosB.getY() > 0){
-				g.drawImage(currentTexture, renderPosA.getX(), renderPosA.getY(), null);
-				renderLight(g);
-				if(damageValue > 0 && damageValue < 4) g.drawImage(overlay[damageValue-1], renderPosA.getX(), renderPosA.getY(), null);
-				if(Settings.Logging.debug && isCollidable){
-					g.setColor(Color.red);
-					g.drawRect(renderPosA.getX(), renderPosA.getY(), (int)(Settings.Texture.tileSize * Camera.scale), (int)(Settings.Texture.tileSize * Camera.scale));
-				}
-			}
+		if(Settings.Logging.debug && isCollidable){
+			g.setColor(Color.red);
+			g.drawRect(renderPosA.getX(), renderPosA.getY(), (int)(Settings.Texture.tileSize * Camera.scale), (int)(Settings.Texture.tileSize * Camera.scale));
 		}
 	}
 	

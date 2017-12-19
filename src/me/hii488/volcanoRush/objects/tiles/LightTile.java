@@ -2,10 +2,9 @@ package me.hii488.volcanoRush.objects.tiles;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
-import me.hii488.controllers.GameController;
-import me.hii488.graphics.Camera;
-import me.hii488.misc.Settings;
+import me.hii488.handlers.TextureHandler;
 import me.hii488.objects.tiles.BaseTile;
 
 public class LightTile extends BaseTile{
@@ -22,24 +21,20 @@ public class LightTile extends BaseTile{
 	}
 	
 	public void render(Graphics g) {
-		super.render(g);
-		if(renderPosA.getX() < GameController.windows[0].width && renderPosB.getX() > 0){
-			if(renderPosA.getY() < GameController.windows[0].height && renderPosB.getY() > 0){
-				renderLight(g);
-			}
-		}
+		textureName = sanitizedName + "_" + currentState + "_" + lightPercent;
+		
+		if(!TextureHandler.containsTexture(textureName)) addLightToImage(TextureHandler.getTexture(sanitizedName + "_" + currentState));
+		
+		g.drawImage(getTexture(), renderPosA.getX(), renderPosA.getY(), null);				
 	}
 	
-	public void renderLight(Graphics g) {
-		try{
-			g.setColor(new Color(0,0,0,(int) ((100-lightPercent)*2.55)));
-		}
-		catch(Exception e) {
-			System.out.println((int)((100-lightPercent)*2.55) + "::" + lightPercent);
-			
-		}
-		//g.setColor(new Color(0,0,0, 105));
-		//g.fillRect(renderPosA.getX(), renderPosA.getY(), (int)(Settings.Texture.tileSize * Camera.scale), (int)(Settings.Texture.tileSize * Camera.scale));
+	public void addLightToImage(BufferedImage i) {
+		Graphics g = i.createGraphics();
+		g.setColor(new Color(0,0,0,(int) ((100-lightPercent)*2.55)));
+		g.fillRect(0, 0, i.getWidth(), i.getHeight());
+		g.dispose();
+		
+		TextureHandler.addTexture(i, textureName);
 	}
 	
 	public void raiseLightTo(int light) {

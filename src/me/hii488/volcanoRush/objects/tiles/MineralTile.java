@@ -47,11 +47,10 @@ public abstract class MineralTile extends LightTile {
 
 	@Override
 	public void onDestroy() {
-		//super.onDestroy();
 		MineralItem i = (MineralItem) EntityRegistry.getEntity("mineralItem");
 		i.containerIdentifier = ContainerHandler.currentContainerIndentifier;
 		i.setOreType(oreType);
-		i.position.setLocation(gridPosition.getX() * Settings.Texture.tileSize + currentTexture.getWidth()/2 - 5, gridPosition.getY() * Settings.Texture.tileSize + currentTexture.getHeight()/2 - 5);
+		i.position.setLocation(gridPosition.getX() * Settings.Texture.tileSize + getTexture().getWidth()/2 - 5, gridPosition.getY() * Settings.Texture.tileSize + getTexture().getHeight()/2 - 5);
 		i.previousMovement.setLocation(GameController.rand.nextFloat()*5-2.5f, GameController.rand.nextFloat()*-10);
 		ContainerHandler.getLoadedContainer().addEntity(i);
 	}
