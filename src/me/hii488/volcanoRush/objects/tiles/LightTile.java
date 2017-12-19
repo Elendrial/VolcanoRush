@@ -11,9 +11,7 @@ public class LightTile extends BaseTile{
 
 	public int lightPercent = 1;
 	
-	public LightTile() {
-		super();
-	}
+	public LightTile() {super();}
 	
 	public LightTile(LightTile l) {
 		super(l);
@@ -29,12 +27,13 @@ public class LightTile extends BaseTile{
 	}
 	
 	public void addLightToImage(BufferedImage i) {
-		Graphics g = i.createGraphics();
+		BufferedImage img = TextureHandler.cloneTexture(i);
+		Graphics g = img.createGraphics();
 		g.setColor(new Color(0,0,0,(int) ((100-lightPercent)*2.55)));
-		g.fillRect(0, 0, i.getWidth(), i.getHeight());
+		g.fillRect(0, 0, img.getWidth(), img.getHeight());
 		g.dispose();
 		
-		TextureHandler.addTexture(i, textureName);
+		TextureHandler.addTexture(img, textureName);
 	}
 	
 	public void raiseLightTo(int light) {

@@ -25,7 +25,7 @@ public class ItemList implements IInputUser, ITickable{
 	public static void registerItem(Item i){
 		itemList.put(i, false);
 		identifierList.put(i.identifier, i);
-		TextureHandler.loadTexture("textures/items/", i.identifier + ".png", i, "item_" + i.identifier);
+		TextureHandler.loadTexture("textures/items/", i.identifier + ".png", i, "item_" + i.identifier + "_0");
 	}
 	
 	public static void registerItems(){

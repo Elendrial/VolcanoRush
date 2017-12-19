@@ -58,6 +58,7 @@ public class ShopMenu extends BaseContainer {
 							itemList.put(i, true);
 							currentFunds -= i.cost;
 							this.textureName = "bought.png";
+							this.textureKey = "bought";
 							this.setupTextures();
 						}
 					}
@@ -65,10 +66,11 @@ public class ShopMenu extends BaseContainer {
 						currentFunds += i.cost;
 						itemList.put(i, false);
 						this.textureName = i.identifier + ".png";
+						this.textureKey = "item_" + i.identifier;
 						this.setupTextures();
 					}
 				}
-			}.setStates(0).setPath("textures/items/").setTextureName(i.identifier + ".png").setDimensions(64, 64).setIdentifier(i.identifier + "Picture").setPosition(col * 70 + 20, row * 70 + 120);
+			}.setStates(0).setPath("textures/items/").setTextureName(i.identifier + ".png").setTextureKey("item_" + i.identifier).setDimensions(64, 64).setIdentifier(i.identifier + "Picture").setPosition(col * 70 + 20, row * 70 + 120);
 			
 			item.setupTextures();
 			itemPictures.add(item);
@@ -92,8 +94,10 @@ public class ShopMenu extends BaseContainer {
 		}.setFill(false).setTextColor(Color.white).setOutlineColor(Color.white).setText("Start Game")
 				.setDimensions(70, 30).setPosition(GameController.windows[0].width/2+15, 700).setIdentifier("playButton");
 		
+		
 		shop.addElement(new GUILabel().setTextColor(Color.WHITE).setFont(Font.decode(Font.MONOSPACED + "-24")).setIdentifier("title")
 				.setText("Shop:").setDimensions(100, 40).setPosition(GameController.windows[0].width/2-50, 50));
+		
 		
 		shop.addElement(playButton);
 		

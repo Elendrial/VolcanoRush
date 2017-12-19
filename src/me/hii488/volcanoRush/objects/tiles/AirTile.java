@@ -18,7 +18,7 @@ public class AirTile extends LightTile{
 	
 	@Override
 	public void initVars() {
-		this.states = 1; // Underground, and above ground
+		this.states = 2; // Underground, and above ground
 		this.textureName = "air.png";
 		this.identifier = "airTile";
 		
@@ -147,7 +147,8 @@ public class AirTile extends LightTile{
 		if(Settings.Logging.debug) g.drawString(fluidContent[1] + "", renderPosA.getX(), renderPosA.getY());
 	}
 	
-	public BufferedImage addFluidOverlay(BufferedImage img) {
+	public BufferedImage addFluidOverlay(BufferedImage im) {
+		BufferedImage img = TextureHandler.cloneTexture(im);
 		Graphics g = img.createGraphics();
 		
 		for(int i = 0; i < fluidContent.length; i++){

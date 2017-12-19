@@ -38,7 +38,7 @@ public class Item implements IInputUser, ITickable{
 		return identifier;
 	}
 	public Item setIdentifier(String identifier) {
-		this.identifier = identifier;
+		this.identifier = "item_" + identifier;
 		return this;
 	}
 	public int getScoreMultiplier() {
