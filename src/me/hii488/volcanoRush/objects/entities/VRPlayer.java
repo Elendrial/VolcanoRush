@@ -15,6 +15,7 @@ import me.hii488.misc.Settings;
 import me.hii488.misc.Vector;
 import me.hii488.objects.entities.Player;
 import me.hii488.objects.tiles.BaseTile;
+import me.hii488.volcanoRush.Initilisation;
 import me.hii488.volcanoRush.VolcRush;
 import me.hii488.volcanoRush.containers.menus.MainMenu;
 import me.hii488.volcanoRush.containers.volcanoes.Volcano;
@@ -43,6 +44,8 @@ public class VRPlayer extends Player implements LightSource{
 		
 		for(int i = 0; i < 4; i++)
 			TextureHandler.loadTexture("textures/overlays/", "breathOverlay_" + i + ".png", this, "breathOverlay_" + i);
+		
+		Initilisation.lightHandler.sources.add(this);
 	}
 	
 	public void resetPlayer(){
@@ -263,12 +266,17 @@ public class VRPlayer extends Player implements LightSource{
 
 	@Override
 	public int getRadius(int depth) {
-		return 5;
+		return 6;
 	}
 
 	@Override
 	public float getDropOff(int depth) {
-		return 5;
+		return 6;
+	}
+
+	@Override
+	public Vector getPosition() {
+		return Grid.getGridPosAtVector(position);
 	}
 	
 }

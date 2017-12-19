@@ -143,6 +143,7 @@ public class AirTile extends LightTile{
 		textureName = sanitizedName + "_" + currentState + "_" + lightPercent + "_" + fluidAsString;
 
 		if(!TextureHandler.containsTexture(textureName)) addLightToImage(addFluidOverlay(TextureHandler.getTexture(sanitizedName + "_" + currentState)));
+		g.drawImage(getTexture(), renderPosA.getX(), renderPosA.getY(), null);
 		
 		if(Settings.Logging.debug) g.drawString(fluidContent[1] + "", renderPosA.getX(), renderPosA.getY());
 	}
@@ -153,10 +154,10 @@ public class AirTile extends LightTile{
 		
 		for(int i = 0; i < fluidContent.length; i++){
 			if(fluidContent[i] != 0){ 
-				if(fluidContent[i] < 25)      g.drawImage(TextureHandler.getTexture(FluidType.values()[i].toString().toLowerCase() + "Overlay_" + 0), renderPosA.getX(), renderPosA.getY(), null); 
-				else if(fluidContent[i] < 50) g.drawImage(TextureHandler.getTexture(FluidType.values()[i].toString().toLowerCase() + "Overlay_" + 1), renderPosA.getX(), renderPosA.getY(), null); 
-	            else if(fluidContent[i] < 75) g.drawImage(TextureHandler.getTexture(FluidType.values()[i].toString().toLowerCase() + "Overlay_" + 2), renderPosA.getX(), renderPosA.getY(), null); 
-	            else                          g.drawImage(TextureHandler.getTexture(FluidType.values()[i].toString().toLowerCase() + "Overlay_" + 3), renderPosA.getX(), renderPosA.getY(), null); 
+				if(fluidContent[i] < 25)      g.drawImage(TextureHandler.getTexture(FluidType.values()[i].toString().toLowerCase() + "Overlay_" + 0), 0, 0, null); 
+				else if(fluidContent[i] < 50) g.drawImage(TextureHandler.getTexture(FluidType.values()[i].toString().toLowerCase() + "Overlay_" + 1), 0, 0, null); 
+	            else if(fluidContent[i] < 75) g.drawImage(TextureHandler.getTexture(FluidType.values()[i].toString().toLowerCase() + "Overlay_" + 2), 0, 0, null); 
+	            else                          g.drawImage(TextureHandler.getTexture(FluidType.values()[i].toString().toLowerCase() + "Overlay_" + 3), 0, 0, null); 
 			} 
 		} 
 		
