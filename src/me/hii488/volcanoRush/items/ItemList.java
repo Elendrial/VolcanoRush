@@ -16,7 +16,6 @@ public class ItemList implements IInputUser, ITickable{
 	// The bool is whether the player already has it or not.
 	protected static HashMap<Item, Boolean> itemList = new HashMap<Item, Boolean>();
 	protected static HashMap<String, Item> identifierList = new HashMap<String, Item>();
-	protected static HashMap<String, BufferedImage> textureList = new HashMap<String, BufferedImage>();
 	
 	// Don't use this to edit the list, only iterate through it.
 	public static HashMap<Item, Boolean> getItemList() {
@@ -26,7 +25,7 @@ public class ItemList implements IInputUser, ITickable{
 	public static void registerItem(Item i){
 		itemList.put(i, false);
 		identifierList.put(i.identifier, i);
-		textureList.put(i.identifier, TextureHandler.loadTexture("textures/items/", i.identifier + ".png", i));
+		TextureHandler.loadTexture("textures/items/", i.identifier + ".png", i, "item_" + i.identifier);
 	}
 	
 	public static void registerItems(){
@@ -40,11 +39,11 @@ public class ItemList implements IInputUser, ITickable{
 	}
 
 	public static BufferedImage getTexture(Item i) {
-		return textureList.get(i.identifier);
+		return TextureHandler.getTexture("item_" + i.identifier);
 	}
 	
 	public static BufferedImage getTexture(String s) {
-		return textureList.get(s);
+		return TextureHandler.getTexture("item_" + s);
 	}
 	
 	public static void unequipAll(){

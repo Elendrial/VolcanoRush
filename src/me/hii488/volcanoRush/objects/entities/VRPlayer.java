@@ -31,7 +31,6 @@ public class VRPlayer extends Player implements LightSource{
 	public boolean movementAllowed = false;
 	public boolean drowning[] = new boolean[FluidType.values().length];
 	private boolean invincible = false;
-	public BufferedImage[] breathOverlay;
 	public int maxBreath = 120;
 	public int breath = 120;
 	
@@ -42,9 +41,8 @@ public class VRPlayer extends Player implements LightSource{
 		this.usesEngineMovement = false;
 		this.speed = 3;
 		
-		breathOverlay = new BufferedImage[4];
-		for(int i = 0; i < breathOverlay.length; i++)
-			breathOverlay[i] = TextureHandler.loadTexture("textures/overlays/", "breathOverlay_" + i + ".png", this);
+		for(int i = 0; i < 4; i++)
+			TextureHandler.loadTexture("textures/overlays/", "breathOverlay_" + i + ".png", this, "breathOverlay_" + i);
 	}
 	
 	public void resetPlayer(){
@@ -108,6 +106,8 @@ public class VRPlayer extends Player implements LightSource{
 		Grid g = ContainerHandler.getLoadedContainer().grid;
 		BaseTile t;
 		
+		BufferedImage currentTexture = getTexture();
+		
 		if(Math.abs(direction.getX() + direction.getY()) == 1){ // If direction is vertical/horizontal 
 			t = g.getTile(Grid.getGridPosAtVector(position.clone().addToLocation(currentTexture.getWidth()/2, currentTexture.getHeight()/2)).addToLocation(direction));
 			if(t instanceof MineralTile) ((MineralTile) t).onDig();
@@ -166,10 +166,10 @@ public class VRPlayer extends Player implements LightSource{
 			super.render(g);
 			
 			if(breath != maxBreath){
-				if(breath > maxBreath * 0.75) g.drawImage(breathOverlay[0], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
-				else if(breath > maxBreath * 0.50) g.drawImage(breathOverlay[1], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
-				else if(breath > maxBreath * 0.25) g.drawImage(breathOverlay[2], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
-				else if(breath > 0) g.drawImage(breathOverlay[3], position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
+				if(breath > maxBreath * 0.75)      g.drawImage(TextureHandler.getTexture("breathOverlay_" + 0), position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
+				else if(breath > maxBreath * 0.50) g.drawImage(TextureHandler.getTexture("breathOverlay_" + 1), position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
+				else if(breath > maxBreath * 0.25) g.drawImage(TextureHandler.getTexture("breathOverlay_" + 2), position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
+				else if(breath > 0)                g.drawImage(TextureHandler.getTexture("breathOverlay_" + 3), position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
 			}
 	
 			if((Settings.Logging.debug || VolcRush.debugCommands) && ContainerHandler.getLoadedContainer() instanceof Volcano){

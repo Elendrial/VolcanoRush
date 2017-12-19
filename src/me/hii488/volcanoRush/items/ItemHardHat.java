@@ -24,13 +24,13 @@ public class ItemHardHat extends Item {
 			if(g.getTileAtVector(EntityRegistry.player.position.clone().addToLocation(Settings.Texture.tileSize, 0)) instanceof AirTile) {
 				EntityRegistry.player.position.setLocation(
 						Grid.getVectorAtGridPos(Grid.getGridPosAtVector(EntityRegistry.player.position.clone().addToLocation(Settings.Texture.tileSize, 0))) // Top left corner of tile on right
-						.addToLocation(EntityRegistry.player.currentTexture.getWidth(), Settings.Texture.tileSize - EntityRegistry.player.currentTexture.getHeight() - 1) // move player to suitable position in the tile
+						.addToLocation((float) EntityRegistry.player.collisionBox.getWidth(), Settings.Texture.tileSize - (float) EntityRegistry.player.collisionBox.getHeight() - 1) // move player to suitable position in the tile
 				);
 			}
 			else if(g.getTileAtVector(EntityRegistry.player.position.clone().addToLocation(-Settings.Texture.tileSize, 0)) instanceof AirTile) {
 				EntityRegistry.player.position.setLocation(
 						Grid.getVectorAtGridPos(Grid.getGridPosAtVector(EntityRegistry.player.position.clone().addToLocation(-Settings.Texture.tileSize, 0))) // Top left corner of tile on right
-						.addToLocation(Settings.Texture.tileSize - EntityRegistry.player.currentTexture.getWidth() - 1, Settings.Texture.tileSize - EntityRegistry.player.currentTexture.getHeight() - 1) // move player to suitable position in the tile
+						.addToLocation(Settings.Texture.tileSize - (float) EntityRegistry.player.collisionBox.getWidth() - 1, Settings.Texture.tileSize - (float) EntityRegistry.player.collisionBox.getHeight() - 1) // move player to suitable position in the tile
 				);
 			}
 			
