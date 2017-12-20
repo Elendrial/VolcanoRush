@@ -25,6 +25,7 @@ public abstract class MineralTile extends LightTile {
 	
 	@Override
 	public void updateOnTick() {
+		super.updateOnTick();
 		oreType.util.updateOnTick(this.gridPosition.getX(), this.gridPosition.getY());
 	}
 	

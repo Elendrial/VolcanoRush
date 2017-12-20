@@ -42,6 +42,7 @@ public class AirTile extends LightTile{
 	protected boolean belowFull;
 	@Override
 	public void updateOnTick(){
+		super.updateOnTick();
 		for(int i = 0; i < fluidContent.length; i++){
 			if(fluidContent[i] != 0){
 				belowFull = false;

@@ -9,7 +9,8 @@ import me.hii488.objects.tiles.BaseTile;
 
 public class LightTile extends BaseTile{
 
-	public int lightPercent = 1;
+	public double lightPercent = 20;
+	public double lowestLight = 20;
 	
 	public LightTile() {super();}
 	
@@ -29,23 +30,30 @@ public class LightTile extends BaseTile{
 	public void addLightToImage(BufferedImage i) {
 		BufferedImage img = TextureHandler.cloneTexture(i);
 		Graphics g = img.createGraphics();
-		g.setColor(new Color(0,0,0,(int) ((100-lightPercent)*2.55)));
+		g.setColor(new Color(0,0,0,(int) ((100-lightPercent)*2.55D)));
 		g.fillRect(0, 0, img.getWidth(), img.getHeight());
 		g.dispose();
 		
 		TextureHandler.addTexture(img, textureName);
 	}
 	
-	public void raiseLightTo(int light) {
+	public void raiseLightTo(double light) {
 		if(lightPercent < light) lightPercent = light;
 		if(lightPercent > 100) lightPercent = 100;
-		if(lightPercent < 1) lightPercent = 1;
+		if(lightPercent < lowestLight) lightPercent = lowestLight;
 	}
 	
-	public void lowerLightTo(int light) {
+	public void lowerLightTo(double light) {
 		if(lightPercent > light) lightPercent = light;
 		if(lightPercent > 100) lightPercent = 100;
-		if(lightPercent < 1) lightPercent = 1;
+		if(lightPercent < lowestLight) lightPercent = lowestLight;
+	}
+	
+	public void setLowestLight(double light) {
+		if(light > 100) lowestLight = 100;
+		else if(light < 1) lowestLight = 1;
+		else lowestLight = light;
+		raiseLightTo(light);
 	}
 	
 	@Override
@@ -55,7 +63,9 @@ public class LightTile extends BaseTile{
 	public float randTickChance() {return 0;}
 
 	@Override
-	public void updateOnTick() {}
+	public void updateOnTick() {
+		if(lightPercent > lowestLight+1 && lightPercent > 25) lightPercent -= 0.5;
+	}
 
 	@Override
 	public void updateOnSec() {}

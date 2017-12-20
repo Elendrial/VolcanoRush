@@ -39,6 +39,7 @@ public class DirtTile extends MineralTile{
 			this.onDestroy();
 			ContainerHandler.getLoadedContainer().grid.setTile("airTile", gridPosition);
 			((LightTile) ContainerHandler.getLoadedContainer().grid.getTile(gridPosition)).raiseLightTo(lightPercent);
+			((LightTile) ContainerHandler.getLoadedContainer().grid.getTile(gridPosition)).setLowestLight(lowestLight);
 		}
 	}
 	

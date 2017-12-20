@@ -19,6 +19,7 @@ public class LightHandler implements ITickable{
 	public void updateOnTick() {
 		if(ContainerHandler.getLoadedContainer() instanceof Volcano) {
 			Grid g = ContainerHandler.getLoadedContainer().grid;
+			
 			for(LightSource l : sources) {
 				Vector v = l.getPosition().clone();
 				int r = l.getRadius(v.getY());
@@ -53,7 +54,7 @@ public class LightHandler implements ITickable{
 		Grid g = ContainerHandler.getLoadedContainer().grid;
 		for(int j = 0; j < g.dimensions.getY(); j++) {
 			for(int i = 0; i < g.dimensions.getX(); i++) {
-				((LightTile) g.getTile(i, j)).raiseLightTo(110 - j);
+				((LightTile) g.getTile(i, j)).setLowestLight(j< 90 ? 110 - j : 20);
 			}
 		}
 	}
