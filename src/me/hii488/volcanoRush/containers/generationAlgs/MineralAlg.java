@@ -1,4 +1,4 @@
-package me.hii488.volcanoRush.containers.algorithms;
+package me.hii488.volcanoRush.containers.generationAlgs;
 
 import me.hii488.misc.Grid;
 import me.hii488.misc.Vector;

@@ -15,7 +15,9 @@ public class MainMenu extends BaseContainer {
 	
 	public MainMenu(){
 		grid.setupGrid(10, 10);
+		System.out.println(grid.getTile(0, 0).identifier);
 		this.identifier = "mainmenu";
+		this.showEntities = false;
 		
 		GUI main = new GUI();
 		GUILabel startButton = (GUILabel) new GUILabel(){

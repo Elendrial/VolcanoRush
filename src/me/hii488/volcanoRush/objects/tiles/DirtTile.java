@@ -54,6 +54,9 @@ public class DirtTile extends MineralTile{
 			d.setOreType(this.oreType);
 			d.position.setLocation(gridPosition.getX() * Settings.Texture.tileSize, gridPosition.getY() * Settings.Texture.tileSize);
 			ContainerHandler.getLoadedContainer().grid.setTile("airTile", gridPosition);
+			((LightTile) ContainerHandler.getLoadedContainer().grid.getTile(gridPosition)).raiseLightTo(lightPercent);
+			((LightTile) ContainerHandler.getLoadedContainer().grid.getTile(gridPosition)).setLowestLight(lowestLight);
+			
 			ContainerHandler.getLoadedContainer().addEntity(d);
 		}
 	}

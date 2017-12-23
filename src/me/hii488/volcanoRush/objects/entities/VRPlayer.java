@@ -48,6 +48,8 @@ public class VRPlayer extends Player implements LightSource{
 		Initilisation.lightHandler.sources.add(this);
 	}
 	
+	public void onLoad() {}
+	
 	public void resetPlayer(){
 		ItemList.unequipAll();
 		maxBreath = 120;
@@ -86,7 +88,7 @@ public class VRPlayer extends Player implements LightSource{
 				possiblePosition.setY(g.dimensions.getY() * Settings.Texture.tileSize - GameController.windows[0].height);
 		}
 		
-		Camera.cameraPosition = possiblePosition;
+		Camera.moveTo(possiblePosition);
 	}
 	
 	public void kill(DeathCause cause){
@@ -169,17 +171,17 @@ public class VRPlayer extends Player implements LightSource{
 			super.render(g);
 			
 			if(breath != maxBreath){
-				if(breath > maxBreath * 0.75)      g.drawImage(TextureHandler.getTexture("breathOverlay_" + 0), position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
-				else if(breath > maxBreath * 0.50) g.drawImage(TextureHandler.getTexture("breathOverlay_" + 1), position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
-				else if(breath > maxBreath * 0.25) g.drawImage(TextureHandler.getTexture("breathOverlay_" + 2), position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
-				else if(breath > 0)                g.drawImage(TextureHandler.getTexture("breathOverlay_" + 3), position.getX() - Camera.cameraPosition.getX() + 16, position.getY() - Camera.cameraPosition.getY() - 5, null);
+				if(breath > maxBreath * 0.75)      g.drawImage(TextureHandler.getTexture("breathOverlay_" + 0), position.getX() - Camera.getPosition().getX() + 16, position.getY() - Camera.getPosition().getY() - 5, null);
+				else if(breath > maxBreath * 0.50) g.drawImage(TextureHandler.getTexture("breathOverlay_" + 1), position.getX() - Camera.getPosition().getX() + 16, position.getY() - Camera.getPosition().getY() - 5, null);
+				else if(breath > maxBreath * 0.25) g.drawImage(TextureHandler.getTexture("breathOverlay_" + 2), position.getX() - Camera.getPosition().getX() + 16, position.getY() - Camera.getPosition().getY() - 5, null);
+				else if(breath > 0)                g.drawImage(TextureHandler.getTexture("breathOverlay_" + 3), position.getX() - Camera.getPosition().getX() + 16, position.getY() - Camera.getPosition().getY() - 5, null);
 			}
 	
 			if((Settings.Logging.debug || VolcRush.debugCommands) && ContainerHandler.getLoadedContainer() instanceof Volcano){
 				g.setColor(Color.white);
 				g.fillRect(0, 0, 1000, 15);
 				g.setColor(Color.black);
-				g.drawString("player: " + position + ";;  tilePos: " + Grid.getGridPosAtVector(position).toString() + ";;   camera: " + Camera.cameraPosition + ";;  tile: " + ContainerHandler.getLoadedContainer().grid.getTileAtVector(position).identifier 
+				g.drawString("player: " + position + ";;  tilePos: " + Grid.getGridPosAtVector(position).toString() + ";;   camera: " + Camera.getPosition() + ";;  tile: " + ContainerHandler.getLoadedContainer().grid.getTileAtVector(position).identifier 
 						+ ";; light: " + ((LightTile) ContainerHandler.getLoadedContainer().grid.getTileAtVector(position)).lightPercent+ ";; score: " + VolcRush.score.getScore(), 2, 12);
 			}
 		}

@@ -32,6 +32,7 @@ public class ShopMenu extends BaseContainer {
 	public ShopMenu(){
 		grid.setupGrid(10, 10);
 		this.identifier = "shop";
+		this.showEntities = false;
 		
 		guis.add(shop);
 		

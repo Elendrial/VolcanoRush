@@ -11,7 +11,7 @@ import me.hii488.misc.Settings;
 import me.hii488.objects.containers.BaseContainer;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.volcanoRush.additionalTickers.LightHandler;
-import me.hii488.volcanoRush.containers.algorithms.MineralAlg;
+import me.hii488.volcanoRush.containers.generationAlgs.MineralAlg;
 import me.hii488.volcanoRush.items.ItemList;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
 

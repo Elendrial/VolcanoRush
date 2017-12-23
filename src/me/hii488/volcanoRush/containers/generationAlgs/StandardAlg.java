@@ -1,4 +1,4 @@
-package me.hii488.volcanoRush.containers.algorithms;
+package me.hii488.volcanoRush.containers.generationAlgs;
 
 import java.util.Random;
 
@@ -68,8 +68,10 @@ public class StandardAlg extends MineralAlg{
 						else yoffset += Math.round(random.nextDouble()) * 2 - 1;
 						tilePos.setLocation(i +xoffset < g.dimensions.getX()-1 && i + xoffset > 0 ? i + xoffset : i, j +yoffset < g.dimensions.getY()-1 && j + yoffset > 0 ? j + yoffset: j);
 						
-						g.setTile("airTile", 0, tilePos);
-						((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
+						if(g.getTile(tilePos) instanceof MineralTile) {
+							g.setTile("airTile", 0, tilePos);
+							((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
+						}
 					}
 					if(random.nextDouble() < 0.4) {
 						if(random.nextInt(2)-1 == 0) xoffset += Math.round(random.nextDouble()) * 2 - 1;
@@ -77,8 +79,10 @@ public class StandardAlg extends MineralAlg{
 					
 						tilePos.setLocation(i +xoffset < g.dimensions.getX()-1 && i + xoffset > 0 ? i + xoffset : i, j +yoffset < g.dimensions.getY()-1 && j + yoffset > 0 ? j + yoffset: j);
 						
-						g.setTile("airTile", 0, tilePos);
-						((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
+						if(g.getTile(tilePos) instanceof MineralTile) {
+							g.setTile("airTile", 0, tilePos);
+							((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
+						}
 					}
 					if(random.nextDouble() < 0.2) {
 						if(random.nextInt(2)-1 == 0) xoffset += Math.round(random.nextDouble()) * 2 - 1;
@@ -86,8 +90,10 @@ public class StandardAlg extends MineralAlg{
 								
 						tilePos.setLocation(i +xoffset < g.dimensions.getX()-1 && i + xoffset > 0 ? i + xoffset : i, j +yoffset < g.dimensions.getY()-1 && j + yoffset > 0 ? j + yoffset: j);
 						
-						g.setTile("airTile", 0, tilePos);
-						((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
+						if(g.getTile(tilePos) instanceof MineralTile) {
+							g.setTile("airTile", 0, tilePos);
+							((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
+						}
 					}
 				}
 				
@@ -106,8 +112,10 @@ public class StandardAlg extends MineralAlg{
 									
 							tilePos.setLocation(i +xoffset < g.dimensions.getX()-1 && i + xoffset > 0 ? i + xoffset : i, j +yoffset < g.dimensions.getY()-1 && j + yoffset > 0 ? j + yoffset: j);
 							
-							g.setTile("airTile", 0, tilePos);
-							((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
+							if(g.getTile(tilePos) instanceof MineralTile) {
+								g.setTile("airTile", 0, tilePos);
+								((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
+							}
 						}
 					}
 				}
@@ -130,8 +138,10 @@ public class StandardAlg extends MineralAlg{
 											
 									tilePos.setLocation(k + xoffset < g.dimensions.getX()-1 && k + xoffset > 0 ? k + xoffset : k, l + yoffset < g.dimensions.getY()-1 && l + yoffset > 0 ? l + yoffset: l);
 									
-									g.setTile("airTile", 0, tilePos);
-									((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
+									if(g.getTile(tilePos) instanceof MineralTile) {
+										g.setTile("airTile", 0, tilePos);
+										((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
+									}
 
 								}
 							}
@@ -148,8 +158,10 @@ public class StandardAlg extends MineralAlg{
 									
 									tilePos.setLocation(k + xoffset < g.dimensions.getX()-1 && k + xoffset > 0 ? k + xoffset : k, l + yoffset < g.dimensions.getY()-1 && l + yoffset > 0 ? l + yoffset: l);
 									
-									g.setTile("airTile", 0, tilePos);
-									((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
+									if(g.getTile(tilePos) instanceof MineralTile) {
+										g.setTile("airTile", 0, tilePos);
+										((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
+									}
 								}
 							}
 						}

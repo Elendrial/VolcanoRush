@@ -11,6 +11,7 @@ public class MineralItem extends GravityEntity {
 	
 	public MineralItem(){super();}
 	public MineralItem(MineralItem i){
+		super(i);
 		if(i.oreType != OreType.NONE) this.setOreType(i.oreType);
 		else this.oreType = OreType.NONE;
 	}

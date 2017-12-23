@@ -1,6 +1,6 @@
 package me.hii488.volcanoRush.containers.volcanoes;
 
-import me.hii488.volcanoRush.containers.algorithms.StandardAlg;
+import me.hii488.volcanoRush.containers.generationAlgs.StandardAlg;
 
 public class StandardVolcano extends Volcano{
 	
