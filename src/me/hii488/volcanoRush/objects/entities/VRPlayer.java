@@ -14,6 +14,7 @@ import me.hii488.misc.Grid;
 import me.hii488.misc.Settings;
 import me.hii488.misc.Vector;
 import me.hii488.objects.entities.Player;
+import me.hii488.objects.entities.RenderEntity;
 import me.hii488.objects.tiles.BaseTile;
 import me.hii488.volcanoRush.Initilisation;
 import me.hii488.volcanoRush.VolcRush;
@@ -92,7 +93,7 @@ public class VRPlayer extends Player implements LightSource{
 	}
 	
 	public void kill(DeathCause cause){
-		
+		System.out.println("Deathcause: " + cause.name());
 		if(ItemList.onDeath(cause) && !invincible) ContainerHandler.loadNewContainer("deathMenu");
 	}
 	
@@ -101,9 +102,7 @@ public class VRPlayer extends Player implements LightSource{
 	protected int jumpSpeed = -8;
 	public void addGravity(Vector v){
 		if(v.getY() < 0 && previousMovement == 0) v.setY(jumpSpeed);
-		else{
-			v.setY(previousMovement >= maxFallSpeed ? maxFallSpeed : previousMovement + 1f);
-		}
+		else v.setY(previousMovement >= maxFallSpeed ? maxFallSpeed : previousMovement + 1f);
 	}
 	
 	
@@ -279,6 +278,10 @@ public class VRPlayer extends Player implements LightSource{
 	@Override
 	public Vector getPosition() {
 		return Grid.getGridPosAtVector(position);
+	}
+	
+	public RenderEntity createRenderEntity(){
+		return new VRPlayerRenderEntity(this);
 	}
 	
 }
