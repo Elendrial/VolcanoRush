@@ -28,7 +28,6 @@ public class DeathMenu extends BaseContainer{
 	
 	public DeathMenu(){
 		this.identifier = "deathMenu";
-		this.showEntities = false;
 		grid.setupGrid(10, 10);
 		
 		menuButton = (GUILabel) new GUILabel(){
@@ -39,7 +38,7 @@ public class DeathMenu extends BaseContainer{
 				ContainerHandler.loadNewContainer("mainmenu");
 			}
 		}.setFill(false).setTextColor(Color.white).setOutlineColor(Color.white).setText("Menu")
-				.setDimensions(70, 30).setPosition(GameController.windows[0].width/2-85, 700);
+				.setDimensions(70, 30).setPosition(GameController.getWindow().width/2-85, 700);
 		
 		playButton = (GUILabel) new GUILabel(){
 			@Override
@@ -49,18 +48,18 @@ public class DeathMenu extends BaseContainer{
 				ContainerHandler.loadNewContainer("shop");
 			}
 		}.setFill(false).setTextColor(Color.white).setOutlineColor(Color.white).setText("Start Game")
-				.setDimensions(70, 30).setPosition(GameController.windows[0].width/2+15, 700);
+				.setDimensions(70, 30).setPosition(GameController.getWindow().width/2+15, 700);
 		
 		
 		gui.addElement(new GUILabel().setTextColor(Color.WHITE).setFont(Font.decode(Font.MONOSPACED + "-24")).setIdentifier("title")
-				.setText("High Scores:").setDimensions(100, 40).setPosition(GameController.windows[0].width/2-50, 50));
-		gui.addElement(pastScores.setTextColor(Color.WHITE).setVerticalJustificaton(1).setHorizontalJustification(-1).setDimensions(0,0).setPosition(GameController.windows[0].width/2+20, 130));
-		gui.addElement(pastNames.setTextColor(Color.WHITE).setVerticalJustificaton(1).setHorizontalJustification(1).setDimensions(0,0).setPosition(GameController.windows[0].width/2, 130));
-		gui.addElement(currentScore.setTextColor(Color.WHITE).setDimensions(200, 40).setPosition(GameController.windows[0].width/2-100, 600));
+				.setText("High Scores:").setDimensions(100, 40).setPosition(GameController.getWindow().width/2-50, 50));
+		gui.addElement(pastScores.setTextColor(Color.WHITE).setVerticalJustificaton(1).setHorizontalJustification(-1).setDimensions(0,0).setPosition(GameController.getWindow().width/2+20, 130));
+		gui.addElement(pastNames.setTextColor(Color.WHITE).setVerticalJustificaton(1).setHorizontalJustification(1).setDimensions(0,0).setPosition(GameController.getWindow().width/2, 130));
+		gui.addElement(currentScore.setTextColor(Color.WHITE).setDimensions(200, 40).setPosition(GameController.getWindow().width/2-100, 600));
 		gui.addElement(menuButton);
 		gui.addElement(playButton);
-		gui.addElement(nameHere.setTextColor(Color.WHITE).setHorizontalJustification(1).setText("Enter your name:").setDimensions(100, 40).setPosition(GameController.windows[0].width/2-105, 650));
-		gui.addElement(nameBox.setTextColor(Color.WHITE).setHorizontalJustification(-1).setDimensions(200, 40).setPosition(GameController.windows[0].width/2 + 6, 650));
+		gui.addElement(nameHere.setTextColor(Color.WHITE).setHorizontalJustification(1).setText("Enter your name:").setDimensions(100, 40).setPosition(GameController.getWindow().width/2-105, 650));
+		gui.addElement(nameBox.setTextColor(Color.WHITE).setHorizontalJustification(-1).setDimensions(200, 40).setPosition(GameController.getWindow().width/2 + 6, 650));
 		
 		guis.add(gui);
 	}
@@ -68,6 +67,7 @@ public class DeathMenu extends BaseContainer{
 	@Override
 	public void onLoad(){
 		super.onLoad();
+		this.showEntities(false);
 		((VRPlayer) EntityRegistry.player).movementAllowed = false;
 		nameBox.text = nameBox.text.replace("\n", "").replace("\t", "").trim();
 		

@@ -17,7 +17,6 @@ public class MainMenu extends BaseContainer {
 		grid.setupGrid(10, 10);
 		System.out.println(grid.getTile(0, 0).identifier);
 		this.identifier = "mainmenu";
-		this.showEntities = false;
 		
 		GUI main = new GUI();
 		GUILabel startButton = (GUILabel) new GUILabel(){
@@ -26,7 +25,7 @@ public class MainMenu extends BaseContainer {
 				if(e.getButton() != MouseEvent.BUTTON1) return;
 				ContainerHandler.loadNewContainer("shop");			
 			}
-		}.setFill(false).setTextColor(Color.white).setOutlineColor(Color.white).setText("Start Game").setDimensions(100, 40).setPosition(GameController.windows[0].width/2-50, GameController.windows[0].height/2-20);
+		}.setFill(false).setTextColor(Color.white).setOutlineColor(Color.white).setText("Start Game").setDimensions(100, 40).setPosition(GameController.getWindow().width/2-50, GameController.getWindow().height/2-20);
 		
 		main.addElement(startButton);
 		guis.add(main);
@@ -36,6 +35,7 @@ public class MainMenu extends BaseContainer {
 	@Override
 	public void onLoad(){
 		super.onLoad();
+		this.showEntities(false);
 		((VRPlayer) EntityRegistry.player).movementAllowed = false;
 	}
 	

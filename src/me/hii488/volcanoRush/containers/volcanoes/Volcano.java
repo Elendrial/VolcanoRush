@@ -31,7 +31,7 @@ public abstract class Volcano extends BaseContainer{
 				pauseMenu.hideAll();
 			}
 		}.setFill(false).setTextColor(Color.white).setOutlineColor(Color.white).setText("Continue")
-				.setDimensions(70, 30).setPosition(GameController.windows[0].width/2-35, 300);
+				.setDimensions(70, 30).setPosition(GameController.getWindow().width/2-35, 300);
 		
 		GUILabel menuButton = (GUILabel) new GUILabel(){
 			@Override
@@ -40,10 +40,10 @@ public abstract class Volcano extends BaseContainer{
 				ContainerHandler.loadNewContainer("mainmenu");
 			}
 		}.setFill(false).setTextColor(Color.white).setOutlineColor(Color.white).setText("To Menu")
-				.setDimensions(70, 30).setPosition(GameController.windows[0].width/2-35, 400);
+				.setDimensions(70, 30).setPosition(GameController.getWindow().width/2-35, 400);
 		
 		GUILabel backgroundShade = (GUILabel) new GUILabel().setFill(true).setOutlineColor(new Color(0f,0f,0f,0.5f))
-				.setPosition(0, 0).setDimensions(GameController.windows[0].width, GameController.windows[0].height);
+				.setPosition(0, 0).setDimensions(GameController.getWindow().width, GameController.getWindow().height);
 		
 		pauseMenu.addElement(backgroundShade);
 		pauseMenu.addElement(continueButton);

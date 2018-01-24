@@ -32,7 +32,6 @@ public class ShopMenu extends BaseContainer {
 	public ShopMenu(){
 		grid.setupGrid(10, 10);
 		this.identifier = "shop";
-		this.showEntities = false;
 		
 		guis.add(shop);
 		
@@ -43,6 +42,7 @@ public class ShopMenu extends BaseContainer {
 	@Override
 	public void onLoad(){
 		super.onLoad();
+		this.showEntities(false);
 		currentFunds = maxSpend;
 		
 		shop.empty();
@@ -93,24 +93,17 @@ public class ShopMenu extends BaseContainer {
 				ContainerHandler.loadNewContainer("standardVolcano"); // TODO: Change this to allow for multiple volcanoes
 			}
 		}.setFill(false).setTextColor(Color.white).setOutlineColor(Color.white).setText("Start Game")
-				.setDimensions(70, 30).setPosition(GameController.windows[0].width/2+15, 700).setIdentifier("playButton");
+				.setDimensions(70, 30).setPosition(GameController.getWindow().width/2+15, 700).setIdentifier("playButton");
 		
 		
 		shop.addElement(new GUILabel().setTextColor(Color.WHITE).setFont(Font.decode(Font.MONOSPACED + "-24")).setIdentifier("title")
-				.setText("Shop:").setDimensions(100, 40).setPosition(GameController.windows[0].width/2-50, 50));
+				.setText("Shop:").setDimensions(100, 40).setPosition(GameController.getWindow().width/2-50, 50));
 		
 		
 		shop.addElement(playButton);
 		
 		((VRPlayer) EntityRegistry.player).resetPlayer();
 		VolcRush.score = new Score();
-	}
-	
-	public void render(Graphics g) {
-		super.render(g);
-		
-		
-		
 	}
 	
 }

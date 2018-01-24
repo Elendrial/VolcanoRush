@@ -32,9 +32,9 @@ public class Initilisation implements IInitiliser{
 	public static void setup(){
 		InitilisationController.initList.add(instance);
 		InputHandler.inputUsers.add(new ItemList());
-		TickController.additionalEarlyTicking.add(new ItemList());
-		TickController.additionalLateTicking.add(new LiquidFix());
-		TickController.additionalLateTicking.add(lightHandler);
+		TickController.addEarlyTicker(new ItemList());
+		TickController.addLateTicker(new LiquidFix());
+		TickController.addLateTicker(lightHandler);
 	}
 
 	public static MainMenu menuContainer = new MainMenu();

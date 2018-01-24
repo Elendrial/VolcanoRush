@@ -73,19 +73,19 @@ public class VRPlayer extends Player implements LightSource{
 	}
 	
 	public void updateCamera(){
-		Vector possiblePosition = new Vector(position.getX() - GameController.windows[0].width/2, position.getY() - GameController.windows[0].height/2);
+		Vector possiblePosition = new Vector(position.getX() - GameController.getWindow().width/2, position.getY() - GameController.getWindow().height/2);
 		Grid g = ContainerHandler.getLoadedContainer().grid;
 		
-		if(g.dimensions.getX() * Settings.Texture.tileSize > GameController.windows[0].width){
+		if(g.dimensions.getX() * Settings.Texture.tileSize > GameController.getWindow().width){
 			if(possiblePosition.getX() < 0) possiblePosition.setX(0);
-			if(possiblePosition.getX() + GameController.windows[0].width > g.dimensions.getX() * Settings.Texture.tileSize) 
-				possiblePosition.setX(g.dimensions.getX() * Settings.Texture.tileSize - GameController.windows[0].width);
+			if(possiblePosition.getX() + GameController.getWindow().width > g.dimensions.getX() * Settings.Texture.tileSize) 
+				possiblePosition.setX(g.dimensions.getX() * Settings.Texture.tileSize - GameController.getWindow().width);
 		}
 
-		if(g.dimensions.getY() * Settings.Texture.tileSize > GameController.windows[0].height){
+		if(g.dimensions.getY() * Settings.Texture.tileSize > GameController.getWindow().height){
 			if(possiblePosition.getY() < 0) possiblePosition.setY(0);
-			if(possiblePosition.getY() + GameController.windows[0].height > g.dimensions.getY() * Settings.Texture.tileSize) 
-				possiblePosition.setY(g.dimensions.getY() * Settings.Texture.tileSize - GameController.windows[0].height);
+			if(possiblePosition.getY() + GameController.getWindow().height > g.dimensions.getY() * Settings.Texture.tileSize) 
+				possiblePosition.setY(g.dimensions.getY() * Settings.Texture.tileSize - GameController.getWindow().height);
 		}
 		
 		Camera.moveTo(possiblePosition);
