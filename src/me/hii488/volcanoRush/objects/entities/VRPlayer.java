@@ -1,7 +1,5 @@
 package me.hii488.volcanoRush.objects.entities;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
@@ -18,14 +16,12 @@ import me.hii488.objects.entities.RenderEntity;
 import me.hii488.objects.tiles.BaseTile;
 import me.hii488.volcanoRush.Initilisation;
 import me.hii488.volcanoRush.VolcRush;
-import me.hii488.volcanoRush.containers.menus.MainMenu;
 import me.hii488.volcanoRush.containers.volcanoes.Volcano;
 import me.hii488.volcanoRush.dataTypes.DeathCause;
 import me.hii488.volcanoRush.dataTypes.FluidType;
 import me.hii488.volcanoRush.items.ItemList;
 import me.hii488.volcanoRush.misc.LightSource;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
-import me.hii488.volcanoRush.objects.tiles.LightTile;
 import me.hii488.volcanoRush.objects.tiles.MineralTile;
 
 public class VRPlayer extends Player implements LightSource{
@@ -162,27 +158,6 @@ public class VRPlayer extends Player implements LightSource{
 		if(ContainerHandler.getLoadedContainer() instanceof Volcano){
 			GameController.isPaused = true;
 			ContainerHandler.getLoadedContainer().getGui("pauseMenu").showAll();
-		}
-	}
-	
-	public void render(Graphics g){
-		if(!(ContainerHandler.getLoadedContainer() instanceof MainMenu)){
-			super.render(g);
-			
-			if(breath != maxBreath){
-				if(breath > maxBreath * 0.75)      g.drawImage(TextureHandler.getTexture("breathOverlay_" + 0), position.getX() - Camera.getPosition().getX() + 16, position.getY() - Camera.getPosition().getY() - 5, null);
-				else if(breath > maxBreath * 0.50) g.drawImage(TextureHandler.getTexture("breathOverlay_" + 1), position.getX() - Camera.getPosition().getX() + 16, position.getY() - Camera.getPosition().getY() - 5, null);
-				else if(breath > maxBreath * 0.25) g.drawImage(TextureHandler.getTexture("breathOverlay_" + 2), position.getX() - Camera.getPosition().getX() + 16, position.getY() - Camera.getPosition().getY() - 5, null);
-				else if(breath > 0)                g.drawImage(TextureHandler.getTexture("breathOverlay_" + 3), position.getX() - Camera.getPosition().getX() + 16, position.getY() - Camera.getPosition().getY() - 5, null);
-			}
-	
-			if((Settings.Logging.debug || VolcRush.debugCommands) && ContainerHandler.getLoadedContainer() instanceof Volcano){
-				g.setColor(Color.white);
-				g.fillRect(0, 0, 1000, 15);
-				g.setColor(Color.black);
-				g.drawString("player: " + position + ";;  tilePos: " + Grid.getGridPosAtVector(position).toString() + ";;   camera: " + Camera.getPosition() + ";;  tile: " + ContainerHandler.getLoadedContainer().grid.getTileAtVector(position).identifier 
-						+ ";; light: " + ((LightTile) ContainerHandler.getLoadedContainer().grid.getTileAtVector(position)).lightPercent+ ";; score: " + VolcRush.score.getScore(), 2, 12);
-			}
 		}
 	}
 	

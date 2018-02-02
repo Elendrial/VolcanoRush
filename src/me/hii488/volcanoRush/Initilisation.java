@@ -1,10 +1,10 @@
 package me.hii488.volcanoRush;
 
-import me.hii488.controllers.InitilisationController;
+import me.hii488.controllers.InitialisationController;
 import me.hii488.controllers.TickController;
 import me.hii488.handlers.ContainerHandler;
 import me.hii488.handlers.InputHandler;
-import me.hii488.interfaces.IInitiliser;
+import me.hii488.interfaces.IInitialiser;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.volcanoRush.additionalTickers.LightHandler;
 import me.hii488.volcanoRush.additionalTickers.LiquidFix;
@@ -24,13 +24,13 @@ import me.hii488.volcanoRush.objects.tiles.RockTile;
 import me.hii488.volcanoRush.objects.tiles.RopeTile;
 import me.hii488.volcanoRush.objects.tiles.UnbreakableTile;
 
-public class Initilisation implements IInitiliser{
+public class Initilisation implements IInitialiser{
 	
 	public static Initilisation instance = new Initilisation();
 	public static LightHandler lightHandler = new LightHandler();
 	
 	public static void setup(){
-		InitilisationController.initList.add(instance);
+		InitialisationController.addInitialiser(instance);
 		InputHandler.inputUsers.add(new ItemList());
 		TickController.addEarlyTicker(new ItemList());
 		TickController.addLateTicker(new LiquidFix());

@@ -12,7 +12,10 @@ import me.hii488.volcanoRush.dataTypes.FluidType;
 public class AirTile extends LightTile{
 	
 	public AirTile(){super();}
-	public AirTile(AirTile t){super(t);}
+	public AirTile(AirTile t){
+		super(t);
+		this.fluidContent = t.fluidContent.clone();
+	}
 	
 	public int[] fluidContent = new int[FluidType.values().length];
 	
@@ -153,8 +156,9 @@ public class AirTile extends LightTile{
 		BufferedImage img = TextureHandler.cloneTexture(im);
 		Graphics g = img.createGraphics();
 		
+		
 		for(int i = 0; i < fluidContent.length; i++){
-			if(fluidContent[i] != 0){ 
+			if(fluidContent[i] != 0){
 				if(fluidContent[i] < 25)      g.drawImage(TextureHandler.getTexture(FluidType.values()[i].toString().toLowerCase() + "Overlay_" + 0), 0, 0, null); 
 				else if(fluidContent[i] < 50) g.drawImage(TextureHandler.getTexture(FluidType.values()[i].toString().toLowerCase() + "Overlay_" + 1), 0, 0, null); 
 	            else if(fluidContent[i] < 75) g.drawImage(TextureHandler.getTexture(FluidType.values()[i].toString().toLowerCase() + "Overlay_" + 2), 0, 0, null); 

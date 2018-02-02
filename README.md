@@ -13,7 +13,6 @@ Most of the core game has been made, but here's what's left:
 - Redo all art
 - Fix that one rare bug where it hangs on generation.
 - Rewrite a lot of code to use events & listeners (low priority)
-- Fix fluid rendering
 
 Other:
 - I tried to make the code organised, but it seems it's made it more of a mess. Sorry to those who look through it.
