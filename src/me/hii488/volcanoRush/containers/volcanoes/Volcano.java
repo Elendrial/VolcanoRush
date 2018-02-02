@@ -11,12 +11,12 @@ import me.hii488.misc.Settings;
 import me.hii488.objects.containers.BaseContainer;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.volcanoRush.additionalTickers.LightHandler;
-import me.hii488.volcanoRush.containers.generationAlgs.MineralAlg;
+import me.hii488.volcanoRush.containers.generationAlgs.GenerationAlg;
 import me.hii488.volcanoRush.items.ItemList;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
 
 public abstract class Volcano extends BaseContainer{
-	public MineralAlg mineralSpawner;
+	public GenerationAlg mineralSpawner;
 	
 	public Volcano(){
 		super();

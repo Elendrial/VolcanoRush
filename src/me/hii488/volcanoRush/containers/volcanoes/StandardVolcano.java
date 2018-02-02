@@ -1,6 +1,6 @@
 package me.hii488.volcanoRush.containers.volcanoes;
 
-import me.hii488.volcanoRush.containers.generationAlgs.TestingAlg;
+import me.hii488.volcanoRush.containers.generationAlgs.StandardAlg;
 
 public class StandardVolcano extends Volcano{
 	
@@ -8,7 +8,7 @@ public class StandardVolcano extends Volcano{
 		super();
 		this.identifier = "standardVolcano";
 		this.grid.setupGrid(100, 1000);
-		this.mineralSpawner = new TestingAlg();
+		this.mineralSpawner = new StandardAlg();
 	}
 	
 }

@@ -9,7 +9,7 @@ import me.hii488.volcanoRush.objects.tiles.AirTile;
 import me.hii488.volcanoRush.objects.tiles.MineralTile;
 
 // Note this is just an alg for testing, it wont be the final one etc etc
-public class TestingAlg extends MineralAlg{
+public class TestingAlg extends GenerationAlg{
 
 	@Override
 	public void populate(Grid g){

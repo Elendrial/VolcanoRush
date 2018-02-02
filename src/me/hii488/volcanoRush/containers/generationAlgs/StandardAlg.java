@@ -11,7 +11,7 @@ import me.hii488.volcanoRush.dataTypes.OreType;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
 import me.hii488.volcanoRush.objects.tiles.MineralTile;
 
-public class StandardAlg extends MineralAlg{
+public class StandardAlg extends GenerationAlg{
 
 	@Override
 	public void populate(Grid g) {
