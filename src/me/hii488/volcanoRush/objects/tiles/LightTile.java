@@ -17,6 +17,7 @@ public class LightTile extends BaseTile{
 	public LightTile(LightTile l) {
 		super(l);
 		this.lightPercent = l.lightPercent;
+		this.lowestLight = l.lowestLight;
 	}
 	
 	public void render(Graphics g) {

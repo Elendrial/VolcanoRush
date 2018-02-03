@@ -14,6 +14,7 @@ public class VolcRush {
 		GameController.loadWindow("Volcano Rush", 1000, 800);
 		
 		Settings.Texture.tileSize = 32;
+		Settings.Logging.tpsPrinter = false;
 		debugCommands = true;
 		
 		Initilisation.setup();

@@ -1,4 +1,4 @@
-package me.hii488.volcanoRush.objects.entities;
+package me.hii488.volcanoRush.objects.entities.render;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -11,6 +11,7 @@ import me.hii488.misc.Settings;
 import me.hii488.objects.entities.RenderEntity;
 import me.hii488.volcanoRush.VolcRush;
 import me.hii488.volcanoRush.containers.volcanoes.Volcano;
+import me.hii488.volcanoRush.objects.entities.VRPlayer;
 import me.hii488.volcanoRush.objects.tiles.LightTile;
 
 public class VRPlayerRenderEntity extends RenderEntity{

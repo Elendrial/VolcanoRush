@@ -21,6 +21,7 @@ import me.hii488.volcanoRush.dataTypes.DeathCause;
 import me.hii488.volcanoRush.dataTypes.FluidType;
 import me.hii488.volcanoRush.items.ItemList;
 import me.hii488.volcanoRush.misc.LightSource;
+import me.hii488.volcanoRush.objects.entities.render.VRPlayerRenderEntity;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
 import me.hii488.volcanoRush.objects.tiles.MineralTile;
 

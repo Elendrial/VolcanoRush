@@ -31,7 +31,7 @@ public class DynamiteEntity extends GravityEntity{
 	public void initVars() {
 		this.identifier = "dynamite";
 		this.textureName = "dynamite.png";
-		this.states = 2;
+		this.states = 3;
 		this.currentState = 2;
 		this.fuse = 90;
 		this.acceleration = 1;
@@ -71,9 +71,11 @@ public class DynamiteEntity extends GravityEntity{
 				q = p.clone().addToLocation(i, j);
 				t = g.getTile(q);
 				if(t instanceof RockTile) {
+					double d = ((RockTile) t).lowestLight;
 					g.setTile("dirtTile", q);
 					((DirtTile) g.getTile(q)).setOreType(((RockTile) t).oreType);
 					((DirtTile) g.getTile(q)).damageValue += 3;
+					((DirtTile) g.getTile(q)).setLowestLight(d);
 				}
 				
 				if(t instanceof DirtTile) {
