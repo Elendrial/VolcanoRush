@@ -11,6 +11,10 @@ import me.hii488.volcanoRush.objects.tiles.MineralTile;
 // Note this is just an alg for testing, it wont be the final one etc etc
 public class TestingAlg extends GenerationAlg{
 
+	public void populate(Grid g, long seed){
+		populate(g);
+	}
+	
 	@Override
 	public void populate(Grid g){
 		g.fillRectWithTile("dirtTile", 0, 0, g.dimensions.getX(), g.dimensions.getY());

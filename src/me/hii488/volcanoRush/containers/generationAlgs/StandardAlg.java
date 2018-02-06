@@ -13,43 +13,34 @@ import me.hii488.volcanoRush.objects.tiles.MineralTile;
 
 public class StandardAlg extends GenerationAlg{
 
+	private Random random = new Random();
+	
 	@Override
-	public void populate(Grid g) {
-		g.wallRectWithTile("unbreakableTile", 0, 0, g.dimensions.getX(), g.dimensions.getY());
-		g.fillRectWithTile("dirtTile", 1, 1, g.dimensions.getX()-1, g.dimensions.getY()-1);
+	public void populate(Grid g){
+		populate(g, random.nextLong());
+	}
+	
+	@Override
+	public void populate(Grid g, long seed) {
+		random.setSeed(seed);
+		System.out.println("Seed:" + seed);
 		
-		g.fillRectWithTile("airTile", 0, g.dimensions.getX()/2-1, 1, g.dimensions.getX()/2+1, 3);
+		setupBaseMap(g);
 		
-		// The nice slope thing on the outside
-		for(int i = 0 ; i < g.dimensions.getX()/4; i++){
-			g.fillRectWithTile("airTile", 1, 0, i, g.dimensions.getX()/2-(2*i), i+1);
-			g.fillRectWithTile("airTile", 1, g.dimensions.getX()/2+(i*2), i, g.dimensions.getX(), i+1);
-			g.fillRectWithTile("unbreakableTile", g.dimensions.getX()/2 - (2*i + 2), i, g.dimensions.getX()/2 - (2*i), i+1);
-			g.fillRectWithTile("unbreakableTile", g.dimensions.getX()/2 + (2*i), i, g.dimensions.getX()/2 + (2*i+2), i+1);
-		}
-		
-		// Escape rope
-		g.setTile("ropeTile", g.dimensions.getX()/2-1, 0);
-		g.setTile("ropeTile", g.dimensions.getX()/2-1, 1);
-		
-		double rand, rockChance, smallCaveChance = 0.005, largeCaveChance = 0.0008, cavernChance = 0.0002, liquidRand, waterChance = 0.5, gasChance = 0.2;
-		int xoffset, yoffset;
+		double rand, liquidRand, rockChance;
 		int fluid;
-		Vector tilePos = new Vector(0,0);
 		
-		Random random = new Random();
-		
-		for(int j = 0; j < g.dimensions.getY(); j++) { // x and y 'wrong' way around to go down by rows so rockchance can be updated easily.
-			rockChance = Math.tanh(j * 0.01) * 0.01;
+		for(int j = 10; j < g.dimensions.getY(); j++) { // x and y 'wrong' way around to go down by rows so rockchance can be updated easily.
+			rockChance = getRockChance(0, j);
 			liquidRand = random.nextDouble();
 			
-			if(liquidRand < gasChance) {
+			if(liquidRand < getGasChance(0,j)) {
 				fluid = FluidType.GAS.ordinal();
-				liquidRand = liquidRand/(gasChance * 1.2) * 100; // Gets a random number
+				liquidRand = liquidRand/(getGasChance(0,j) * 1.2) * 100; // Gets a random number
 			}
-			else if(liquidRand - gasChance < waterChance) {
+			else if(liquidRand - getGasChance(0,j) < getWaterChance(0,j)) {
 				fluid = FluidType.WATER.ordinal();
-				liquidRand = liquidRand/(waterChance * 1.2) * 100;
+				liquidRand = liquidRand/(getWaterChance(0,j) * 1.2) * 100;
 			}
 			else fluid = -1;
 			
@@ -60,112 +51,21 @@ public class StandardAlg extends GenerationAlg{
 				
 				// Small cave/hole generation
 				rand = random.nextDouble();
-				if(rand < smallCaveChance && g.getTile(i, j) instanceof MineralTile) {
-					xoffset = 0; yoffset = 0;
-					g.setTile("airTile", 0, i, j);
-					if(random.nextBoolean()) {
-						if(random.nextBoolean()) xoffset += Math.round(random.nextDouble()) * 2 - 1;
-						else yoffset += Math.round(random.nextDouble()) * 2 - 1;
-						tilePos.setLocation(i +xoffset < g.dimensions.getX()-1 && i + xoffset > 0 ? i + xoffset : i, j +yoffset < g.dimensions.getY()-1 && j + yoffset > 0 ? j + yoffset: j);
-						
-						if(g.getTile(tilePos) instanceof MineralTile) {
-							g.setTile("airTile", 0, tilePos);
-							((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
-						}
-					}
-					if(random.nextDouble() < 0.4) {
-						if(random.nextInt(2)-1 == 0) xoffset += Math.round(random.nextDouble()) * 2 - 1;
-						else yoffset += Math.round(random.nextDouble()) * 2 - 1;
-					
-						tilePos.setLocation(i +xoffset < g.dimensions.getX()-1 && i + xoffset > 0 ? i + xoffset : i, j +yoffset < g.dimensions.getY()-1 && j + yoffset > 0 ? j + yoffset: j);
-						
-						if(g.getTile(tilePos) instanceof MineralTile) {
-							g.setTile("airTile", 0, tilePos);
-							((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
-						}
-					}
-					if(random.nextDouble() < 0.2) {
-						if(random.nextInt(2)-1 == 0) xoffset += Math.round(random.nextDouble()) * 2 - 1;
-						else yoffset += Math.round(random.nextDouble()) * 2 - 1;
-								
-						tilePos.setLocation(i +xoffset < g.dimensions.getX()-1 && i + xoffset > 0 ? i + xoffset : i, j +yoffset < g.dimensions.getY()-1 && j + yoffset > 0 ? j + yoffset: j);
-						
-						if(g.getTile(tilePos) instanceof MineralTile) {
-							g.setTile("airTile", 0, tilePos);
-							((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
-						}
-					}
+				if(rand < getSmallCaveChance(i, j) && g.getTile(i, j) instanceof MineralTile) {
+					makeSmallCave(g, i, j, fluid, liquidRand);
 				}
 				
 				// Large cave/hole generation
 				// TODO: Maybe somehow add a marker that this is where monsters should go?
 				rand = random.nextDouble();
-				if(rand < largeCaveChance && j > 25) {
-					g.setTile("airTile", 0, i, j);
-					rand = random.nextInt(5) + 5;
-					for(int k = 0; k < rand + 1; k++) {
-						xoffset = 0; yoffset = 0;
-						
-						for(int l = 0; l < rand; l++) {
-							if(random.nextInt(2)-1 == 0) xoffset += Math.round(random.nextDouble()) * 2 - 1;
-							else yoffset += Math.round(random.nextDouble()) * 2 - 1;
-									
-							tilePos.setLocation(i +xoffset < g.dimensions.getX()-1 && i + xoffset > 0 ? i + xoffset : i, j +yoffset < g.dimensions.getY()-1 && j + yoffset > 0 ? j + yoffset: j);
-							
-							if(g.getTile(tilePos) instanceof MineralTile) {
-								g.setTile("airTile", 0, tilePos);
-								((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
-							}
-						}
-					}
+				if(rand < getLargeCaveChance(i,j) && j > 25) {
+					makeLargeCave(g, i, j, fluid, liquidRand);
 				}
 				
 				// Cavern generation
 				rand = random.nextDouble();
-				if(rand < cavernChance && j > 75) {
-					int x1 = i - 21 > 1 ? i - 21 : 1, x2 = i + 21 < g.dimensions.getX()-1 ? i + 21 : g.dimensions.getX()-2;
-					int y = j + 17 < g.dimensions.getY() ? j + 17 : g.dimensions.getY() - 1;
-					
-					g.fillRectWithTile("airTile", 0, x1, j, x2, y);
-					
-					for(int k = x1; k < x2; k++) {
-						for(int l = j; l < y; l+=y-j-2) {
-							for(int repeats = 0; repeats < 3; repeats++) {
-								xoffset = 0; yoffset = 0;
-								for(int m = 0; m < 7; m++) {
-									if(random.nextInt(2)-1 == 0) xoffset += Math.round(random.nextDouble()) * 2 - 1;
-									else yoffset += Math.round(random.nextDouble()) * 2 - 1;
-											
-									tilePos.setLocation(k + xoffset < g.dimensions.getX()-1 && k + xoffset > 0 ? k + xoffset : k, l + yoffset < g.dimensions.getY()-1 && l + yoffset > 0 ? l + yoffset: l);
-									
-									if(g.getTile(tilePos) instanceof MineralTile) {
-										g.setTile("airTile", 0, tilePos);
-										((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
-									}
-
-								}
-							}
-						}
-					}
-					
-					for(int l = j; l < y; l++) {
-						for(int k = x1; k < x2; k += x2-x1-1) {
-							for(int repeats = 0; repeats < 3; repeats++) {
-								xoffset = 0; yoffset = 0;
-								for(int m = 0; m < 7; m++) {
-									if(random.nextInt(2)-1 == 0) xoffset += Math.round(random.nextDouble()) * 2 - 1;
-									else yoffset += Math.round(random.nextDouble()) * 2 - 1;
-									
-									tilePos.setLocation(k + xoffset < g.dimensions.getX()-1 && k + xoffset > 0 ? k + xoffset : k, l + yoffset < g.dimensions.getY()-1 && l + yoffset > 0 ? l + yoffset: l);
-									
-									if(g.getTile(tilePos) instanceof MineralTile) {
-										g.setTile("airTile", 0, tilePos);
-										((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) liquidRand);
-									}
-								}
-							}
-						}
-					}
+				if(rand < getCavernChance(i,j) && j > 75) {
+					makeCavern(g, i, j, fluid, liquidRand);
 				}
 			}
 		}
@@ -196,4 +96,138 @@ public class StandardAlg extends GenerationAlg{
 		}
 		return OreType.NONE;
 	}
+
+	// I put these into methods rather than attributes so they can be made functions on (x,y) at some point easily if needed.
+	public double getRockChance(int x, int y) {
+		return Math.tanh(y * 0.01) * 0.01;
+	}
+
+	public double getSmallCaveChance(int x, int y) {
+		return 0.005;
+	}
+
+	public double getLargeCaveChance(int x, int y) {
+		return y > 100 ? 0.0016 : 0.0008;
+	}
+
+	public double getCavernChance(int x, int y) {
+		return 0.00002;
+	}
+	public double getWaterChance(int x, int y) {
+		return 0.5;
+	}
+
+	public double getGasChance(int x, int y) {
+		return 0.2;
+	}
+
+	private void setupBaseMap(Grid g){
+		g.wallRectWithTile("unbreakableTile", 0, 0, g.dimensions.getX(), g.dimensions.getY());
+		g.fillRectWithTile("dirtTile", 1, 1, g.dimensions.getX()-1, g.dimensions.getY()-1);
+		
+		g.fillRectWithTile("airTile", 0, g.dimensions.getX()/2-1, 1, g.dimensions.getX()/2+1, 3);
+		
+		// The nice slope thing on the outside
+		for(int i = 0 ; i < g.dimensions.getX()/4; i++){
+			g.fillRectWithTile("airTile", 1, 0, i, g.dimensions.getX()/2-(2*i), i+1);
+			g.fillRectWithTile("airTile", 1, g.dimensions.getX()/2+(i*2), i, g.dimensions.getX(), i+1);
+			g.fillRectWithTile("unbreakableTile", g.dimensions.getX()/2 - (2*i + 2), i, g.dimensions.getX()/2 - (2*i), i+1);
+			g.fillRectWithTile("unbreakableTile", g.dimensions.getX()/2 + (2*i), i, g.dimensions.getX()/2 + (2*i+2), i+1);
+		}
+		
+		// Escape rope
+		g.setTile("ropeTile", g.dimensions.getX()/2-1, 0);
+		g.setTile("ropeTile", g.dimensions.getX()/2-1, 1);
+	}
+	
+	private void makeSmallCave(Grid g, int i, int j, int fluid, double liquidRand){
+		int xoffset = 0, yoffset = 0;
+		
+		g.setTile("airTile", 0, i, j);
+		if(random.nextBoolean()) {
+			if(random.nextBoolean()) xoffset += Math.round(random.nextDouble()) * 2 - 1;
+			else yoffset += Math.round(random.nextDouble()) * 2 - 1;
+			
+			safeSetAir(g, i + xoffset, j + yoffset, fluid, liquidRand);
+		}
+		if(random.nextDouble() < 0.4) {
+			if(random.nextInt(2)-1 == 0) xoffset += Math.round(random.nextDouble()) * 2 - 1;
+			else yoffset += Math.round(random.nextDouble()) * 2 - 1;
+		
+			safeSetAir(g, i + xoffset, j + yoffset, fluid, liquidRand);
+		}
+		if(random.nextDouble() < 0.2) {
+			if(random.nextInt(2)-1 == 0) xoffset += Math.round(random.nextDouble()) * 2 - 1;
+			else yoffset += Math.round(random.nextDouble()) * 2 - 1;
+					
+			safeSetAir(g, i + xoffset, j + yoffset, fluid, liquidRand);
+		}
+	}
+	
+	private void makeLargeCave(Grid g, int i, int j, int fluid, double liquidRand){
+		double rand = random.nextInt(5) + 5;
+		
+		g.setTile("airTile", 0, i, j);
+		
+		for(int k = 0; k < rand + 1; k++) {
+			int xoffset = 0, yoffset = 0;
+			
+			for(int l = 0; l < rand; l++) {
+				if(random.nextInt(2)-1 == 0) xoffset += Math.round(random.nextDouble()) * 2 - 1;
+				else yoffset += Math.round(random.nextDouble()) * 2 - 1;
+						
+				safeSetAir(g, i + xoffset, j + yoffset, fluid, liquidRand);
+			}
+		}
+	}
+	
+	private void makeCavern(Grid g, int i, int j, int fluid, double liquidRand){
+		int xoffset = 0, yoffset = 0;
+		
+		int x1 = i - 21 > 1 ? i - 21 : 1, x2 = i + 21 < g.dimensions.getX()-1 ? i + 21 : g.dimensions.getX()-2;
+		int y = j + 17 < g.dimensions.getY() ? j + 17 : g.dimensions.getY() - 1;
+		
+		g.fillRectWithTile("airTile", 0, x1, j, x2, y);
+		
+		for(int k = x1; k < x2; k++) {
+			for(int l = j; l < y; l+=y-j-2) {
+				for(int repeats = 0; repeats < 3; repeats++) {
+					xoffset = 0; yoffset = 0;
+					for(int m = 0; m < 7; m++) {
+						if(random.nextInt(2)-1 == 0) xoffset += Math.round(random.nextDouble()) * 2 - 1;
+						else yoffset += Math.round(random.nextDouble()) * 2 - 1;
+								
+						safeSetAir(g, i + xoffset, j + yoffset, fluid, liquidRand);
+					}
+				}
+			}
+		}
+		
+		for(int l = j; l < y; l++) {
+			for(int k = x1; k < x2; k += x2-x1-1) {
+				for(int repeats = 0; repeats < 3; repeats++) {
+					xoffset = 0; yoffset = 0;
+					for(int m = 0; m < 7; m++) {
+						if(random.nextInt(2)-1 == 0) xoffset += Math.round(random.nextDouble()) * 2 - 1;
+						else yoffset += Math.round(random.nextDouble()) * 2 - 1;
+												
+						safeSetAir(g, i + xoffset, j + yoffset, fluid, liquidRand);
+					}
+				}
+			}
+		}
+	}
+	
+	
+	private void safeSetAir(Grid g, int x, int y, int fluid, double fluidAmount){
+		if(x > g.dimensions.getX() || y > g.dimensions.getY() || x < 0 || y < 0) return;
+
+		Vector tilePos = new Vector(x,y);
+		
+		if(g.getTile(tilePos) instanceof MineralTile) {
+			g.setTile("airTile", 0, tilePos);
+			((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) fluidAmount);
+		}
+	}
+	
 }
