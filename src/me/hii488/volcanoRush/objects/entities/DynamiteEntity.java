@@ -12,10 +12,10 @@ import me.hii488.misc.Vector;
 import me.hii488.objects.entities.BaseEntity;
 import me.hii488.objects.tiles.BaseTile;
 import me.hii488.volcanoRush.dataTypes.DeathCause;
-import me.hii488.volcanoRush.dataTypes.FluidType;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
 import me.hii488.volcanoRush.objects.tiles.DirtTile;
 import me.hii488.volcanoRush.objects.tiles.RockTile;
+import me.hii488.volcanoRush.registers.FluidRegistry;
 
 public class DynamiteEntity extends GravityEntity{
 
@@ -52,7 +52,7 @@ public class DynamiteEntity extends GravityEntity{
 		BaseTile t;
 		
 		if(g.getTile(p) instanceof AirTile) { // If it's in water, exit.
-			if(((AirTile)g.getTile(p)).fluidContent[FluidType.WATER.ordinal()] != 0) {
+			if(((AirTile) g.getTile(p)).fluidContent.get(FluidRegistry.getFluid("water")) != 0) {
 				this.destroy();
 				return;
 			}

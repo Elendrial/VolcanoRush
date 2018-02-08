@@ -6,10 +6,11 @@ import me.hii488.controllers.GameController;
 import me.hii488.misc.Grid;
 import me.hii488.misc.Vector;
 import me.hii488.objects.tiles.BaseTile;
-import me.hii488.volcanoRush.dataTypes.FluidType;
 import me.hii488.volcanoRush.dataTypes.OreType;
+import me.hii488.volcanoRush.fluids.Fluid;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
 import me.hii488.volcanoRush.objects.tiles.MineralTile;
+import me.hii488.volcanoRush.registers.FluidRegistry;
 
 public class StandardAlg extends GenerationAlg{
 
@@ -28,21 +29,21 @@ public class StandardAlg extends GenerationAlg{
 		setupBaseMap(g);
 		
 		double rand, liquidRand, rockChance;
-		int fluid;
+		Fluid fluid;
 		
 		for(int j = 10; j < g.dimensions.getY(); j++) { // x and y 'wrong' way around to go down by rows so rockchance can be updated easily.
 			rockChance = getRockChance(0, j);
 			liquidRand = random.nextDouble();
 			
 			if(liquidRand < getGasChance(0,j)) {
-				fluid = FluidType.GAS.ordinal();
-				liquidRand = liquidRand/(getGasChance(0,j) * 1.2) * 100; // Gets a random number
+				fluid = FluidRegistry.getFluid("gas");
+				liquidRand = liquidRand/(getGasChance(0,j) * 1.2) * 100;
 			}
 			else if(liquidRand - getGasChance(0,j) < getWaterChance(0,j)) {
-				fluid = FluidType.WATER.ordinal();
+				fluid = FluidRegistry.getFluid("water");
 				liquidRand = liquidRand/(getWaterChance(0,j) * 1.2) * 100;
 			}
-			else fluid = -1;
+			else fluid = null;
 			
 			for(int i = 0; i < g.dimensions.getX(); i++) {
 				// Replacing dirt with rock
@@ -140,7 +141,7 @@ public class StandardAlg extends GenerationAlg{
 		g.setTile("ropeTile", g.dimensions.getX()/2-1, 1);
 	}
 	
-	private void makeSmallCave(Grid g, int i, int j, int fluid, double liquidRand){
+	private void makeSmallCave(Grid g, int i, int j, Fluid fluid, double liquidRand){
 		int xoffset = 0, yoffset = 0;
 		
 		g.setTile("airTile", 0, i, j);
@@ -164,7 +165,7 @@ public class StandardAlg extends GenerationAlg{
 		}
 	}
 	
-	private void makeLargeCave(Grid g, int i, int j, int fluid, double liquidRand){
+	private void makeLargeCave(Grid g, int i, int j, Fluid fluid, double liquidRand){
 		double rand = random.nextInt(5) + 5;
 		
 		g.setTile("airTile", 0, i, j);
@@ -181,7 +182,7 @@ public class StandardAlg extends GenerationAlg{
 		}
 	}
 	
-	private void makeCavern(Grid g, int i, int j, int fluid, double liquidRand){
+	private void makeCavern(Grid g, int i, int j, Fluid fluid, double liquidRand){
 		int xoffset = 0, yoffset = 0;
 		
 		int x1 = i - 21 > 1 ? i - 21 : 1, x2 = i + 21 < g.dimensions.getX()-1 ? i + 21 : g.dimensions.getX()-2;
@@ -219,14 +220,14 @@ public class StandardAlg extends GenerationAlg{
 	}
 	
 	
-	private void safeSetAir(Grid g, int x, int y, int fluid, double fluidAmount){
+	private void safeSetAir(Grid g, int x, int y, Fluid fluid, double fluidAmount){
 		if(x > g.dimensions.getX() || y > g.dimensions.getY() || x < 0 || y < 0) return;
 
 		Vector tilePos = new Vector(x,y);
 		
 		if(g.getTile(tilePos) instanceof MineralTile) {
 			g.setTile("airTile", 0, tilePos);
-			((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) fluidAmount);
+			if(fluid != null) ((AirTile) g.getTile(tilePos)).fillWithFluid(fluid, (int) fluidAmount);
 		}
 	}
 	

@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import me.hii488.interfaces.IInputUser;
 import me.hii488.interfaces.ITickable;
 import me.hii488.volcanoRush.dataTypes.DeathCause;
-import me.hii488.volcanoRush.dataTypes.FluidType;
+import me.hii488.volcanoRush.fluids.Fluid;
 
 public class Item implements IInputUser, ITickable{
 	
@@ -20,7 +20,7 @@ public class Item implements IInputUser, ITickable{
 	
 	// Override-able methods
 	public void onEquip(){}
-	public void inFluid(FluidType fluid){}
+	public void inFluid(Fluid fluid){}
 	public boolean onDeath(DeathCause cause){return true;} // Return whether player still dies
 	public boolean onMovement(){return true;} // Return whether to also use existing movement code
 	public void onGeneration(){}

@@ -2,7 +2,7 @@ package me.hii488.volcanoRush;
 
 import me.hii488.controllers.GameController;
 import me.hii488.misc.Settings;
-import me.hii488.volcanoRush.misc.Score;
+import me.hii488.volcanoRush.dataTypes.Score;
 
 public class VolcRush {
 	
@@ -10,6 +10,7 @@ public class VolcRush {
 	public static boolean debugCommands;
 	
 	public static void main(String[] args){
+		System.out.println((int)99/25);
 		GameController.setupEngine();
 		GameController.loadWindow("Volcano Rush", 1000, 800);
 		

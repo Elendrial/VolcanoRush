@@ -15,10 +15,10 @@ import me.hii488.handlers.ContainerHandler;
 import me.hii488.objects.containers.BaseContainer;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.volcanoRush.VolcRush;
+import me.hii488.volcanoRush.dataTypes.Score;
 import me.hii488.volcanoRush.items.Item;
-import me.hii488.volcanoRush.items.ItemList;
-import me.hii488.volcanoRush.misc.Score;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
+import me.hii488.volcanoRush.registers.ItemRegistry;
 
 public class ShopMenu extends BaseContainer {
 	
@@ -46,7 +46,7 @@ public class ShopMenu extends BaseContainer {
 		
 		shop.empty();
 		
-		HashMap<Item, Boolean> itemList = ItemList.getItemList();
+		HashMap<Item, Boolean> itemList = ItemRegistry.getItemList();
 		
 		int row = 0, col = 0;
 		for(Item i : itemList.keySet()) {

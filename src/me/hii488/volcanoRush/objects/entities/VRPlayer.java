@@ -2,7 +2,7 @@ package me.hii488.volcanoRush.objects.entities;
 
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.util.Arrays;
+import java.util.HashMap;
 
 import me.hii488.controllers.GameController;
 import me.hii488.graphics.Camera;
@@ -18,17 +18,18 @@ import me.hii488.volcanoRush.Initilisation;
 import me.hii488.volcanoRush.VolcRush;
 import me.hii488.volcanoRush.containers.volcanoes.Volcano;
 import me.hii488.volcanoRush.dataTypes.DeathCause;
-import me.hii488.volcanoRush.dataTypes.FluidType;
-import me.hii488.volcanoRush.items.ItemList;
-import me.hii488.volcanoRush.misc.LightSource;
+import me.hii488.volcanoRush.dataTypes.LightSource;
+import me.hii488.volcanoRush.fluids.Fluid;
 import me.hii488.volcanoRush.objects.entities.render.VRPlayerRenderEntity;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
 import me.hii488.volcanoRush.objects.tiles.MineralTile;
+import me.hii488.volcanoRush.registers.FluidRegistry;
+import me.hii488.volcanoRush.registers.ItemRegistry;
 
 public class VRPlayer extends Player implements LightSource{
 	
+	public HashMap<Fluid, Boolean> drowning;
 	public boolean movementAllowed = false;
-	public boolean drowning[] = new boolean[FluidType.values().length];
 	private boolean invincible = false;
 	public int maxBreath = 120;
 	public int breath = 120;
@@ -43,13 +44,18 @@ public class VRPlayer extends Player implements LightSource{
 		for(int i = 0; i < 4; i++)
 			TextureHandler.loadTexture("textures/overlays/", "breathOverlay_" + i + ".png", this, "breathOverlay_" + i);
 		
+		drowning = new HashMap<Fluid, Boolean>();
+		for(String s : FluidRegistry.fluids.keySet())
+			drowning.put(FluidRegistry.fluids.get(s), false);
+		
+		
 		Initilisation.lightHandler.sources.add(this);
 	}
 	
 	public void onLoad() {}
 	
 	public void resetPlayer(){
-		ItemList.unequipAll();
+		ItemRegistry.unequipAll();
 		maxBreath = 120;
 		breath = 120;
 		speed = 3;
@@ -91,7 +97,7 @@ public class VRPlayer extends Player implements LightSource{
 	
 	public void kill(DeathCause cause){
 		System.out.println("Deathcause: " + cause.name());
-		if(ItemList.onDeath(cause) && !invincible) ContainerHandler.loadNewContainer("deathMenu");
+		if(ItemRegistry.onDeath(cause) && !invincible) ContainerHandler.loadNewContainer("deathMenu");
 	}
 	
 	protected float previousMovement = 0;
@@ -135,21 +141,22 @@ public class VRPlayer extends Player implements LightSource{
 	
 	public void checkBreath(){
 		BaseTile t = ContainerHandler.getLoadedContainer().grid.getTileAtVector(position);
-		Arrays.fill(drowning, false);
+		for(Fluid f : drowning.keySet()) drowning.put(f, false);
 		
 		if(t instanceof AirTile){
-			for(int i = 0; i < ((AirTile) t).fluidContent.length; i++){
-				if(((AirTile) t).fluidContent[i] > 50){
-					drowning[i] = true;
-					ItemList.inFluid(FluidType.values()[i]);
+			for(Fluid f : ((AirTile) t).fluidContent.keySet()){
+				if(((AirTile) t).fluidContent.get(f) > 0){
+					if(((AirTile) t).fluidContent.get(f) > 50 && !f.breathable) drowning.put(f, true);
+					
+					ItemRegistry.inFluid(f);
 				}
 			}
 		}
 		
-		boolean drowns = false;
-		for(int i = 0; i < drowning.length && !drowns; i++) if(drowning[i]) drowns = true;
+		boolean isDrowning = false;
+		for(boolean b : drowning.values()) if(b) isDrowning = true;
 		
-		if(drowns) breath--;
+		if(isDrowning) breath--;
 		else breath = maxBreath;
 		
 		if(breath <= 0) this.kill(DeathCause.DROWN);

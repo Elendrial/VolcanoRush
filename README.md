@@ -4,6 +4,7 @@ Put on hold for the moment, unsure if I'll ever return to it.
 
 Most of the core game has been made, but here's what's left:
 - Improve movement (might have to change engine for this)
+    - (Specifically: weaker gravity/higher jump height)
 - Improve the main menu to include instructions etc
 - Make a digging cooldown
 - Monsters

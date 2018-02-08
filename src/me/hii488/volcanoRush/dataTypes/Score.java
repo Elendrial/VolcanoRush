@@ -1,4 +1,4 @@
-package me.hii488.volcanoRush.misc;
+package me.hii488.volcanoRush.dataTypes;
 
 import java.io.Serializable;
 import java.util.ArrayList;

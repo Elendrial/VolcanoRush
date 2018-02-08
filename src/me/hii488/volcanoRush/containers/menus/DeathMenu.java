@@ -13,9 +13,9 @@ import me.hii488.handlers.ContainerHandler;
 import me.hii488.objects.containers.BaseContainer;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.volcanoRush.VolcRush;
-import me.hii488.volcanoRush.items.ItemList;
-import me.hii488.volcanoRush.misc.Score;
+import me.hii488.volcanoRush.dataTypes.Score;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
+import me.hii488.volcanoRush.registers.ItemRegistry;
 
 public class DeathMenu extends BaseContainer{
 	
@@ -84,7 +84,7 @@ public class DeathMenu extends BaseContainer{
 			e.printStackTrace();
 		}
 		
-		VolcRush.score.multiplier *= ItemList.getItemMultiplier();
+		VolcRush.score.multiplier *= ItemRegistry.getItemMultiplier();
 		currentScore.text = "Score achieved: " + VolcRush.score.getScore();
 	}
 	

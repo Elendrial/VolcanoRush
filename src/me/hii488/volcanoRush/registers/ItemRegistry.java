@@ -1,4 +1,4 @@
-package me.hii488.volcanoRush.items;
+package me.hii488.volcanoRush.registers;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -9,9 +9,17 @@ import me.hii488.handlers.TextureHandler;
 import me.hii488.interfaces.IInputUser;
 import me.hii488.interfaces.ITickable;
 import me.hii488.volcanoRush.dataTypes.DeathCause;
-import me.hii488.volcanoRush.dataTypes.FluidType;
+import me.hii488.volcanoRush.fluids.Fluid;
+import me.hii488.volcanoRush.items.Item;
+import me.hii488.volcanoRush.items.ItemAirTank;
+import me.hii488.volcanoRush.items.ItemCharge;
+import me.hii488.volcanoRush.items.ItemDynamite;
+import me.hii488.volcanoRush.items.ItemGasMask;
+import me.hii488.volcanoRush.items.ItemHardHat;
+import me.hii488.volcanoRush.items.ItemScoreDouble;
+import me.hii488.volcanoRush.items.ItemScoreTriple;
 
-public class ItemList implements IInputUser, ITickable{
+public class ItemRegistry implements IInputUser, ITickable{
 	
 	// The bool is whether the player already has it or not.
 	protected static HashMap<Item, Boolean> itemList = new HashMap<Item, Boolean>();
@@ -83,7 +91,7 @@ public class ItemList implements IInputUser, ITickable{
 		return mult;
 	}
 	
-	public static void inFluid(FluidType f){
+	public static void inFluid(Fluid f){
 		for(Item i : itemList.keySet()){
 			if(itemList.get(i)) i.inFluid(f);
 		}

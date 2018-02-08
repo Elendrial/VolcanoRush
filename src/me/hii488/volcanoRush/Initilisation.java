@@ -12,7 +12,6 @@ import me.hii488.volcanoRush.containers.menus.DeathMenu;
 import me.hii488.volcanoRush.containers.menus.MainMenu;
 import me.hii488.volcanoRush.containers.menus.ShopMenu;
 import me.hii488.volcanoRush.containers.volcanoes.StandardVolcano;
-import me.hii488.volcanoRush.items.ItemList;
 import me.hii488.volcanoRush.objects.entities.ChargeEntity;
 import me.hii488.volcanoRush.objects.entities.DynamiteEntity;
 import me.hii488.volcanoRush.objects.entities.FallingDirt;
@@ -23,6 +22,8 @@ import me.hii488.volcanoRush.objects.tiles.DirtTile;
 import me.hii488.volcanoRush.objects.tiles.RockTile;
 import me.hii488.volcanoRush.objects.tiles.RopeTile;
 import me.hii488.volcanoRush.objects.tiles.UnbreakableTile;
+import me.hii488.volcanoRush.registers.FluidRegistry;
+import me.hii488.volcanoRush.registers.ItemRegistry;
 
 public class Initilisation implements IInitialiser{
 	
@@ -31,8 +32,8 @@ public class Initilisation implements IInitialiser{
 	
 	public static void setup(){
 		InitialisationController.addInitialiser(instance);
-		InputHandler.inputUsers.add(new ItemList());
-		TickController.addEarlyTicker(new ItemList());
+		InputHandler.inputUsers.add(new ItemRegistry());
+		TickController.addEarlyTicker(new ItemRegistry());
 		TickController.addLateTicker(new LiquidFix());
 		TickController.addLateTicker(lightHandler);
 	}
@@ -44,7 +45,8 @@ public class Initilisation implements IInitialiser{
 	
 	@Override
 	public void preInit() {
-		ItemList.registerItems();
+		ItemRegistry.registerItems();
+		FluidRegistry.registerFluids();
 		
 		ContainerHandler.addContainer(menuContainer);
 		ContainerHandler.addContainer(shopContainer);

@@ -3,6 +3,7 @@ package me.hii488.volcanoRush.items;
 import me.hii488.handlers.ContainerHandler;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.volcanoRush.objects.entities.ChargeEntity;
+import me.hii488.volcanoRush.registers.ItemRegistry;
 
 public class ItemCharge extends ItemDynamite {
 	
@@ -14,7 +15,7 @@ public class ItemCharge extends ItemDynamite {
 	}
 	
 	public void onEquip() {
-		ItemList.unequipItem("dynamite");
+		ItemRegistry.unequipItem("dynamite");
 	}
 	
 	@Override
