@@ -21,7 +21,7 @@ public class TestingAlg extends GenerationAlg{
 		g.fillRectWithTile("dirtTile", 0, 0, g.dimensions.getX(), g.dimensions.getY());
 		g.wallRectWithTile("unbreakableTile", 0, 0, g.dimensions.getX(), g.dimensions.getY());
 		g.fillRectWithTile("airTile", 1, 1, 0, g.dimensions.getX() - 1, 3);
-		g.fillRectWithTile("airTile", 30, 4, g.dimensions.getX() - 30, 5);
+		g.fillRectWithTile("airTile", 30, 5, g.dimensions.getX() - 30, 6);
 		
 		for(BaseTile[] b : g.grid) for(BaseTile t : b){
 			if(t instanceof MineralTile) ((MineralTile) t).setOreType(getOreType(t.gridPosition));
@@ -46,7 +46,7 @@ public class TestingAlg extends GenerationAlg{
 	public int getFluidAmount(Fluid t, Vector v) { return getFluidAmount(t, v.getX(), v.getY());}
 	
 	public int getFluidAmount(Fluid t, int x, int y) {
-		if(t.identifier.equals("water") && y >= 4) return 50;
+		if(t.identifier.equals("lava") && y >= 4) return 60;
 		return 0;
 	}
 	

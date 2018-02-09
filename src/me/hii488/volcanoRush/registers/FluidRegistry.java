@@ -5,6 +5,7 @@ import java.util.HashMap;
 import me.hii488.handlers.TextureHandler;
 import me.hii488.volcanoRush.fluids.Fluid;
 import me.hii488.volcanoRush.fluids.FluidGas;
+import me.hii488.volcanoRush.fluids.FluidLava;
 import me.hii488.volcanoRush.fluids.FluidWater;
 
 public class FluidRegistry {
@@ -32,7 +33,7 @@ public class FluidRegistry {
 	
 	public static void registerFluids(){
 		registerFluid(new FluidWater());
-//		registerFluid(new FluidLava());
+		registerFluid(new FluidLava());
 		registerFluid(new FluidGas());
 	}
 	

@@ -12,14 +12,17 @@ import me.hii488.objects.containers.BaseContainer;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.volcanoRush.additionalTickers.LightHandler;
 import me.hii488.volcanoRush.containers.generationAlgs.GenerationAlg;
+import me.hii488.volcanoRush.dataTypes.Seismometer;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
 import me.hii488.volcanoRush.registers.ItemRegistry;
 
 public abstract class Volcano extends BaseContainer{
 	public GenerationAlg mineralSpawner;
+	public Seismometer seismometer;
 	
 	public Volcano(){
 		super();
+		seismometer = new Seismometer();
 		
 		GUI pauseMenu = new GUI().setIdentifier("pauseMenu");
 
@@ -61,6 +64,15 @@ public abstract class Volcano extends BaseContainer{
 		ItemRegistry.doEquips();
 		mineralSpawner.populate(grid);
 		LightHandler.setInitialLight();
+		seismometer.setCurrentActivity(0);
+	}
+	
+	public void updateOnSec(){
+		if(seismometer.isEnabled() && seismometer.getCurrentActivity() > seismometer.getMaxActivity()) erupt();
+	}
+	
+	public void erupt(){
+		
 	}
 	
 }

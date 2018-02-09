@@ -151,15 +151,12 @@ public class AirTile extends LightTile{
 		
 		if(!TextureHandler.containsTexture(textureName)) addLightToImage(addFluidOverlay(TextureHandler.getTexture(sanitizedName + "_" + currentState)));
 		g.drawImage(getTexture(), renderPosA.getX(), renderPosA.getY(), null);
-		
-		g.drawString(fluidContent.get(FluidRegistry.getFluid("water")) + "", renderPosA.getX(), renderPosA.getY());
 	}
 	
 	public BufferedImage addFluidOverlay(BufferedImage im) {
 		BufferedImage img = TextureHandler.cloneTexture(im);
 		Graphics g = img.createGraphics();
 		
-		g.drawString("test", 0, 0);
 		for(Fluid fluid : fluidContent.keySet()){
 			fluid.addOverlay(g, fluidContent.get(fluid));
 		}

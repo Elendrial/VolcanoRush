@@ -15,6 +15,7 @@ Most of the core game has been made, but here's what's left:
 - Fix that one rare bug where it hangs on generation.
 - Rewrite a lot of code to use events & listeners (very low priority)
 - Make Dynamite give off light.
+- Add fluid viscosity
 
 Possible ideas:
 - Add inventory system
