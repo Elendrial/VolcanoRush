@@ -4,6 +4,7 @@ public enum DeathCause {
 	CRUSH,
 	ATTACK,
 	DROWN,
+	LAVA,
 	ESCAPE,
 	EXPLOSION,
 	OTHER;

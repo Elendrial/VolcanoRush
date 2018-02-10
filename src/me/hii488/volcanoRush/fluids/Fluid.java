@@ -3,6 +3,7 @@ package me.hii488.volcanoRush.fluids;
 import java.awt.Graphics;
 
 import me.hii488.handlers.TextureHandler;
+import me.hii488.objects.entities.BaseEntity;
 import me.hii488.objects.tiles.BaseTile;
 
 public abstract class Fluid{
@@ -24,6 +25,7 @@ public abstract class Fluid{
 	
 	public abstract void onEnterTile(BaseTile t);
 	public abstract void onLeaveTile(BaseTile t);
+	public abstract void onContactWith(BaseEntity e);
 	public abstract void updateOnTick(int x, int y, int level);
 	public abstract void updateOnSec(int x, int y, int level);
 	
