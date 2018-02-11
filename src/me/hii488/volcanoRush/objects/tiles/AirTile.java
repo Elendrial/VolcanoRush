@@ -3,6 +3,7 @@ package me.hii488.volcanoRush.objects.tiles;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
+import java.util.Set;
 
 import me.hii488.handlers.ContainerHandler;
 import me.hii488.handlers.TextureHandler;
@@ -12,12 +13,12 @@ import me.hii488.volcanoRush.registers.FluidRegistry;
 
 public class AirTile extends LightTile{
 
-	public HashMap<Fluid, Integer> fluidContent;
+	public FluidContent fluidContent;
 	
 	public AirTile(){super();}
 	public AirTile(AirTile t){
 		super(t);
-		this.fluidContent = new HashMap<Fluid, Integer>(t.fluidContent);
+		this.fluidContent = t.fluidContent.clone(this);
 		
 		for(Fluid f : FluidRegistry.fluids.values()) fluidContent.put(f, t.fluidContent.get(f));
 	}
@@ -29,9 +30,7 @@ public class AirTile extends LightTile{
 		this.textureName = "air.png";
 		this.identifier = "airTile";
 		
-		fluidContent = new HashMap<Fluid, Integer>();
-		for(String s : FluidRegistry.fluids.keySet())
-			fluidContent.put(FluidRegistry.fluids.get(s), 0);
+		fluidContent = new FluidContent(this);
 	}
 	
 	public void fillWithFluid(Fluid fluid, int amount) {
@@ -130,9 +129,9 @@ public class AirTile extends LightTile{
 			}
 		}
 		
-		for(Fluid f : fluidContent.keySet()){
+		for(Fluid f : fluidContent.keySet())
 			if(fluidContent.get(f) > 0) f.updateOnSec(this.gridPosition.getX(), this.gridPosition.getY(), fluidContent.get(f));
-		}
+		
 	}
 	
 	public void render(Graphics g){
@@ -157,9 +156,9 @@ public class AirTile extends LightTile{
 		BufferedImage img = TextureHandler.cloneTexture(im);
 		Graphics g = img.createGraphics();
 		
-		for(Fluid fluid : fluidContent.keySet()){
+		for(Fluid fluid : fluidContent.keySet())
 			fluid.addOverlay(g, fluidContent.get(fluid));
-		}
+		
 		g.dispose();
 		
 		return img;
@@ -167,6 +166,60 @@ public class AirTile extends LightTile{
 	
 	public AirTile clone(){
 		return new AirTile(this);
+	}
+	
+	public class FluidContent{
+		protected HashMap<Fluid, Integer> fluidContent;
+		private AirTile parentTile;
+		
+		public FluidContent(AirTile t){
+			fluidContent = new HashMap<Fluid, Integer>();
+			for(String s : FluidRegistry.fluids.keySet())
+				fluidContent.put(FluidRegistry.fluids.get(s), 0);
+			this.parentTile = t;
+		}
+		
+		private FluidContent(FluidContent t, AirTile at){
+			this.fluidContent = new HashMap<Fluid, Integer>(t.fluidContent);
+			this.parentTile = at;
+			
+			for(Fluid f : FluidRegistry.fluids.values()) fluidContent.put(f, t.fluidContent.get(f));
+		}
+		
+		public void put(Fluid f, int i){
+			if(i > 100) i = 100;
+			if(i < 0) i = 0;
+			
+			if(get(f) == 0 && i != 0) f.onEnterTile(parentTile);
+			else if(get(f) != 0 && i == 0) f.onLeaveTile(parentTile);
+			
+			fluidContent.put(f, i);
+		}
+		
+		public int get(Fluid f){
+			return fluidContent.get(f);
+		}
+		
+		public int get(String s){
+			return fluidContent.get(FluidRegistry.getFluid(s));
+		}
+		
+		public void addTo(Fluid f, int i){
+			put(f, get(f) + i);
+		}
+		
+		public void addTo(String s, int i){
+			Fluid f = FluidRegistry.getFluid(s);
+			put(f, get(f) + i);
+		}
+		
+		public Set<Fluid> keySet(){
+			return fluidContent.keySet();
+		}
+		
+		public FluidContent clone(AirTile t){
+			return new FluidContent(this, t);
+		}
 	}
 	
 }

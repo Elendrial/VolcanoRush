@@ -43,6 +43,10 @@ public class StandardAlg extends GenerationAlg{
 				fluid = FluidRegistry.getFluid("water");
 				liquidRand = liquidRand/(getWaterChance(0,j) * 1.2) * 100;
 			}
+			else if(liquidRand - getWaterChance(0,j) - getGasChance(0,j) < getLavaChance(0,j)){
+				fluid = FluidRegistry.getFluid("lava");
+				liquidRand = liquidRand/(getLavaChance(0,j) * 1.2) * 100;
+			}
 			else fluid = null;
 			
 			for(int i = 0; i < g.dimensions.getX(); i++) {
@@ -114,12 +118,17 @@ public class StandardAlg extends GenerationAlg{
 	public double getCavernChance(int x, int y) {
 		return 0.00002;
 	}
+	
 	public double getWaterChance(int x, int y) {
 		return 0.5;
 	}
 
 	public double getGasChance(int x, int y) {
 		return 0.2;
+	}
+	
+	public double getLavaChance(int x, int y) {
+		return 0.05;
 	}
 
 	private void setupBaseMap(Grid g){

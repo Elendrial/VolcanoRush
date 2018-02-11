@@ -1,33 +1,31 @@
 package me.hii488.volcanoRush.objects.entities;
 
+import me.hii488.misc.Grid;
 import me.hii488.misc.Vector;
-import me.hii488.objects.TexturedObject;
 import me.hii488.objects.entities.BaseEntity;
 import me.hii488.volcanoRush.dataTypes.LightSource;
 
 public class LavaLightEntity extends BaseEntity implements LightSource{
 
-	public LavaLightEntity() {}
-	public LavaLightEntity(LavaLightEntity e) {
-		super(e);
-	}
+	public LavaLightEntity() {super();}
+	public LavaLightEntity(LavaLightEntity e) {super(e);}
 	
 	@Override
 	public void initVars() {
-		this.identifier = "lavaLightEntity";
+		this.identifier = "lavaLight";
 		this.currentState = 0;
 		this.states = 0;
-		this.textureName = "NONE";
+		this.textureName = "lavaLight.png";
 	}
 	
 	@Override
 	public int getLightIntensity(int depth) {
-		return 99;
+		return 75;
 	}
 
 	@Override
 	public int getRadius(int depth) {
-		return 7;
+		return 5;
 	}
 
 	@Override
@@ -37,7 +35,7 @@ public class LavaLightEntity extends BaseEntity implements LightSource{
 	
 	@Override
 	public Vector getPosition() {
-		return this.position;
+		return Grid.getGridPosAtVector(position);
 	}
 	
 	public float randTickChance() {return 0;}
@@ -51,8 +49,8 @@ public class LavaLightEntity extends BaseEntity implements LightSource{
 	public void onDestroy() {}
 
 	@Override
-	public TexturedObject clone() {
-		return null;
+	public LavaLightEntity clone() {
+		return new LavaLightEntity(this);
 	}
 
 }

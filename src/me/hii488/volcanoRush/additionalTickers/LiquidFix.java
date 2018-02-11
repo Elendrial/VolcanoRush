@@ -63,11 +63,11 @@ public class LiquidFix implements ITickable{
 			for(AirTile t : toUpdate){ 						 // Go through each tile above it
 				if(t.fluidContent.get(f) > 0){  		     // If tile has fluid in it
 					unplacedFluid++;				 		 // Move some fluid from it into temp storage.
-					t.fluidContent.put(f, t.fluidContent.get(f)-1);
+					t.fluidContent.addTo(f, -1);
 				}
 			}
 			while(lowestPoint.fluidContent.get(f) < 100 && unplacedFluid > 0){         // While the store isn't empty and the tile below isn't full
-				lowestPoint.fluidContent.put(f, lowestPoint.fluidContent.get(f) + 1);  // Move fluid from the store to the tile below.
+				lowestPoint.fluidContent.addTo(f, 1);  // Move fluid from the store to the tile below.
 				unplacedFluid--;
 			}
 			
@@ -85,7 +85,7 @@ public class LiquidFix implements ITickable{
 		}
 		
 		unplacedFluid %= toUpdate.size();
-		for(int i = 0; i < unplacedFluid; i++) toUpdate.get(i).fluidContent.put(f, toUpdate.get(i).fluidContent.get(f) + 1);
+		for(int i = 0; i < unplacedFluid; i++) toUpdate.get(i).fluidContent.addTo(f, 1);
 		
 	}
 

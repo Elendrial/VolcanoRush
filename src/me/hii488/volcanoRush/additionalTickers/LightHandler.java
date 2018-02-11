@@ -15,6 +15,16 @@ public class LightHandler implements ITickable{
 	
 	public ArrayList<LightSource> sources = new ArrayList<LightSource>();
 	
+	public void addSource(LightSource ls){
+		sources.add(ls);
+		System.out.println("Added light Source");
+	}
+	
+	public void removeSource(LightSource ls){
+		sources.remove(ls);
+		System.out.println("Removed light Source");
+	}
+	
 	@Override
 	public void updateOnTick() {
 		if(ContainerHandler.getLoadedContainer() instanceof Volcano) {
@@ -24,9 +34,9 @@ public class LightHandler implements ITickable{
 				Vector v = l.getPosition().clone();
 				int r = l.getRadius(v.getY());
 				
-				int jStart = v.getY()-r < 0 ? -v.getY() : -r;
+				int jStart = v.getY() - r < 0 ? -v.getY() : -r;
+				int jEnd = v.getY() + r > g.dimensions.getY() ? g.dimensions.getY()-v.getY() : r;
 				int iEnd = v.getX() + r > g.dimensions.getX() ? g.dimensions.getX()-v.getX() : r;
-				int jEnd = v.getY()+r > g.dimensions.getY() ? g.dimensions.getY()-v.getY() : r;
 				
 				for(int i = v.getX()-r < 0 ? -v.getX() : -r; i < iEnd; i++) {
 					int isq = i*i; // Ever so slightly reduce amount of computations needed
@@ -50,7 +60,7 @@ public class LightHandler implements ITickable{
 		}
 	}
 
-	public static void setInitialLight() {
+	public void setInitialLight() {
 		Grid g = ContainerHandler.getLoadedContainer().grid;
 		for(int j = 0; j < g.dimensions.getY(); j++) {
 			for(int i = 0; i < g.dimensions.getX(); i++) {

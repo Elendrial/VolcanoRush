@@ -14,7 +14,6 @@ import me.hii488.misc.Vector;
 import me.hii488.objects.entities.Player;
 import me.hii488.objects.entities.RenderEntity;
 import me.hii488.objects.tiles.BaseTile;
-import me.hii488.volcanoRush.Initilisation;
 import me.hii488.volcanoRush.VolcRush;
 import me.hii488.volcanoRush.containers.volcanoes.Volcano;
 import me.hii488.volcanoRush.dataTypes.DeathCause;
@@ -47,9 +46,6 @@ public class VRPlayer extends Player implements LightSource{
 		drowning = new HashMap<Fluid, Boolean>();
 		for(String s : FluidRegistry.fluids.keySet())
 			drowning.put(FluidRegistry.fluids.get(s), false);
-		
-		
-		Initilisation.lightHandler.sources.add(this);
 	}
 	
 	public void onLoad() {}

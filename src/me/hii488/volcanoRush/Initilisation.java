@@ -6,7 +6,6 @@ import me.hii488.handlers.ContainerHandler;
 import me.hii488.handlers.InputHandler;
 import me.hii488.interfaces.IInitialiser;
 import me.hii488.registries.EntityRegistry;
-import me.hii488.volcanoRush.additionalTickers.LightHandler;
 import me.hii488.volcanoRush.additionalTickers.LiquidFix;
 import me.hii488.volcanoRush.containers.menus.DeathMenu;
 import me.hii488.volcanoRush.containers.menus.MainMenu;
@@ -15,6 +14,7 @@ import me.hii488.volcanoRush.containers.volcanoes.StandardVolcano;
 import me.hii488.volcanoRush.objects.entities.ChargeEntity;
 import me.hii488.volcanoRush.objects.entities.DynamiteEntity;
 import me.hii488.volcanoRush.objects.entities.FallingDirt;
+import me.hii488.volcanoRush.objects.entities.LavaLightEntity;
 import me.hii488.volcanoRush.objects.entities.MineralItem;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
@@ -28,14 +28,12 @@ import me.hii488.volcanoRush.registers.ItemRegistry;
 public class Initilisation implements IInitialiser{
 	
 	public static Initilisation instance = new Initilisation();
-	public static LightHandler lightHandler = new LightHandler();
 	
 	public static void setup(){
 		InitialisationController.addInitialiser(instance);
 		InputHandler.inputUsers.add(new ItemRegistry());
 		TickController.addEarlyTicker(new ItemRegistry());
 		TickController.addLateTicker(new LiquidFix());
-		TickController.addLateTicker(lightHandler);
 	}
 
 	public static MainMenu menuContainer = new MainMenu();
@@ -53,19 +51,26 @@ public class Initilisation implements IInitialiser{
 		ContainerHandler.addContainer(deathContainer);
 		ContainerHandler.addContainer(standardVolc);
 		
-		// These need to be instantiated to add them to the entity/tile register.
+		tileInit();
+		entityInit();
+		
+		EntityRegistry.player = new VRPlayer();
+	}
+	
+	public void tileInit(){
 		new DirtTile();
 		new RockTile();
 		new AirTile();
 		new UnbreakableTile();
 		new RopeTile();
-		
+	}
+	
+	public void entityInit(){
+		new LavaLightEntity();
 		new MineralItem();
 		new FallingDirt();
 		new DynamiteEntity();
 		new ChargeEntity();
-		
-		EntityRegistry.player = new VRPlayer();
 	}
 
 	@Override

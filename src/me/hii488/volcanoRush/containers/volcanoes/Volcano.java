@@ -12,17 +12,20 @@ import me.hii488.objects.containers.BaseContainer;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.volcanoRush.additionalTickers.LightHandler;
 import me.hii488.volcanoRush.containers.generationAlgs.GenerationAlg;
+import me.hii488.volcanoRush.dataTypes.LightSource;
 import me.hii488.volcanoRush.dataTypes.Seismometer;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
 import me.hii488.volcanoRush.registers.ItemRegistry;
 
 public abstract class Volcano extends BaseContainer{
+	public LightHandler lightHandler;
 	public GenerationAlg mineralSpawner;
 	public Seismometer seismometer;
 	
 	public Volcano(){
 		super();
 		seismometer = new Seismometer();
+		lightHandler = new LightHandler();
 		
 		GUI pauseMenu = new GUI().setIdentifier("pauseMenu");
 
@@ -63,12 +66,22 @@ public abstract class Volcano extends BaseContainer{
 		EntityRegistry.player.position.setLocation(grid.dimensions.getX()/2 * Settings.Texture.tileSize, 60);
 		ItemRegistry.doEquips();
 		mineralSpawner.populate(grid);
-		LightHandler.setInitialLight();
+		
+		lightHandler.setInitialLight();
+		if(!lightHandler.sources.contains(EntityRegistry.player) && EntityRegistry.player instanceof LightSource) lightHandler.addSource((LightSource) EntityRegistry.player);
+		
 		seismometer.setCurrentActivity(0);
 	}
 	
 	public void updateOnSec(){
+		super.updateOnSec();
+		lightHandler.updateOnSec();
 		if(seismometer.isEnabled() && seismometer.getCurrentActivity() > seismometer.getMaxActivity()) erupt();
+	}
+	
+	public void updateOnTick(){
+		super.updateOnTick();
+		lightHandler.updateOnTick();
 	}
 	
 	public void erupt(){
