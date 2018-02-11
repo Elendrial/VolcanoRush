@@ -4,9 +4,8 @@ import me.hii488.handlers.ContainerHandler;
 import me.hii488.misc.Grid;
 import me.hii488.misc.Settings;
 import me.hii488.misc.Vector;
-import me.hii488.objects.entities.BaseEntity;
 
-public abstract class GravityEntity extends BaseEntity{
+public abstract class GravityEntity extends VREntity{
 	
 	public GravityEntity(){
 		super();

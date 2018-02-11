@@ -2,10 +2,10 @@ package me.hii488.volcanoRush.objects.entities;
 
 import me.hii488.misc.Grid;
 import me.hii488.misc.Vector;
-import me.hii488.objects.entities.BaseEntity;
+import me.hii488.objects.entities.RenderEntity;
 import me.hii488.volcanoRush.dataTypes.LightSource;
 
-public class LavaLightEntity extends BaseEntity implements LightSource{
+public class LavaLightEntity extends VREntity implements LightSource{
 
 	public LavaLightEntity() {super();}
 	public LavaLightEntity(LavaLightEntity e) {super(e);}
@@ -53,4 +53,7 @@ public class LavaLightEntity extends BaseEntity implements LightSource{
 		return new LavaLightEntity(this);
 	}
 
+	public RenderEntity createRenderEntity(){
+		return null;
+	}
 }

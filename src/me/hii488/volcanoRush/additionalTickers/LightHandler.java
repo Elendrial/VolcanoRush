@@ -17,12 +17,10 @@ public class LightHandler implements ITickable{
 	
 	public void addSource(LightSource ls){
 		sources.add(ls);
-		System.out.println("Added light Source");
 	}
 	
 	public void removeSource(LightSource ls){
 		sources.remove(ls);
-		System.out.println("Removed light Source");
 	}
 	
 	@Override

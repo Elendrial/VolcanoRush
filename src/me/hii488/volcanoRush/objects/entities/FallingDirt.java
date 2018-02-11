@@ -4,16 +4,16 @@ import me.hii488.handlers.ContainerHandler;
 import me.hii488.handlers.EntityHandler;
 import me.hii488.misc.Grid;
 import me.hii488.misc.Settings;
-import me.hii488.objects.entities.BaseEntity;
 import me.hii488.objects.tiles.BaseTile;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.registries.TileRegistry;
+import me.hii488.volcanoRush.containers.volcanoes.Volcano;
 import me.hii488.volcanoRush.dataTypes.DeathCause;
 import me.hii488.volcanoRush.dataTypes.OreType;
 import me.hii488.volcanoRush.objects.tiles.DirtTile;
 import me.hii488.volcanoRush.objects.tiles.LightTile;
 
-public class FallingDirt extends BaseEntity{
+public class FallingDirt extends VREntity{
 
 	public OreType oreType;
 	
@@ -43,6 +43,9 @@ public class FallingDirt extends BaseEntity{
 			BaseTile t = g.getTileAtVector(position);
 			if(t instanceof LightTile) d.setLowestLight(((LightTile) t).lowestLight);
 			ContainerHandler.getLoadedContainer().grid.setTile(d, Grid.getGridPosAtVector(position));
+			
+			if(ContainerHandler.getLoadedContainer() instanceof Volcano)
+				((Volcano) ContainerHandler.getLoadedContainer()).seismometer.addToCurrentActivity(10);
 		}
 		else{
 			this.position.addToLocation(0, Settings.Texture.tileSize/2);

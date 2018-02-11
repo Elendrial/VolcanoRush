@@ -9,23 +9,28 @@ import me.hii488.graphics.GUI.GUILabel;
 import me.hii488.handlers.ContainerHandler;
 import me.hii488.misc.Settings;
 import me.hii488.objects.containers.BaseContainer;
+import me.hii488.objects.tiles.BaseTile;
 import me.hii488.registries.EntityRegistry;
 import me.hii488.volcanoRush.additionalTickers.LightHandler;
 import me.hii488.volcanoRush.containers.generationAlgs.GenerationAlg;
 import me.hii488.volcanoRush.dataTypes.LightSource;
 import me.hii488.volcanoRush.dataTypes.Seismometer;
 import me.hii488.volcanoRush.objects.entities.VRPlayer;
+import me.hii488.volcanoRush.objects.tiles.AirTile;
 import me.hii488.volcanoRush.registers.ItemRegistry;
 
 public abstract class Volcano extends BaseContainer{
+	private GUILabel seismomLabel;
 	public LightHandler lightHandler;
 	public GenerationAlg mineralSpawner;
 	public Seismometer seismometer;
+	public boolean erupting;
 	
 	public Volcano(){
 		super();
 		seismometer = new Seismometer();
 		lightHandler = new LightHandler();
+		erupting = false;
 		
 		GUI pauseMenu = new GUI().setIdentifier("pauseMenu");
 
@@ -58,6 +63,11 @@ public abstract class Volcano extends BaseContainer{
 		
 		guis.add(pauseMenu);
 		
+		
+		GUI seismometerGUI = new GUI();
+		seismomLabel = (GUILabel) new GUILabel().setHorizontalJustification(-1).setTextColor(Color.black).setIdentifier("seismometer").setPosition(5, GameController.getWindow().height - 20);
+		seismometerGUI.addElement(seismomLabel);
+		guis.add(seismometerGUI);
 	}
 	
 	public void onLoad(){
@@ -73,19 +83,52 @@ public abstract class Volcano extends BaseContainer{
 		seismometer.setCurrentActivity(0);
 	}
 	
+	protected int eruptY;
 	public void updateOnSec(){
 		super.updateOnSec();
 		lightHandler.updateOnSec();
-		if(seismometer.isEnabled() && seismometer.getCurrentActivity() > seismometer.getMaxActivity()) erupt();
+		if(erupting){ 
+			if(eruptY > 5){
+				BaseTile t;
+				for(int i = 1; i < grid.dimensions.getX()-1; i++){
+					t = grid.getTile(i, eruptY);
+					if(!(t instanceof AirTile)){
+						grid.setTile("airTile", i, eruptY);
+						t = grid.getTile(i, eruptY);
+					}
+					
+					((AirTile) t).fluidContent.empty();
+					((AirTile) t).fluidContent.put("lava", 100);
+					
+					if(eruptY < grid.dimensions.getY() - 13){
+						t = grid.getTile(i, eruptY + 13);
+						if(t instanceof AirTile){
+							((AirTile) t).fluidContent.empty();
+							grid.setTile("dirtTile", i, eruptY + 13);
+						}
+					}
+				}
+				
+				eruptY--;
+			}
+		}
+		else if(seismometer.isEnabled() && seismometer.getCurrentActivity() > seismometer.getMaxActivity()) erupt();
 	}
 	
 	public void updateOnTick(){
 		super.updateOnTick();
 		lightHandler.updateOnTick();
+		seismomLabel.setText(seismometer.getCurrentActivity() + "/" + seismometer.getMaxActivity());
 	}
 	
 	public void erupt(){
-		
+		System.out.println("Erupting");
+		erupting = true;
+		eruptY = grid.dimensions.getY() - 2;
+	}
+	
+	public boolean isErupting(){
+		return erupting;
 	}
 	
 }

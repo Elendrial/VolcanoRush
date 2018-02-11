@@ -7,6 +7,7 @@ public class FluidWater extends Fluid{
 
 	public FluidWater(){
 		this.identifier = "water";
+		this.textureName = "water";
 		this.flowDir = FlowDirection.DOWN;
 	}
 
@@ -14,6 +15,6 @@ public class FluidWater extends Fluid{
 	public void updateOnSec(int x, int y, int level) {}
 	public void onEnterTile(BaseTile t) {}
 	public void onLeaveTile(BaseTile t) {}
-	public void onContactWith(BaseEntity e) {}
+	public void onContactWith(BaseEntity e, int level) {}
 	
 }

@@ -124,11 +124,11 @@ public class StandardAlg extends GenerationAlg{
 	}
 
 	public double getGasChance(int x, int y) {
-		return 0.2;
+		return y > 100 ? 0.2 : 0.1;
 	}
 	
 	public double getLavaChance(int x, int y) {
-		return 0.05;
+		return y > 100 ? 0.05 : 0;
 	}
 
 	private void setupBaseMap(Grid g){

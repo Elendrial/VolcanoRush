@@ -7,6 +7,7 @@ public class FluidGas extends Fluid{
 
 	public FluidGas(){
 		this.identifier = "gas";
+		this.textureName = "gas";
 		this.flowDir = FlowDirection.UP;
 	}
 
@@ -14,6 +15,6 @@ public class FluidGas extends Fluid{
 	public void updateOnSec(int x, int y, int level) {}
 	public void onEnterTile(BaseTile t) {}
 	public void onLeaveTile(BaseTile t) {}
-	public void onContactWith(BaseEntity e) {}
+	public void onContactWith(BaseEntity e, int level) {}
 
 }

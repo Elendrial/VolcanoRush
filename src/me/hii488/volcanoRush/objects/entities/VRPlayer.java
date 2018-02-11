@@ -140,6 +140,8 @@ public class VRPlayer extends Player implements LightSource{
 		for(Fluid f : drowning.keySet()) drowning.put(f, false);
 		
 		if(t instanceof AirTile){
+			((AirTile) t).fluidContent.inContactWith(this);
+			
 			for(Fluid f : ((AirTile) t).fluidContent.keySet()){
 				if(((AirTile) t).fluidContent.get(f) > 0){
 					if(((AirTile) t).fluidContent.get(f) > 50 && !f.breathable) drowning.put(f, true);
@@ -228,12 +230,25 @@ public class VRPlayer extends Player implements LightSource{
 		
 		// Debug commands
 		if(Settings.Logging.debug || VolcRush.debugCommands) {
+			Grid g;
 			switch(arg0.getKeyCode()) {
 			case KeyEvent.VK_K:
 				this.kill(DeathCause.OTHER);
 				break;
 			case KeyEvent.VK_I:
 				this.invincible = !this.invincible;
+				break;
+			case KeyEvent.VK_N:
+				g = ContainerHandler.getLoadedContainer().grid;
+				if(g.dimensions.getY() > Grid.getGridPosAtVector(position).getY() + 50)
+					position.addToLocation(0, 50 * Settings.Texture.tileSize);
+				
+				break;
+			case KeyEvent.VK_M:
+				g = ContainerHandler.getLoadedContainer().grid;
+				if(g.dimensions.getY() > Grid.getGridPosAtVector(position).getY() - 50)
+					position.addToLocation(0, - 50 * Settings.Texture.tileSize);
+				
 				break;
 			}
 		}

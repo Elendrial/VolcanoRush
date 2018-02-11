@@ -8,6 +8,7 @@ import me.hii488.handlers.ContainerHandler;
 import me.hii488.handlers.TextureHandler;
 import me.hii488.misc.Settings;
 import me.hii488.registries.EntityRegistry;
+import me.hii488.volcanoRush.containers.volcanoes.Volcano;
 import me.hii488.volcanoRush.dataTypes.OreType;
 import me.hii488.volcanoRush.objects.entities.FallingDirt;
 
@@ -64,6 +65,10 @@ public class DirtTile extends MineralTile{
 	public void onDig(){
 		if(damageValue == 0) damageValue = 2;
 		else damageValue = 5;
+		
+		if(ContainerHandler.getLoadedContainer() instanceof Volcano)
+			((Volcano) ContainerHandler.getLoadedContainer()).seismometer.addToCurrentActivity(1);
+		
 	}
 	
 

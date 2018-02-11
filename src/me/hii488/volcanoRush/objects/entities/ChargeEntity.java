@@ -11,6 +11,7 @@ import me.hii488.misc.Settings;
 import me.hii488.misc.Vector;
 import me.hii488.objects.entities.BaseEntity;
 import me.hii488.objects.tiles.BaseTile;
+import me.hii488.volcanoRush.containers.volcanoes.Volcano;
 import me.hii488.volcanoRush.dataTypes.DeathCause;
 import me.hii488.volcanoRush.objects.tiles.DirtTile;
 import me.hii488.volcanoRush.objects.tiles.RockTile;
@@ -56,6 +57,9 @@ public class ChargeEntity extends DynamiteEntity{
 				}
 			}
 		}
+		
+		if(ContainerHandler.getLoadedContainer() instanceof Volcano)
+			((Volcano) ContainerHandler.getLoadedContainer()).seismometer.addToCurrentActivity(35);
 		
 		this.destroy();
 	}

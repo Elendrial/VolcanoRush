@@ -7,6 +7,7 @@ import java.util.Set;
 
 import me.hii488.handlers.ContainerHandler;
 import me.hii488.handlers.TextureHandler;
+import me.hii488.objects.entities.BaseEntity;
 import me.hii488.objects.tiles.BaseTile;
 import me.hii488.volcanoRush.fluids.Fluid;
 import me.hii488.volcanoRush.registers.FluidRegistry;
@@ -19,8 +20,6 @@ public class AirTile extends LightTile{
 	public AirTile(AirTile t){
 		super(t);
 		this.fluidContent = t.fluidContent.clone(this);
-		
-		for(Fluid f : FluidRegistry.fluids.values()) fluidContent.put(f, t.fluidContent.get(f));
 	}
 	
 	
@@ -196,6 +195,10 @@ public class AirTile extends LightTile{
 			fluidContent.put(f, i);
 		}
 		
+		public void put(String s, int i){
+			put(FluidRegistry.getFluid(s), i);
+		}
+		
 		public int get(Fluid f){
 			return fluidContent.get(f);
 		}
@@ -215,6 +218,14 @@ public class AirTile extends LightTile{
 		
 		public Set<Fluid> keySet(){
 			return fluidContent.keySet();
+		}
+		
+		public void empty(){
+			for(Fluid f : FluidRegistry.fluids.values()) put(f, 0);
+		}
+		
+		public void inContactWith(BaseEntity e){
+			for(Fluid f : FluidRegistry.fluids.values()) if(get(f) > 0) f.onContactWith(e, get(f));
 		}
 		
 		public FluidContent clone(AirTile t){

@@ -16,14 +16,14 @@ public class FluidRegistry {
 	public static void registerFluid(Fluid f){
 		if(!fluids.containsValue(f)){
 			fluids.put(f.identifier, f);
-			TextureHandler.loadTextureSet("textures/overlays/fluids/", f.identifier + ".png", f, f.identifier, 4);
+			TextureHandler.loadTextureSet("textures/overlays/fluids/", f.textureName + ".png", f, f.identifier, 4);
 		}
 	}
 	
 	public static void registerFluid(Fluid f, int states){
 		if(!fluids.containsValue(f)){
 			fluids.put(f.identifier, f);
-			TextureHandler.loadTextureSet("textures/overlays/fluids/", f.identifier + ".png", f, f.identifier, states);
+			TextureHandler.loadTextureSet("textures/overlays/fluids/", f.textureName + ".png", f, f.identifier, states);
 		}
 	}
 	

@@ -9,13 +9,16 @@ Most of the core game has been made, but here's what's left:
 - Make a digging cooldown
 - Monsters
 - The rest of the items
-- Forced end to game (volcano erupting)
+- Camera shake/similar when exploding.
 - Proper explosions
 - Redo all art
 - Fix that one rare bug where it hangs on generation.
 - Rewrite a lot of code to use events & listeners (very low priority)
 - Make Dynamite give off light.
 - Add fluid viscosity
+- Seismometer
+- Redo LiquidFix to stop it calling onEnterTile and onLeaveTile for liquids every second.
+- Move OreType over to a registry based system like Fluids (?)
 
 Possible ideas:
 - Add inventory system

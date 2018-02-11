@@ -22,6 +22,7 @@ public class FluidLava extends Fluid{
 	
 	public FluidLava(){
 		this.identifier = "lava";
+		this.textureName = "lava";
 		this.flowDir = FlowDirection.DOWN;
 	}
 
@@ -55,7 +56,9 @@ public class FluidLava extends Fluid{
 		}
 	}
 	
-	public void onContactWith(BaseEntity e) {
+	public void onContactWith(BaseEntity e, int level) {
+		if(level < 5) return;
+		
 		if(e instanceof VRPlayer) {
 			((VRPlayer) e).kill(DeathCause.LAVA);
 		}

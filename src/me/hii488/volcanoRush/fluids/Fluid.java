@@ -9,12 +9,13 @@ import me.hii488.objects.tiles.BaseTile;
 public abstract class Fluid{
 	
 	public FlowDirection flowDir;
-	public String identifier;
+	public String identifier, textureName;
 	public boolean breathable;
 	
 	public Fluid(){
 		flowDir = FlowDirection.NONE;
 		identifier = "";
+		textureName = "";
 		breathable = false;
 	}
 	
@@ -25,7 +26,7 @@ public abstract class Fluid{
 	
 	public abstract void onEnterTile(BaseTile t);
 	public abstract void onLeaveTile(BaseTile t);
-	public abstract void onContactWith(BaseEntity e);
+	public abstract void onContactWith(BaseEntity e, int level);
 	public abstract void updateOnTick(int x, int y, int level);
 	public abstract void updateOnSec(int x, int y, int level);
 	

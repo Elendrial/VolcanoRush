@@ -8,6 +8,7 @@ import me.hii488.interfaces.ITickable;
 import me.hii488.misc.Grid;
 import me.hii488.volcanoRush.containers.volcanoes.Volcano;
 import me.hii488.volcanoRush.fluids.Fluid;
+import me.hii488.volcanoRush.fluids.Fluid.FlowDirection;
 import me.hii488.volcanoRush.objects.tiles.AirTile;
 import me.hii488.volcanoRush.registers.FluidRegistry;
 
@@ -21,19 +22,21 @@ public class LiquidFix implements ITickable{
 			ArrayList<AirTile> toUpdate = new ArrayList<AirTile>();			
 			
 			for(Fluid f : FluidRegistry.fluids.values()){ // For each fluid type
-				for(int y = 1; y < container.grid.dimensions.getY() - 1; y++){ // Go down row by row
-					for(int x = 0; x < container.grid.dimensions.getX(); x++){ // Seeing if the water needs fixing.
-						if(container.grid.getTile(x, y + f.flowDir.getDeltaY()) instanceof AirTile){		// (this is before the next if so updateWater() can easily determine whether it's flattening or pushing down a hole.)
-							updateWater(toUpdate, f, true);
-							toUpdate.clear();
+				if(f.flowDir != FlowDirection.NONE){
+					for(int y = 1; y < container.grid.dimensions.getY() - 1; y++){ // Go down row by row
+						for(int x = 0; x < container.grid.dimensions.getX(); x++){ // Seeing if the water needs fixing.
+							if(container.grid.getTile(x, y + f.flowDir.getDeltaY()) instanceof AirTile){		// (this is before the next if so updateWater() can easily determine whether it's flattening or pushing down a hole.)
+								updateWater(toUpdate, f, true);
+								toUpdate.clear();
+							}
+							if(container.grid.getTile(x, y) instanceof AirTile) toUpdate.add((AirTile) container.grid.getTile(x, y));
+							else{
+								updateWater(toUpdate, f, false);
+								toUpdate.clear();
+							}
 						}
-						if(container.grid.getTile(x, y) instanceof AirTile) toUpdate.add((AirTile) container.grid.getTile(x, y));
-						else{
-							updateWater(toUpdate, f, false);
-							toUpdate.clear();
-						}
+						toUpdate.clear();
 					}
-					toUpdate.clear();
 				}
 			}
 		}

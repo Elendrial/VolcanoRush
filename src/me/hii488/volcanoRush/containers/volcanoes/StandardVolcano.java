@@ -9,6 +9,7 @@ public class StandardVolcano extends Volcano{
 		this.identifier = "standardVolcano";
 		this.grid.setupGrid(100, 1000);
 		this.mineralSpawner = new StandardAlg();
+		this.seismometer.setMaxActivity(5000); // Semi-temporary number
 	}
 	
 }

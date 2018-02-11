@@ -10,7 +10,6 @@ public class VolcRush {
 	public static boolean debugCommands;
 	
 	public static void main(String[] args){
-		System.out.println((int)99/25);
 		GameController.setupEngine();
 		GameController.loadWindow("Volcano Rush", 1000, 800);
 		
